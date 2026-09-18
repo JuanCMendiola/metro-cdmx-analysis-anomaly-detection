@@ -1,0 +1,17 @@
+# Core data stack (versions pinned to what's already verified working)
+pandas==2.2.2
+numpy==1.26.4
+matplotlib==3.11.1
+seaborn==0.13.2
+plotly==5.22.0
+openpyxl==3.1.3
+
+# Modeling / stats (not yet installed in this environment, floors only)
+scikit-learn>=1.4
+statsmodels>=0.14
+pmdarima>=2.0
+prophet>=1.1
+
+# Optional: VS Code / Jupytext cell execution for the .py "# %%" files
+ipykernel>=6.29
+jupytext>=1.16
