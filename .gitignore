@@ -216,3 +216,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Checkpoints de datos generados por el pipeline (regenerables, no versionar)
+data/processed
