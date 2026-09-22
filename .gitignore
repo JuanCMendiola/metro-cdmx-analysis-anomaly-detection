@@ -219,3 +219,7 @@ __marimo__/
 
 # Checkpoints de datos generados por el pipeline (regenerables, no versionar)
 data/processed
+
+# Graficas del EDA generadas por eda/analisis_exploratorio.py (regenerables, no versionar)
+eda/img/*.png
+!eda/img/.gitkeep

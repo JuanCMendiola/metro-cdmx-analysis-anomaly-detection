@@ -12,6 +12,7 @@ statsmodels>=0.14
 pmdarima>=2.0
 prophet>=1.1
 
-# Optional: VS Code / Jupytext cell execution for the .py "# %%" files
+# Optional: VS Code / Jupytext cell execution for the .py "# %%" files, and for
+# running modeling/modelado.ipynb
 ipykernel>=6.29
 jupytext>=1.16
