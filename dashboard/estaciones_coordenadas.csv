@@ -1,0 +1,197 @@
+linea,estacion,lat,lon
+linea 1,balbuena,19.42336,-99.10277
+linea 1,balderas,19.42674,-99.14927
+linea 1,boulevard puerto aéreo,19.41994,-99.09626
+linea 1,candelaria,19.42915,-99.12017
+linea 1,chapultepec,19.42075,-99.17642
+linea 1,cuauhtémoc,19.42566,-99.1546
+linea 1,gómez farias,19.41648,-99.09021
+linea 1,gómez farías,19.41648,-99.09021
+linea 1,insurgentes,19.42365,-99.16329
+linea 1,isabel la católica,19.42639,-99.13783
+linea 1,juanacatlán,19.41295,-99.18198
+linea 1,merced,19.42549,-99.12503
+linea 1,moctezuma,19.42685,-99.1098
+linea 1,observatorio,19.39828,-99.2004
+linea 1,pantitlán,19.41552,-99.0733
+linea 1,pino suárez,19.42515,-99.13279
+linea 1,salto del agua,19.427335,-99.14263
+linea 1,san lázaro,19.431215,-99.11361
+linea 1,sevilla,19.42185,-99.17112
+linea 1,tacubaya,19.40205333333333,-99.18738333333332
+linea 1,zaragoza,19.41192,-99.08229
+linea 12,atlalilco,19.354415,-99.103775
+linea 12,calle 11,19.32047,-99.08587
+linea 12,culhuacán,19.33685,-99.10896
+linea 12,eje central,19.36134,-99.15142
+linea 12,ermita,19.3609,-99.142265
+linea 12,hospital 20 de noviembre,19.37201,-99.17088
+linea 12,insurgentes sur,19.37355,-99.17825
+linea 12,lomas estrella,19.32215,-99.09575
+linea 12,mexicaltzingo,19.35776,-99.12314
+linea 12,mixcoac,19.37598,-99.187155
+linea 12,nopalera,19.29996,-99.04599
+linea 12,olivos,19.30432,-99.05951
+linea 12,parque de los venados,19.37066,-99.15872
+linea 12,periférico oriente,19.31761,-99.07451
+linea 12,san andrés tomatlán,19.32815,-99.10452
+linea 12,tezonco,19.30631,-99.06527
+linea 12,tlaltenco,19.29435,-99.02403
+linea 12,tláhuac,19.28602,-99.0142
+linea 12,zapata,19.37102,-99.165055
+linea 12,zapotitlán,19.29666,-99.03431
+linea 2,allende,19.43556,-99.13687
+linea 2,bellas artes,19.436695,-99.141015
+linea 2,chabacano,19.4093,-99.13444666666668
+linea 2,colegio militar,19.44927,-99.17178
+linea 2,cuatro caminos,19.45959,-99.21584
+linea 2,cuitláhuac,19.45725,-99.1815
+linea 2,ermita,19.3609,-99.142265
+linea 2,general anaya,19.35324,-99.14501
+linea 2,hidalgo,19.437465000000003,-99.147
+linea 2,nativitas,19.38005,-99.14002
+linea 2,normal,19.44456,-99.16727
+linea 2,panteones,19.45864,-99.20295
+linea 2,pino suárez,19.42515,-99.13279
+linea 2,popotla,19.45291,-99.17549
+linea 2,portales,19.36992,-99.14157
+linea 2,revolución,19.43923,-99.15423
+linea 2,san antonio abad,19.41602,-99.13454
+linea 2,san cosme,19.4419,-99.16066
+linea 2,tacuba,19.458805,-99.1877
+linea 2,tasqueña,19.34376,-99.13953
+linea 2,viaducto,19.40087,-99.1369
+linea 2,villa de cortés,19.38758,-99.13896
+linea 2,xola,19.39521,-99.13781
+linea 2,zócalo/tenochtitlan,19.4325,-99.13225
+linea 3,balderas,19.42674,-99.14927
+linea 3,centro médico,19.407145,-99.15559
+linea 3,copilco,19.3361,-99.17697
+linea 3,coyoacán,19.36136,-99.17086
+linea 3,deportivo 18 de marzo,19.484295,-99.1254
+linea 3,división del norte,19.37918,-99.15948
+linea 3,etiopía/plaza de la transparencia,19.39592,-99.15603
+linea 3,eugenia,19.38617,-99.1572
+linea 3,guerrero,19.444935,-99.145665
+linea 3,hidalgo,19.437465000000003,-99.147
+linea 3,hospital general,19.41376,-99.15325
+linea 3,indios verdes,19.49534,-99.11951
+linea 3,juárez,19.43325,-99.14768
+linea 3,la raza,19.469275,-99.138015
+linea 3,miguel ángel de quevedo,19.34625,-99.18076
+linea 3,niños héroes,19.41948,-99.15036
+linea 3,potrero,19.47719,-99.13201
+linea 3,tlatelolco,19.45506,-99.14313
+linea 3,universidad,19.32435,-99.17394
+linea 3,viveros/derechos humanos,19.35346,-99.176
+linea 3,zapata,19.37102,-99.165055
+linea 4,bondojito,19.46463,-99.11198
+linea 4,canal del norte,19.44895,-99.11613
+linea 4,candelaria,19.42915,-99.12017
+linea 4,consulado,19.45658,-99.11372
+linea 4,fray servando,19.42159,-99.12053
+linea 4,jamaica,19.41001,-99.122045
+linea 4,martín carrera,19.48399,-99.105925
+linea 4,morelos,19.439415,-99.11886
+linea 4,santa anita,19.403505,-99.12118
+linea 4,talismán,19.47436,-99.10801
+linea 5,aragón,19.45126,-99.09621
+linea 5,autobuses del norte,19.47907,-99.14065
+linea 5,consulado,19.45658,-99.11372
+linea 5,eduardo molina,19.4514,-99.1053
+linea 5,hangares,19.42435,-99.08813
+linea 5,instituto del petróleo,19.49019,-99.14642
+linea 5,la raza,19.469275,-99.138015
+linea 5,misterios,19.46311,-99.13024
+linea 5,oceanía,19.445355,-99.087045
+linea 5,pantitlán,19.41552,-99.0733
+linea 5,politécnico,19.50068,-99.14921
+linea 5,terminal aérea,19.43427,-99.08808
+linea 5,valle gómez,19.45887,-99.11949
+linea 6,deportivo 18 de marzo,19.484295,-99.1254
+linea 6,el rosario,19.504685,-99.199945
+linea 6,ferrería/arena ciudad de méxico,19.49067,-99.17415
+linea 6,instituto del petróleo,19.49019,-99.14642
+linea 6,la villa/basílica,19.48174,-99.11837
+linea 6,lindavista,19.48811,-99.13507
+linea 6,martín carrera,19.48399,-99.105925
+linea 6,norte 45,19.48867000000001,-99.16299
+linea 6,tezozómoc,19.4949,-99.19602
+linea 6,uam-azcapotzalco,19.49091,-99.18627
+linea 6,vallejo,19.48985,-99.156
+linea 7,aquiles serdán,19.49064,-99.19535
+linea 7,auditorio,19.42576,-99.19203
+linea 7,barranca del muerto,19.3615,-99.18926
+linea 7,camarones,19.47911,-99.19004
+linea 7,constituyentes,19.41177,-99.19135
+linea 7,el rosario,19.504685,-99.199945
+linea 7,mixcoac,19.37598,-99.187155
+linea 7,polanco,19.43355,-99.19093
+linea 7,refinería,19.46947,-99.19051
+linea 7,san antonio,19.38434,-99.18661
+linea 7,san joaquín,19.44501,-99.19177
+linea 7,san pedro de los pinos,19.39149,-99.18581
+linea 7,tacuba,19.458805,-99.1877
+linea 7,tacubaya,19.40205333333333,-99.18738333333332
+linea 8,aculco,19.37321,-99.1077
+linea 8,apatlaco,19.3791,-99.10949
+linea 8,atlalilco,19.354415,-99.103775
+linea 8,bellas artes,19.436695,-99.141015
+linea 8,cerro de la estrella,19.35605,-99.08562
+linea 8,chabacano,19.4093,-99.13444666666668
+linea 8,constitución de 1917,19.34597,-99.0638
+linea 8,coyuya,19.3983,-99.11348
+linea 8,doctores,19.42155,-99.14319
+linea 8,escuadrón 201,19.36484,-99.10948
+linea 8,garibaldi/lagunilla,19.443945000000006,-99.138435
+linea 8,iztacalco,19.38829,-99.11211
+linea 8,iztapalapa,19.35783,-99.09345
+linea 8,la viga,19.40671,-99.12627
+linea 8,obrera,19.41324,-99.14404
+linea 8,salto del agua,19.427335,-99.14263
+linea 8,san juan de letrán,19.43158,-99.14125
+linea 8,santa anita,19.403505,-99.12118
+linea 8,uam-i,19.35106,-99.07482
+linea 9,centro médico,19.407145,-99.15559
+linea 9,chabacano,19.4093,-99.13444666666668
+linea 9,chilpancingo,19.40593,-99.16852
+linea 9,ciudad deportiva,19.40843,-99.09125
+linea 9,jamaica,19.41001,-99.122045
+linea 9,lázaro cárdenas,19.40722,-99.14463
+linea 9,mixiuhca,19.40837,-99.11297
+linea 9,pantitlán,19.41552,-99.0733
+linea 9,patriotismo,19.40611,-99.17892
+linea 9,puebla,19.40719,-99.08239
+linea 9,tacubaya,19.40205333333333,-99.18738333333332
+linea 9,velódromo,19.40854,-99.10316
+linea a,acatitla,19.36472,-99.00567
+linea a,agrícola oriental,19.40462,-99.06957
+linea a,canal de san juan,19.39876,-99.05942
+linea a,guelatao,19.38515,-99.03566
+linea a,la paz,19.35056,-98.96094
+linea a,los reyes,19.35904,-98.97687
+linea a,pantitlán,19.41552,-99.0733
+linea a,peñón viejo,19.37331,-99.01705
+linea a,santa marta,19.36031,-98.99518
+linea a,tepalcates,19.39128,-99.04633
+linea b,bosque de aragón,19.45809,-99.06929
+linea b,buenavista,19.44619,-99.15235
+linea b,ciudad azteca,19.53451,-99.02751
+linea b,deportivo oceanía,19.45101,-99.07933
+linea b,ecatepec,19.51513,-99.03607
+linea b,garibaldi/lagunilla,19.443945000000006,-99.138435
+linea b,guerrero,19.444935,-99.145665
+linea b,impulsora,19.48575,-99.04896
+linea b,lagunilla,19.44322,-99.13023
+linea b,morelos,19.439415,-99.11886
+linea b,múzquiz,19.50149,-99.04207
+linea b,nezahualcóyotl,19.47289,-99.05461
+linea b,oceanía,19.445355,-99.087045
+linea b,olímpica,19.52135,-99.03334
+linea b,plaza aragón,19.52848,-99.03018
+linea b,ricardo flores magón,19.43657,-99.10371
+linea b,romero rubio,19.44084,-99.0942
+linea b,río de los remedios,19.49069,-99.04679
+linea b,san lázaro,19.431215,-99.11361
+linea b,tepito,19.44279,-99.12407
+linea b,villa de aragón,19.46167,-99.06138

@@ -16,3 +16,6 @@ prophet>=1.1
 # running modeling/modelado.ipynb
 ipykernel>=6.29
 jupytext>=1.16
+
+# Dashboard prototype (dashboard/app.py)
+streamlit>=1.38
