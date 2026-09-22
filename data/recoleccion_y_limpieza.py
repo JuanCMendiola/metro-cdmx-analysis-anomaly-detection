@@ -1,31 +1,13 @@
 # %%
 # Recoleccion y limpieza (dataset simple + dataset desglosado).
 # Fusion de los antiguos data/01_recoleccion_y_limpieza.py + data/02_carga_dataset_desglosado.py.
-# Las notas/markdown que acompanaban este codigo estan en ANALISIS.md (esta misma carpeta).
+# Contexto y hallazgos: ver ANALISIS.md (esta misma carpeta).
+# Este script es autocontenido: descarga y limpia los datos desde cero y guarda
+# los checkpoints que usan eda/ y feature_engineering/ (no depende de que se
+# haya corrido nada mas antes, en el mismo kernel o en otro).
 
+import os
 import pandas as pd
-import numpy as np
-# Reinicia el kernel después de la celda de instalación y luego importa:
-import matplotlib.pyplot as plt
-import seaborn as sns
-import matplotlib.dates as mdates
-import statsmodels.api as sm
-from statsmodels.tsa.seasonal import seasonal_decompose
-from statsmodels.tsa.seasonal import STL
-from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
-from statsmodels.tsa.stattools import adfuller
-from pmdarima import auto_arima
-from prophet import Prophet
-import matplotlib.ticker as ticker
-from matplotlib.ticker import PercentFormatter
-import plotly.graph_objects as go
-import plotly.express as px
-from sklearn.metrics import (
-    mean_absolute_error,
-    mean_squared_error,
-    r2_score,
-    median_absolute_error
-)
 
 # %%
 url = "https://datos.cdmx.gob.mx/dataset/f2046fd5-51b5-4876-b008-bd65d95f9a02/resource/0e8ffe58-28bb-4dde-afcd-e5f5b4de4ccb/download/afluenciastc_simple_02_2026.csv"
@@ -96,9 +78,11 @@ metro[metro['afluencia'] == 0].count()
 
 # %%
 # Snapshot del metro "simple" (2010-2026) antes de que se sobreescriba abajo con
-# el dataset desglosado; eda/analisis_exploratorio.py usa metro_simple para el
+# el dataset desglosado; eda/analisis_exploratorio.py usa este checkpoint para el
 # primer vistazo (serie completa, incluye la caida por pandemia).
 metro_simple = metro.copy()
+os.makedirs('data/processed', exist_ok=True)
+metro_simple.to_pickle('data/processed/metro_simple.pkl')
 
 # %%
 url = "https://datos.cdmx.gob.mx/dataset/f2046fd5-51b5-4876-b008-bd65d95f9a02/resource/cce544e1-dc6b-42b4-bc27-0d8e6eb3ed72/download/afluenciastc_desglosado_02_2026.csv"
@@ -124,8 +108,7 @@ metro[metro['afluencia'] == 0].count()
 dataset_original_copy = metro.copy()
 
 # %%
-# Checkpoint: guarda dataset_original_copy para que modeling/ lo cargue sin
-# tener que re-descargar y re-limpiar el CSV completo.
-import os
+# Checkpoint: guarda dataset_original_copy para que eda/, feature_engineering/
+# y modeling/ lo carguen sin tener que re-descargar y re-limpiar el CSV completo.
 os.makedirs('data/processed', exist_ok=True)
 dataset_original_copy.to_pickle('data/processed/dataset_original_copy.pkl')

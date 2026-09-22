@@ -3,8 +3,30 @@
 # y dataset final para modelado.
 # Fusion de los antiguos feature_engineering/01_feature_engineering.py +
 # feature_engineering/02_preprocesamiento.py.
-# Las notas/markdown que acompanaban este codigo estan en ANALISIS.md (esta misma carpeta).
+# Contexto y hallazgos: ver ANALISIS.md (esta misma carpeta).
+# Cada grafica se guarda en feature_engineering/img/ (plt.savefig), igual que
+# en eda/analisis_exploratorio.py. El backend 'Agg' hace que plt.show() no
+# abra ninguna ventana ni bloquee la ejecucion al correr esto como script.
+# Este script es autocontenido: carga el checkpoint que genera
+# eda/analisis_exploratorio.py (no depende de que se haya corrido en el mismo
+# kernel; solo de que ese checkpoint ya exista en disco).
 
+import os
+import pandas as pd
+import numpy as np
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import seaborn as sns
+import matplotlib.dates as mdates
+import statsmodels.api as sm
+from statsmodels.tsa.seasonal import STL
+
+os.makedirs('feature_engineering/img', exist_ok=True)
+
+af_dia_est = pd.read_pickle('data/processed/af_dia_est.pkl')
+
+# %%
 agg = af_dia_est.sort_values('fecha').groupby(['linea', 'estacion'])['afluencia'] # solo columna afluencia agrupada por linea y estacion
 
 af_dia_est['media_movil'] = round((agg.rolling(window=60, min_periods=1).mean().reset_index(level=[0,1], drop=True)),2) # reset porque rolling + group by agrega dos columnas al indice
@@ -64,7 +86,9 @@ for linea in lineas_unicas[:1]:
         
         ax.grid(True, alpha=0.9, linestyle='--')
         plt.tight_layout()
+        plt.savefig(f'feature_engineering/img/01_acf_{linea.replace(" ", "_")}_{estacion.replace(" ", "_")}.png', dpi=150, bbox_inches='tight')
         plt.show()
+        plt.close()
 
 # %%
 lineas_unicas = af_dia_est['linea'].unique()
@@ -72,12 +96,12 @@ lineas_unicas = af_dia_est['linea'].unique()
 for linea in lineas_unicas[:1]:
     datos_linea = af_dia_est[af_dia_est['linea'] == linea]
     estaciones_en_linea = datos_linea['estacion'].unique()
-    
-    for estacion in estaciones_en_linea[:1]:  
+
+    for estacion in estaciones_en_linea[:1]:
         datos_filtrados = datos_linea[datos_linea['estacion'] == estacion].sort_values('fecha')
-        
+
         fig, ax = plt.subplots(figsize=(30, 8))
-        
+
         sm.graphics.tsa.plot_pacf(datos_filtrados['afluencia'].dropna(), lags=60, ax=ax, color = '#ff6b35', method='ywm')
         # lag 365 compara 2025-2024, 730 compara 2025-2023, 1095: 2025-2022
 
@@ -85,12 +109,14 @@ for linea in lineas_unicas[:1]:
         ax.set_ylabel('Autocorrelación')
         plt.setp(ax.get_xticklabels(), rotation=45, ha='right', fontsize=11)
         plt.yticks(fontsize=12)
-        plt.title(f'{linea} - Estación {estacion}\nPeriodo: {FECHA_INICIO.year} - {FECHA_FIN.year}', 
+        plt.title(f'{linea} - Estación {estacion}\nPeriodo: {FECHA_INICIO.year} - {FECHA_FIN.year}',
                   fontsize=18, fontweight='bold', pad=20)
-        
+
         ax.grid(True, alpha=0.9, linestyle='--')
         plt.tight_layout()
+        plt.savefig(f'feature_engineering/img/02_pacf_{linea.replace(" ", "_")}_{estacion.replace(" ", "_")}.png', dpi=150, bbox_inches='tight')
         plt.show()
+        plt.close()
 
 # %%
 n = 0
@@ -168,7 +194,9 @@ for linea in lineas_unicas[:1]:
 
         ax.grid(True, alpha=0.9, linestyle='--')
         plt.tight_layout()
+        plt.savefig(f'feature_engineering/img/03_anomalias_{linea.replace(" ", "_")}_{estacion.replace(" ", "_")}.png', dpi=150, bbox_inches='tight')
         plt.show()
+        plt.close()
 
         print(round(datos_filtrados[datos_filtrados.index > FECHA_INICIO].describe(),2))
 
@@ -218,7 +246,9 @@ for linea in lineas_unicas[:1]:
                      fontweight='bold')
 
         plt.tight_layout()
+        plt.savefig(f'feature_engineering/img/04_stl_{linea.replace(" ", "_")}_{estacion.replace(" ", "_")}.png', dpi=150, bbox_inches='tight')
         plt.show()
+        plt.close()
 
         print(f'Promedio residuales de descomposición aditiva: {desc_STL.resid.mean()}')
 
@@ -256,6 +286,5 @@ af_modelo
 # %%
 # Checkpoint: guarda af_modelo para que modeling/ lo cargue directo, sin
 # tener que re-ejecutar recoleccion, limpieza, EDA y feature engineering.
-import os
 os.makedirs('data/processed', exist_ok=True)
 af_modelo.to_pickle('data/processed/af_modelo.pkl')

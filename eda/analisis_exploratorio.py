@@ -1,12 +1,28 @@
 # %%
 # EDA sobre el dataset simple y el dataset desglosado.
 # Fusion de los antiguos eda/01_eda_simple.py + eda/02_eda_desglosado.py.
-# Las notas/markdown que acompanaban este codigo estan en ANALISIS.md (esta misma carpeta).
-# Cada grafica se guarda en eda/img/ ademas de mostrarse (plt.show()).
+# Contexto y hallazgos: ver ANALISIS.md (esta misma carpeta).
+# Cada grafica se guarda en eda/img/ (plt.savefig). El backend 'Agg' de abajo
+# hace que plt.show() no abra ninguna ventana ni bloquee la ejecucion -
+# necesario al correr esto como script plano (python eda/analisis_exploratorio.py
+# o el boton "Run Python File"); si lo corres celda por celda en un kernel de
+# Jupyter/VS Code, las graficas igual se guardan pero no se mostraran inline.
+# Este script es autocontenido: carga los checkpoints que genera
+# data/recoleccion_y_limpieza.py (no depende de que se haya corrido en el
+# mismo kernel; solo de que esos checkpoints ya existan en disco) y al final
+# guarda su propio checkpoint para que lo use feature_engineering/.
 
-# Carpeta donde se guardan las graficas del EDA conforme se van generando.
 import os
+import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 os.makedirs('eda/img', exist_ok=True)
+
+metro_simple = pd.read_pickle('data/processed/metro_simple.pkl')
+metro = pd.read_pickle('data/processed/dataset_original_copy.pkl')
 
 # %%
 af_dia = metro_simple.groupby('fecha')['afluencia'].sum()
@@ -30,6 +46,7 @@ plt.ylabel('Pasajeros')
 plt.legend()
 plt.savefig('eda/img/01_evolucion_afluencia_2010-2026.png', dpi=150, bbox_inches='tight')
 plt.show()
+plt.close()
 
 print(round(af_dia['afluencia'].describe(),2))
 
@@ -65,6 +82,7 @@ plt.ylabel('Pasajeros')
 plt.legend()
 plt.savefig('eda/img/02_evolucion_afluencia_2022-2026.png', dpi=150, bbox_inches='tight')
 plt.show()
+plt.close()
 
 print(round(af_dia['afluencia'].describe(),2))
 
@@ -87,6 +105,7 @@ plt.pie(af_anual['afluencia'], labels=af_anual['año'], autopct='%1.1f%%', start
 plt.title('Distribución de Afluencia Total por Año (2022-2025)', fontweight='bold')
 plt.savefig('eda/img/03_pie_afluencia_anual.png', dpi=150, bbox_inches='tight')
 plt.show()
+plt.close()
 
 # %%
 import matplotlib.pyplot as plt
@@ -129,6 +148,7 @@ plt.title('Afluencia en millones de personas por línea 2022-2025', fontweight='
 plt.axis('equal')  
 plt.savefig('eda/img/04_pie_afluencia_por_linea.png', dpi=150, bbox_inches='tight')
 plt.show()
+plt.close()
 
 # %%
 # Agrupar por línea
@@ -196,6 +216,7 @@ plt.grid(axis='y', linestyle='--', alpha=0.4)
 plt.tight_layout()
 plt.savefig('eda/img/05_barras_afluencia_por_linea.png', dpi=150, bbox_inches='tight')
 plt.show()
+plt.close()
 
 # %%
 df_agrupado = metro.groupby(['linea', 'estacion'])['afluencia'].sum().reset_index()
@@ -238,6 +259,7 @@ for linea in lineas:
     
     plt.savefig(f'eda/img/06_barras_estacion_{linea.replace(" ", "_")}.png', dpi=150, bbox_inches='tight')
     plt.show()
+    plt.close()
 
 # %%
 plt.figure(figsize=(50, 50))
@@ -267,6 +289,7 @@ for i,j in enumerate(ax.axes.flat):
     j.grid(True)
 ax.savefig('eda/img/07_afluencia_tipo_pago_por_anio.png', dpi=150, bbox_inches='tight')
 plt.show()
+plt.close()
 
 # %%
 plt.figure(figsize=(12,8))
@@ -284,6 +307,7 @@ plt.ylabel('Afluencia')
 
 plt.savefig('eda/img/08_boxplot_afluencia_por_linea.png', dpi=150, bbox_inches='tight')
 plt.show()
+plt.close()
 
 # %%
 # 1. Agrupamos por FECHA y LINEA para tener el total diario por línea
@@ -303,6 +327,7 @@ plt.xlabel('Línea')
 plt.ylabel('Pasajeros por día') # La escala ahora será de miles, no millones
 plt.savefig('eda/img/09_boxplot_afluencia_diaria_por_linea.png', dpi=150, bbox_inches='tight')
 plt.show()
+plt.close()
 
 # %%
 af_dia['mes'] = af_dia['fecha'].dt.month
@@ -318,6 +343,7 @@ sns.heatmap(tabla, cmap='viridis')
 plt.title('Patrones de afluencia por mes y año')
 plt.savefig('eda/img/10_heatmap_afluencia_mes_anio.png', dpi=150, bbox_inches='tight')
 plt.show()
+plt.close()
 
 # %%
 df = metro[metro['anio'].between(2021, 2026)]
@@ -345,6 +371,7 @@ plt.title("Correlación de Afluencia entre Años")
 plt.tight_layout()
 plt.savefig('eda/img/11_correlacion_afluencia_entre_anios.png', dpi=150, bbox_inches='tight')
 plt.show()
+plt.close()
 
 # %%
 # Calcular suma total y promedio diario por estación
@@ -397,6 +424,7 @@ ax.set_ylabel('Estación')
 plt.tight_layout()
 plt.savefig('eda/img/12_top10_promedio_diario.png', dpi=150, bbox_inches='tight')
 plt.show()
+plt.close()
 
 # %%
 import pandas as pd
@@ -474,3 +502,10 @@ plt.grid(True, linestyle='--', alpha=0.5)
 plt.tight_layout()
 plt.savefig('eda/img/13_afluencia_mensual_por_linea.png', dpi=150, bbox_inches='tight')
 plt.show()
+plt.close()
+
+# %%
+# Checkpoint: guarda af_dia_est para que feature_engineering/feature_engineering.py
+# lo cargue sin depender de que este script haya corrido antes en el mismo kernel.
+os.makedirs('data/processed', exist_ok=True)
+af_dia_est.to_pickle('data/processed/af_dia_est.pkl')
