@@ -11,6 +11,7 @@ scikit-learn>=1.4
 statsmodels>=0.14
 pmdarima>=2.0
 prophet>=1.1
+xgboost>=2.0  # optional: anomaly-risk model in modeling/modelado.ipynb (falls back to Random Forest only)
 
 # Optional: VS Code / Jupytext cell execution for the .py "# %%" files, and for
 # running modeling/modelado.ipynb
