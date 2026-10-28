@@ -1,144 +1,109 @@
-# Analisis y hallazgos - Respaldo de SARIMA
+# Modelado: Prophet + MAD, riesgo futuro con XGBoost (horizonte 6 meses)
 
-Notas que acompanaban al modelado SARIMA/SARIMAX antes de que ese codigo se
-moviera de `modeling/modelado.ipynb` a `modeling/sarima_backup.py` (para
-quedarnos solo con Prophet en el notebook activo). El notebook sigue teniendo
-sus propias celdas markdown para la parte de Prophet.
+Estado vigente del notebook `modeling/modelado.ipynb` (corrida 2026-10-28,
+datos 2022-01-01 a 2026-07-31, 196 series estación-línea, 195 activas).
+Presentación visual: `presentacion_prophet_mad_xgboost.pdf` (raíz del repo).
 
-- Se puede aplicar una diferenciación estacional, además de incluir modelos
-  estacionales AR(P) o MA(Q).
-- La prueba Dickey-Fuller aumentada (estación cuatro caminos, con constante y
-  tendencia) arrojó un estadístico de -2.6045 y un p-valor de 0.2778. Dado
-  que el p-valor es superior a 0.05 y el estadístico no supera el valor
-  crítico al 5% (-3.415), no se rechaza la hipótesis nula de raíz unitaria.
-  En consecuencia, se concluye que la serie no es estacionaria en niveles.
-- Se determina que el orden de diferenciación no estacional es d=1. Este es
-  uno de los parámetros clave del modelo SARIMAX: p (orden autorregresivo),
-  d (diferenciación), q (media móvil); y si hay estacionalidad: P, D, Q, s.
-- En los primeros rezagos: la ACF muestra un pico negativo en lag 1, la PACF
-  también presenta un pico significativo en lag 1. Esto sugiere probar
-  modelos pequeños como AR(1), MA(1), ARMA(1,1). Componente estacional: los
-  picos en múltiplos de 7 son muy notorios (la ACF sugiere un componente MA
-  estacional, la PACF muestra también cierta persistencia estacional). Punto
-  de partida recomendado: SARIMA(1,1,1)x(1,0,1)_7 (funciona bien con
-  patrones semanales).
-- Celda suelta sin contexto claro en el notebook original (posiblemente un
-  fragmento de parámetros pegado por accidente en una celda markdown):
-  ```
-  train_log,
-  order=(1,1,1),
-  seasonal_order=(1,0,1,7),   # <- D=1 para estacionalidad semanal
-  enforce_stationarity=False,
-  enforce_invertibility=False
-  ```
+## 1. Detector: Prophet + MAD estacional
 
----
+| Paso | Qué hace | Dónde |
+|---|---|---|
+| Cierres operativos | Afluencia 0 o < 5% de la mediana de los 5 días equivalentes previos -> `CIERRE (Operativo)`; no cuenta como anomalía | celda 4: `UMBRAL_CIERRE`, `es_cierre` |
+| MAD estacional | Mediana/MAD de las últimas 5 semanas del mismo día (solo días válidos); anomalía si \|z robusto\| > 3.5 | celda 4: `movil_sin_cierres()` |
+| Prophet | Tendencia + estacionalidad anual/semanal + festivos MX, banda 95%; entrena sin cierres; `yhat` y banda >= 0 | celda 8 |
+| Consenso | MAD y Prophet -> CRÍTICA; solo Prophet -> ALTA; solo MAD -> MEDIA | celda 8: `conditions` |
+| Pronóstico | `DIAS_FUTURO = 182` (6 meses: 2026-08-01 -> 2027-01-29) | celda 8 |
 
-# Cambios en modelado.ipynb: gráficas de pronóstico y riesgo de anomalías futuras
+Salidas: `master_auditoria_consenso_MAD.csv/.xlsx` (anomalías, sin cierres),
+`data/processed/prophet_series.pkl` (histórico + 6 meses con `yhat`, banda y
+componentes `holidays`, `yearly`, `trend`) y una gráfica por serie en
+`modeling/img_pronosticos/<linea>/<estacion>.png`.
 
-Resumen de lo que se agregó al notebook activo y por qué, con las cifras de la
-corrida de referencia (195 series, datos 2022-01-01 a 2026-07-31).
+Conteo histórico (326,235 estación-días): CRÍTICA 8,575 (2.6%), ALTA 6,732,
+MEDIA 49,742, CIERRE 23,138 (7.1%).
 
-## 1. Motor de auditoría (celda "MODELO PARA LAS 195 SERIES")
+## 2. Riesgo de anomalía futura (XGBoost sobre Prophet)
 
-- **Detección sin cambios:** mismas reglas (Prophet fuera de su intervalo + MAD
-  robusto a 7 días -> CRÍTICA / ALTA / MEDIA). `master_auditoria_consenso_MAD.csv`
-  conserva sus columnas; solo cambia ligeramente entre corridas porque el
-  intervalo de Prophet se estima por muestreo aleatorio (10,937 vs ~10,980
-  críticas).
-- **Gráfica de pronóstico por serie:** se guarda un PNG por estación en
-  `modeling/img_pronosticos/<linea>/<estacion>.png` con (arriba) todo el
-  histórico: afluencia real, ajuste de Prophet, intervalo y anomalías por
-  prioridad; y (abajo) un zoom a los últimos 90 días + el pronóstico de los
-  próximos 30 días. Se controla con `carpeta_graficas` y `dias_futuro`.
-- **Pronósticos guardados:** el motor ahora devuelve también `series_prophet`
-  (todos los días de cada serie más los días futuros) y lo guarda en
-  `data/processed/prophet_series.pkl`, con `yhat`, su intervalo y los
-  componentes de Prophet `holidays` (efecto de festivos MX), `yearly` y
-  `trend`. Es el insumo del modelo de riesgo.
-- **Excel:** `master_auditoria_consenso_MAD.xlsx` es una copia del CSV para
-  revisión manual (OSINT); ninguna celda lo lee.
+Para cada estación-día futuro estima la probabilidad de terminar como CRÍTICA.
+Entrena con el universo estación-día de `prophet_series.pkl`, sin cierres.
 
-## 2. Riesgo de anomalías futuras (Random Forest / XGBoost sobre Prophet)
+| Grupo | Variables | Fuente |
+|---|---|---|
+| Prophet | `yhat_rel`, `banda_rel`, `efecto_festivo_rel`, `estacional_anual_rel` | pronóstico de Prophet, normalizado vs el mismo día de la semana de la estación |
+| Calendario | mes, semana, día del mes, festivo, días a/desde festivo, cercanía a Semana Santa | `holidays` (MX) + `dateutil.easter` |
+| Feriados no oficiales | `es_feriado_no_oficial` (`FECHAS_CULTURALES`) | bitácora OSINT |
+| Clima | temporadas de lluvias, calor y contingencia | climatología CDMX (no hay clima diario futuro) |
+| Estación | `linea_cod`, tasa histórica de críticas (total y al alza), `log_demanda`, `percentil_demanda`, `cv_demanda` | histórico, solo tramo de entrenamiento |
+| Excluidas | `dia_semana`, `es_fin_semana` | se quitan + pesos por día para no aprender "fin de semana = riesgo" |
 
-Prophet sigue siendo el modelo base. El clasificador **continúa** su
-pronóstico: para cada estación-día futuro estima la probabilidad de que el día
-termine como anomalía CRÍTICA. El CSV de anomalías solo contiene positivos, por
-eso se entrena con el universo completo estación-día de `series_prophet`
-(positivo = CRÍTICA, ~3.4% de los días).
+Las variables más importantes son `es_feriado_no_oficial`, `dias_a_semana_santa`,
+`mes` y `temporada_calor`; de Prophet, `efecto_festivo_rel`.
 
-Salida: `propuesta_anomalias_futuras.csv` (pronóstico de Prophet con su banda
-+ `prob_critica`, `riesgo_relativo`, `riesgo_vs_mismo_dia`, `ranking_en_el_dia`).
+Propuesta (celda 28): `propuesta_anomalias_futuras.csv` (Top 30 estaciones por
+riesgo promedio) y `.xlsx` (hojas "Top estaciones" y "Dias en alerta", riesgo >= 2x
+frente a un día típico del mismo día de la semana).
 
-### Variables (todas conocibles para fechas futuras)
+## 3. Resultados
 
-| Grupo | Variables |
-|---|---|
-| Extraídas de Prophet | `yhat_rel`, `banda_rel`, `efecto_festivo_rel` (componente `holidays`), `estacional_anual_rel` (componente `yearly`) |
-| Calendario / estacionalidad | mes, semana, día del mes, festivos oficiales MX, días a/desde festivo, cercanía a Semana Santa, feriados no oficiales/culturales (`FECHAS_CULTURALES`, salen de la bitácora OSINT) |
-| Clima (climatología) | `temporada_lluvias` (jun-oct), `temporada_calor` (mar-may), `temporada_contingencia` (feb-jun) |
-| Carácter de la estación | `log_demanda`, `percentil_demanda`, `cv_demanda`, `tasa_hist_estacion`, `tasa_hist_alza` (críticas por picos al alza), `linea_cod` |
+### Validación del notebook (corte 2025-08-31, prevalencia 3.3%)
 
-El clima diario real no se puede conocer a futuro y no hay datos de clima en el
-proyecto, por lo que se usa solo la temporada. Las estadísticas de estación se
-calculan únicamente con el tramo de entrenamiento. Jornadas electorales y
-manifestaciones concretas no están modeladas (no hay calendario futuro
-confiable).
+| Modelo | AP global | ROC-AUC global | AP intra-día | ROC-AUC intra-día |
+|---|---|---|---|---|
+| Solo día de la semana | 0.039 | 0.555 | 0.033 | 0.500 |
+| Tasa histórica de la estación | 0.031 | 0.480 | 0.031 | 0.474 |
+| XGBoost sin Prophet | 0.313 | 0.717 | 0.257 | 0.709 |
+| **XGBoost + Prophet (elegido)** | 0.312 | 0.738 | **0.269** | 0.731 |
+| XGBoost + Prophet con día de semana (contraste) | 0.340 | 0.736 | 0.281 | 0.735 |
 
-### Cómo se controló el sesgo de fin de semana
+Esta validación usa `yhat` dentro de muestra, así que no depende del horizonte.
 
-Problema: las críticas se concentran en fines de semana (domingo 7.3% de los
-estación-días vs 1.9-2.9% entre semana; 31% de todas las críticas son en
-domingo). La bitácora OSINT indica que parte de eso es ruido del detector: 45%
-de las 75 "Falsas Alarmas" caen en domingo. Un modelo ingenuo aprende "domingo
-= riesgo" (predice 3.5x más riesgo en domingo que entre semana) en vez de los
-factores que la investigación sí encontró (clima extremo, eventos masivos,
-feriados no oficiales, estacionalidad). Medidas:
+### Backtest fuera de muestra: 3 vs 6 meses
 
-1. `dia_semana` y `es_fin_semana` **no** son variables del modelo (solo del modelo de contraste).
-2. Las variables de Prophet se normalizan contra el **mismo día de la semana de
-   cada estación** y no se usa el componente semanal de Prophet.
-3. El entrenamiento **pondera por día de la semana**: cada positivo pesa
-   `tasa_global / tasa_de_su_día`, igualando la prevalencia entre días.
-4. La evaluación se hace **dentro de cada día de la semana** (AP y ROC-AUC
-   intra-día), además de la global.
-5. La propuesta se ordena por `riesgo_vs_mismo_dia` (riesgo del estación-día
-   frente a uno típico del mismo día de la semana).
+Prophet y XGBoost se reentrenan solo con datos hasta el corte y se evalúan con
+el pronóstico de ese corte (sin días de cierre, 195 estaciones).
 
-### Resultados (validación temporal: entrena hasta 2025-08-30, prueba después)
+**Prophet**
 
-| Modelo | AP global | AP intra-día | ROC-AUC intra-día |
-|---|---|---|---|
-| Al azar (prevalencia) | 0.039 | 0.039 | 0.500 |
-| Referencia: solo día de la semana | 0.055 | 0.039 | 0.500 |
-| Referencia: tasa histórica de la estación | 0.042 | 0.043 | 0.510 |
-| Random Forest sin variables de Prophet | 0.110 | 0.139 | 0.678 |
-| XGBoost sin variables de Prophet | 0.120 | 0.161 | 0.693 |
-| Random Forest + Prophet | 0.120 | 0.137 | 0.700 |
-| **XGBoost + Prophet (elegido)** | 0.136 | **0.171** | 0.716 |
-| XGBoost + Prophet CON día de semana (sesgado, contraste) | 0.152 | 0.186 | 0.727 |
+| Horizonte | Evalúa | WAPE | MAPE mediana | Cobertura banda 95% |
+|---|---|---|---|---|
+| 3 meses (corte 30-abr) | may-jul 2026 | 10.4% | 9.3% | 93.8% |
+| 6 meses (corte 31-ene) | feb-jul 2026 | 12.5% | 11.9% | 89.4% |
+| 6 meses, meses 4-6 | may-jul 2026 | 13.6% | 11.8% | 87.6% |
 
-Lectura honesta:
+**XGBoost + Prophet**
 
-- Hay señal real dentro de cada día (AP intra-día ~4.4x el azar), pero es
-  **modesta**: sirve para **priorizar** estaciones/días de vigilancia, no como
-  predictor exacto de fallas.
-- Las variables de Prophet aportan poco pero de forma consistente con XGBoost
-  (AP intra-día 0.161 -> 0.171, ROC-AUC 0.693 -> 0.716); con Random Forest no
-  mejoran el AP.
-- El sesgo de fin de semana **se redujo, no desapareció**: relación
-  domingo/entre semana de 3.5x (sesgado) -> 1.5x (elegido); el detector real
-  tuvo 2.3x en el periodo de prueba. Lo que queda es en parte legítimo (fines de
-  semana con festivos/puentes) y en parte estaciones con patrón dominical propio
-  (p. ej. Copilco, Polanco, Villa de Aragón), por lo que el top de la propuesta
-  sigue teniendo muchos domingos.
-- Estaciones de mayor demanda tienen una tasa histórica de críticas algo mayor
-  (2.9% en el cuartil de menor demanda vs 3.7% en el de mayor), pero la
-  variable pesa poco frente al calendario.
-- La etiqueta es lo que detectan Prophet + MAD, no incidentes confirmados; en
-  el histórico `yhat` es ajuste dentro de muestra.
+| Horizonte | AP intra-día | vs azar | Precision@30 | Recall@30 |
+|---|---|---|---|---|
+| 3 meses (may-jul) | 0.048 | 1.9x | 3.7% | 23% |
+| 6 meses (feb-jul) | 0.303 | 9.8x | 4.1% | 21% |
+| 6 meses, meses 1-3 (feb-abr) | 0.417 | 11.3x | 5.1% | 21% |
+| 6 meses, meses 4-6 (may-jul) | 0.039 | 1.6x | 3.2% | 20% |
 
-### Dependencias
+Lectura:
 
-`xgboost` (opcional; sin él solo se entrena Random Forest), `holidays` y
-`python-dateutil` (ya vienen con Prophet) en `requirements.txt`.
+- **A 6 meses las métricas no mejoran.** Comparando los mismos meses (may-jul),
+  Prophet pasa de WAPE 10.4% a 13.6% y la cobertura de la banda baja de 93.8% a
+  87.6%; XGBoost baja de AP intra-día 0.048 a 0.039.
+- El AP alto del tramo feb-abr viene de Semana Santa (2-4 abr 2026, ~470
+  críticas), que el calendario sí anticipa.
+- May-jul es difícil para cualquier horizonte: el 11-jun-2026 (inauguración del
+  Mundial) salieron 153 estaciones en CRÍTICA y ninguna variable lo describe.
+- El horizonte de 6 meses sirve para planear (picos esperados: 15-sep, 2-nov,
+  24-dic, 1-ene); para operar conviene recalcular cada mes.
+- Top de la propuesta: Chabacano L9, Ciudad Deportiva L9, Chabacano L8 (cambio de
+  nivel en 2026 que no se separa como cierre), luego estaciones de L1.
+
+## 4. Limitaciones y siguientes pasos
+
+- La etiqueta es lo que detectan Prophet + MAD, no incidentes confirmados; la
+  muestra OSINT y la bitácora corresponden a una versión anterior del detector.
+- Cierres parciales / cambios de nivel (Chabacano L9, Balderas, Zócalo) inflan el
+  riesgo de esas estaciones.
+- Falta un calendario de eventos (conciertos, partidos, marchas) y clima diario.
+- La banda de Prophet pierde cobertura a 6 meses: probar intervalos conformales
+  calibrados por horizonte.
+
+## Dependencias
+
+`prophet`, `xgboost` (opcional; sin él solo Random Forest), `holidays` y
+`python-dateutil` en `requirements.txt`.
