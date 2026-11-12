@@ -31,6 +31,18 @@ de usar el dashboard para algo mas que un prototipo, conviene:
    del STC Metro") y revalidar/reemplazar estas coordenadas contra él.
 2. Revisar visualmente en el mapa que ninguna estación quedó mal ubicada.
 
+## Red del Metro y validación de coordenadas
+
+`dashboard/data/red_metro.json` es el trazo de las 12 líneas tomado de la capa
+oficial "Líneas y Estaciones de STC Metro (SHP)" de datos.cdmx.gob.mx
+(`STC_Metro_lineas_utm14n`, convertido de UTM 14N a WGS84 y redondeado a 5
+decimales). Las estaciones de esa misma capa ya vienen en latitud/longitud; al
+compararlas con `estaciones_coordenadas.csv`, 194 de 196 coinciden por nombre
+con una diferencia mediana de 0 m (90% a menos de 115 m, máximo 318 m en
+Atlalilco), así que las coordenadas actuales quedan validadas contra la fuente
+oficial. Las 2 sin coincidencia exacta son variantes de nombre (Niños Héroes y
+Mixiuhca).
+
 ## Qué necesita el dashboard para correr
 
 El dashboard solo lee archivos que están en el repo, así que se puede desplegar
@@ -62,17 +74,16 @@ arcgis_capa = "https://services.arcgis.com/.../FeatureServer/0"   # opcional
 
 ## Pestañas
 
-- **Resumen:** indicadores, anomalías por mes, por línea y calendario mes/año.
-- **Mapa:** calor, columnas 3D o puntos con el color de cada línea (pydeck,
-  fondo Carto sin token); indicador de anomalías, afluencia o impacto.
-- **Estación:** afluencia real, banda esperada y pronóstico de Prophet con las
-  anomalías marcadas, más sus registros OSINT.
-- **Riesgo próximo:** top de estaciones del modelo XGBoost + Prophet, fechas con
-  más estaciones en alerta y calendario de alertas.
-- **Causas (OSINT):** causas, severidad, matriz de vulnerabilidad y
-  estacionalidad de la bitácora.
-- **ArcGIS:** muestra el mapa web o dashboard de ArcGIS Online configurado en
-  `ARCGIS_URL`.
+Pensado para usuarios, con tres pestañas:
+
+- **Mapa de la red:** afluencia diaria típica (columnas 3D con el color de cada
+  línea) o anomalías (mapa de calor + puntos), por periodo; las anomalías leves
+  se pueden incluir con un interruptor. Al hacer clic en una estación queda
+  elegida en la pestaña de series.
+- **Series de tiempo:** afluencia real, rango normal de Prophet, pronóstico y
+  anomalías marcadas de cada estación, con la causa encontrada en la
+  investigación OSINT cuando existe.
+- **Mapa ArcGIS:** el mapa web de ArcGIS Online configurado en `ARCGIS_URL`.
 
 ## Siguientes pasos
 
