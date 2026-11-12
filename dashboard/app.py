@@ -204,7 +204,8 @@ with tab_mapa:
     por_est['color'] = por_est['linea'].map(lambda l: hex_rgb(COLORES_LINEA.get(l, GRIS)))
 
     # Cada estacion es un circulo cuyo tamano y color (amarillo -> naranja -> rojo) indican el valor.
-    # El radio va en pixeles: se ve igual a cualquier zoom y no se funde en una mancha.
+    # El radio va en metros (60 a 530 m): a la vista inicial casi todas son puntos sobre la linea y solo
+    # destacan las mayores; al acercarse crecen. Acotado entre 2.2 y 16 px para que nunca tape la red.
     por_est['peso'] = por_est['afluencia'] if ver == 'Afluencia' else por_est['anomalias']
     intensidad = (por_est['peso'] / max(por_est['peso'].max(), 1)).clip(0, 1) ** 0.5
 
@@ -213,19 +214,19 @@ with tab_mapa:
         u = t * 2 if t < 0.5 else (t - 0.5) * 2
         return [int(a[k] + (b[k] - a[k]) * u) for k in range(3)] + [235]
 
-    por_est['radio_px'] = 3 + 13 * intensidad
+    por_est['radio'] = 60 + 470 * intensidad ** 1.6
     por_est['relleno'] = [gradiente(t) for t in intensidad]
-    por_est = por_est.sort_values('radio_px', ascending=False)   # los chicos quedan encima y se pueden seleccionar
+    por_est = por_est.sort_values('radio', ascending=False)   # los chicos quedan encima y se pueden seleccionar
 
     izq, der = st.columns([2.6, 1])
     with izq:
         capas = [pdk.Layer('PathLayer', data=red, get_path='path', get_color='color', width_units='pixels',
                            get_width=4, cap_rounded=True, joint_rounded=True, pickable=False),
                  pdk.Layer('ScatterplotLayer', id='estaciones', data=por_est, get_position='[lon, lat]',
-                           radius_units='pixels', get_radius='radio_px', get_fill_color='relleno',
-                           get_line_color=[255, 255, 255, 255], line_width_units='pixels', get_line_width=1.5,
+                           get_radius='radio', radius_min_pixels=2.2, radius_max_pixels=16, get_fill_color='relleno',
+                           get_line_color=[255, 255, 255, 255], line_width_units='pixels', get_line_width=1.2,
                            stroked=True, pickable=True, auto_highlight=True, highlight_color=[46, 46, 46, 255])]
-        vista = pdk.ViewState(latitude=19.41, longitude=-99.13, zoom=10.8, pitch=0, min_zoom=9.8, max_zoom=16)
+        vista = pdk.ViewState(latitude=19.405, longitude=-99.12, zoom=11.3, pitch=0, min_zoom=10, max_zoom=16)
         if arcgis_capa:
             try:
                 capas.append(pdk.Layer('GeoJsonLayer', data=capa_arcgis(arcgis_capa), stroked=True, filled=True,
