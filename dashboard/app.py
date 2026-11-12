@@ -1,6 +1,7 @@
 # Dashboard del monitor de anomalias de afluencia del Metro CDMX, pensado para
-# usuarios: mapa de la red (afluencia y anomalias), series de tiempo por
-# estacion (real, esperado por Prophet y pronostico) y el mapa de ArcGIS Online.
+# usuarios: mapa de ArcGIS Online con el ranking de estaciones por afluencia o
+# anomalias, y series de tiempo por estacion (real, esperado por Prophet y
+# pronostico).
 # Contexto de los datos: dashboard/ANALISIS.md.
 #
 # Solo lee archivos que estan en el repo (dashboard/data/*.parquet, que genera
@@ -10,13 +11,10 @@
 # Correr con la raiz del repo como working directory:
 #   streamlit run dashboard/app.py
 
-import json
 from pathlib import Path
 
 import pandas as pd
 import plotly.graph_objects as go
-import pydeck as pdk
-import requests
 import streamlit as st
 import streamlit.components.v1 as components
 
@@ -24,11 +22,9 @@ BASE = Path(__file__).resolve().parent
 REPO = BASE.parent
 DATOS = BASE / 'data'
 
-# ArcGIS Online: enlace del mapa web / dashboard compartido como PUBLICO (lo ve cualquier visitante)
-# y, opcional, URL de una capa de servicio (.../FeatureServer/0) que se dibuja sobre el mapa de la red.
-# Tambien se pueden definir en los Secrets de Streamlit Cloud como arcgis_url / arcgis_capa.
+# ArcGIS Online: enlace del mapa web / dashboard compartido como PUBLICO (lo ve cualquier visitante).
+# Tambien se puede definir en los Secrets de Streamlit Cloud como arcgis_url.
 ARCGIS_URL = 'https://ipn-upiita.maps.arcgis.com/apps/mapviewer/index.html?webmap=7e269609115e4ac082242b3e4259afb5&center=-99.116609%2C19.383384&scale=144447.638572'
-ARCGIS_CAPA = ''
 
 NARANJA = '#F26522'
 NARANJA_CLARO = '#F9A66C'
@@ -38,12 +34,6 @@ GRIS = '#5F6368'
 GRIS_CLARO = '#E6E6E6'
 FUENTE = 'Inter, "Segoe UI", Roboto, sans-serif'
 
-# Colores de cada linea del Metro (aproximados a la senaletica)
-COLORES_LINEA = {
-    'linea 1': '#E9468F', 'linea 2': '#0060A9', 'linea 3': '#B5A100', 'linea 4': '#6CC3C1',
-    'linea 5': '#F4D000', 'linea 6': '#E1251B', 'linea 7': '#F47B20', 'linea 8': '#00954F',
-    'linea 9': '#6B3D2E', 'linea a': '#93268F', 'linea b': '#8A9A8E', 'linea 12': '#C2A05B',
-}
 CRITICA = 'CRÍTICA (Consenso)'
 MENORES = ['ALTA (Solo Prophet)', 'MEDIA (Solo MAD)']
 CIERRE = 'CIERRE (Operativo)'
@@ -68,8 +58,6 @@ st.markdown(f"""
 .seccion {{ font-size: 1.05rem; font-weight: 700; color: {GRIS_OSCURO}; border-left: 4px solid {NARANJA};
   padding-left: 10px; margin: 6px 0 8px 0; }}
 .nota {{ font-size: .85rem; color: {GRIS}; }}
-.leyenda span {{ display: inline-block; margin-right: 14px; font-size: .82rem; color: {GRIS}; }}
-.leyenda i {{ display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }}
 .stTabs [data-baseweb="tab-list"] {{ gap: 6px; }}
 .stTabs [data-baseweb="tab"] {{ background: {GRIS_CLARO}; border-radius: 8px 8px 0 0; padding: 10px 22px; }}
 .stTabs [data-baseweb="tab"] p {{ font-size: 1rem; font-weight: 600; }}
@@ -96,11 +84,6 @@ def seccion(texto):
     st.markdown(f'<div class="seccion">{texto}</div>', unsafe_allow_html=True)
 
 
-def hex_rgb(color, alfa=230):
-    color = color.lstrip('#')
-    return [int(color[i:i + 2], 16) for i in (0, 2, 4)] + [alfa]
-
-
 @st.cache_data(show_spinner='Cargando datos…')
 def cargar():
     series = pd.read_parquet(DATOS / 'series_estaciones.parquet')
@@ -108,29 +91,12 @@ def cargar():
         series[col] = series[col].astype(str)
     series['prioridad_auditoria'] = series['prioridad_auditoria'].astype(object)
     series['diferencia'] = series['afluencia'] - series['yhat']
-    coords = pd.read_csv(BASE / 'estaciones_coordenadas.csv')
     top = pd.read_parquet(DATOS / 'riesgo_top_estaciones.parquet')
     bitacora = pd.read_csv(REPO / 'bitacora_investigacion_anomalias_criticas.csv')
     bitacora.columns = bitacora.columns.str.lower()
     bitacora['fecha'] = pd.to_datetime(bitacora['fecha']).dt.normalize()
     bitacora['causa'] = bitacora['hallazgo_principal'].str.split('(').str[0].str.strip()
-    # Trazo oficial de las 12 lineas (datos.cdmx.gob.mx, "Lineas y Estaciones de STC Metro", convertido a WGS84)
-    red = pd.DataFrame(json.loads((DATOS / 'red_metro.json').read_text(encoding='utf-8')))
-    red['color'] = red['linea'].map(lambda l: hex_rgb(COLORES_LINEA.get(l, GRIS), 255))
-    return series, coords, top, bitacora, red
-
-
-@st.cache_data(show_spinner='Descargando capa de ArcGIS…', ttl=3600)
-def capa_arcgis(url):
-    url = url.rstrip('/')
-    if not url.endswith('/query'):
-        url += '/query'
-    r = requests.get(url, params={'where': '1=1', 'outFields': '*', 'outSR': 4326, 'f': 'geojson'}, timeout=30)
-    r.raise_for_status()
-    datos = r.json()
-    if 'features' not in datos:
-        raise ValueError(datos.get('error', {}).get('message', 'La respuesta no es GeoJSON'))
-    return datos
+    return series, top, bitacora
 
 
 def config_arcgis(clave, valor):
@@ -150,12 +116,11 @@ if faltan:
              '. Corre `python dashboard/preparar_datos.py` desde la raíz del repo.')
     st.stop()
 
-series, coords, top, bitacora, red = cargar()
+series, top, bitacora = cargar()
 hist = series[~series['es_futuro']]
 futuro = series[series['es_futuro']]
 ultimo_dato = hist['fecha'].max()
 arcgis_url = config_arcgis('arcgis_url', ARCGIS_URL)
-arcgis_capa = config_arcgis('arcgis_capa', ARCGIS_CAPA)
 
 estaciones = (hist[['linea', 'estacion']].drop_duplicates()
               .assign(clave=lambda d: d['linea'] + '|' + d['estacion'],
@@ -178,105 +143,63 @@ kpi(c[2], 'Anomalías graves (último año)', f'{ultimo_anio["prioridad_auditori
 kpi(c[3], 'Pronóstico hasta', f'{futuro["fecha"].max():%d/%m/%Y}', 'afluencia esperada por estación')
 st.write('')
 
-tab_mapa, tab_series, tab_arcgis = st.tabs(['Mapa de la red', 'Series de tiempo', 'Mapa ArcGIS'])
+tab_mapa, tab_series = st.tabs(['Mapa', 'Series de tiempo'])
 
-# ---------------------------------------------------------------- mapa de la red
+# ---------------------------------------------------------------- mapa (ArcGIS) + ranking de estaciones
 with tab_mapa:
-    c1, c2, c3 = st.columns([1.2, 1.4, 1.4])
-    ver = c1.radio('Ver en el mapa', ['Afluencia', 'Anomalías'], horizontal=True)
-    periodo = c2.radio('Periodo', list(PERIODOS), horizontal=True, key='periodo_mapa')
-    menores = c3.toggle('Incluir anomalías leves', value=False,
-                        help='Por defecto solo se cuentan las graves: días en que el pronóstico (Prophet) y la '
-                             'comparación con semanas anteriores (MAD) coinciden en que algo raro pasó.')
-
-    dias = PERIODOS[periodo]
-    datos = hist if dias is None else hist[hist['fecha'] > ultimo_dato - pd.Timedelta(days=dias)]
-    tipos = [CRITICA] + (MENORES if menores else [])
-    por_est = (datos[~datos['prioridad_auditoria'].eq(CIERRE)].groupby(['linea', 'estacion'])
-               .agg(afluencia=('afluencia', 'median'))
-               .join(datos[datos['prioridad_auditoria'].isin(tipos)].groupby(['linea', 'estacion']).size().rename('anomalias'))
-               .fillna({'anomalias': 0}).reset_index().merge(coords, on=['linea', 'estacion']))
-    por_est['clave'] = por_est['linea'] + '|' + por_est['estacion']
-    por_est['nombre'] = por_est['estacion'].map(nombre_estacion)
-    por_est['nombre_linea'] = por_est['linea'].map(nombre_linea)
-    por_est['afluencia_txt'] = por_est['afluencia'].map('{:,.0f}'.format)
-    por_est['anomalias_txt'] = por_est['anomalias'].map('{:,.0f}'.format)
-    por_est['color'] = por_est['linea'].map(lambda l: hex_rgb(COLORES_LINEA.get(l, GRIS)))
-
-    # Cada estacion es un circulo cuyo tamano y color (amarillo -> naranja -> rojo) indican el valor.
-    # El radio va en metros (60 a 530 m): a la vista inicial casi todas son puntos sobre la linea y solo
-    # destacan las mayores; al acercarse crecen. Acotado entre 2.2 y 16 px para que nunca tape la red.
-    por_est['peso'] = por_est['afluencia'] if ver == 'Afluencia' else por_est['anomalias']
-    intensidad = (por_est['peso'] / max(por_est['peso'].max(), 1)).clip(0, 1) ** 0.5
-
-    def gradiente(t):
-        a, b = ((255, 214, 0), (242, 101, 34)) if t < 0.5 else ((242, 101, 34), (160, 20, 20))
-        u = t * 2 if t < 0.5 else (t - 0.5) * 2
-        return [int(a[k] + (b[k] - a[k]) * u) for k in range(3)] + [235]
-
-    por_est['radio'] = 60 + 470 * intensidad ** 1.6
-    por_est['relleno'] = [gradiente(t) for t in intensidad]
-    por_est = por_est.sort_values('radio', ascending=False)   # los chicos quedan encima y se pueden seleccionar
-
-    izq, der = st.columns([2.6, 1])
+    izq, der = st.columns([2.5, 1])
     with izq:
-        capas = [pdk.Layer('PathLayer', data=red, get_path='path', get_color='color', width_units='pixels',
-                           get_width=4, cap_rounded=True, joint_rounded=True, pickable=False),
-                 pdk.Layer('ScatterplotLayer', id='estaciones', data=por_est, get_position='[lon, lat]',
-                           get_radius='radio', radius_min_pixels=2.2, radius_max_pixels=16, get_fill_color='relleno',
-                           get_line_color=[255, 255, 255, 255], line_width_units='pixels', get_line_width=1.2,
-                           stroked=True, pickable=True, auto_highlight=True, highlight_color=[46, 46, 46, 255])]
-        vista = pdk.ViewState(latitude=19.405, longitude=-99.12, zoom=11.3, pitch=0, min_zoom=10, max_zoom=16)
-        if arcgis_capa:
-            try:
-                capas.append(pdk.Layer('GeoJsonLayer', data=capa_arcgis(arcgis_capa), stroked=True, filled=True,
-                                       get_fill_color=[242, 101, 34, 50], get_line_color=[242, 101, 34, 200],
-                                       line_width_min_pixels=2, point_radius_min_pixels=3, pickable=False))
-            except Exception as e:
-                st.warning(f'No se pudo cargar la capa de ArcGIS: {e}')
-        deck = pdk.Deck(layers=capas, map_provider='carto', map_style=pdk.map_styles.CARTO_LIGHT, initial_view_state=vista,
-                        tooltip={'html': '<b>{nombre}</b> · {nombre_linea}<br/>Afluencia diaria típica: <b>{afluencia_txt}</b>'
-                                         '<br/>Anomalías en el periodo: <b>{anomalias_txt}</b>',
-                                 'style': {'backgroundColor': GRIS_OSCURO, 'color': 'white', 'fontFamily': FUENTE}})
-        evento = st.pydeck_chart(deck, height=560, on_select='rerun', selection_mode='single-object', key='mapa_red')
-        # Al hacer clic en una estacion, queda elegida en la pestana de series de tiempo
-        try:
-            elegido = evento.selection.objects.get('estaciones', [])
-            if elegido:
-                st.session_state['linea_serie'], st.session_state['est_serie'] = elegido[0]['clave'].split('|')
-        except AttributeError:
-            pass
-        st.markdown('<div class="leyenda">' + ''.join(
-            f'<span><i style="background:{COLORES_LINEA[l]}"></i>{nombre_linea(l)}</span>'
-            for l in sorted(COLORES_LINEA, key=lambda x: (len(x), x))) + '</div>', unsafe_allow_html=True)
-        st.markdown('<div class="leyenda"><span style="display:inline-flex;align-items:center;gap:6px">'
-                    + ('Menos pasajeros' if ver == 'Afluencia' else 'Menos anomalías') +
-                    '<b style="display:inline-block;width:120px;height:10px;border-radius:5px;'
-                    'background:linear-gradient(90deg,#FFD600,#F26522,#A01414)"></b>'
-                    + ('Más pasajeros' if ver == 'Afluencia' else 'Más anomalías') + '</span></div>', unsafe_allow_html=True)
-        st.markdown('<p class="nota">' + ('Tamaño y color de cada círculo = pasajeros que recibe la estación al día. '
-                                          if ver == 'Afluencia' else
-                                          'Tamaño y color de cada círculo = anomalías de la estación en el periodo. ') +
-                    'Pasa el cursor sobre una estación para ver sus datos. ' +
-                    'Haz clic en una estación y abre <b>Series de tiempo</b> para ver su detalle.</p>', unsafe_allow_html=True)
+        if arcgis_url:
+            if hasattr(st, 'iframe'):
+                st.iframe(arcgis_url, height=640)
+            else:   # versiones de Streamlit anteriores a st.iframe
+                components.iframe(arcgis_url, height=640, scrolling=True)
+            st.markdown(f'<p class="nota">Si el mapa no carga, ábrelo directamente: <a href="{arcgis_url}" target="_blank">'
+                        'ver en ArcGIS Online</a>.</p>', unsafe_allow_html=True)
+        else:
+            st.info('Aún no hay un mapa de ArcGIS configurado. Pon el enlace del mapa web (compartido como público) en '
+                    'la constante ARCGIS_URL al inicio de dashboard/app.py, o en los Secrets de Streamlit Cloud como arcgis_url.')
 
     with der:
+        ver = st.radio('Ver', ['Afluencia', 'Anomalías'], horizontal=True)
+        periodo = st.selectbox('Periodo', list(PERIODOS), key='periodo_mapa')
+        menores = ver == 'Anomalías' and st.toggle(
+            'Incluir anomalías leves', value=False,
+            help='Por defecto solo se cuentan las graves: días en que el pronóstico (Prophet) y la '
+                 'comparación con semanas anteriores (MAD) coinciden en que algo raro pasó.')
+
+        dias = PERIODOS[periodo]
+        datos = hist if dias is None else hist[hist['fecha'] > ultimo_dato - pd.Timedelta(days=dias)]
+        tipos = [CRITICA] + (MENORES if menores else [])
+        por_est = (datos[~datos['prioridad_auditoria'].eq(CIERRE)].groupby(['linea', 'estacion'])
+                   .agg(afluencia=('afluencia', 'median'))
+                   .join(datos[datos['prioridad_auditoria'].isin(tipos)].groupby(['linea', 'estacion']).size().rename('anomalias'))
+                   .fillna({'anomalias': 0}).reset_index())
+        por_est['nombre'] = por_est['estacion'].map(nombre_estacion)
+        por_est['nombre_linea'] = por_est['linea'].map(nombre_linea)
+
         if ver == 'Afluencia':
             seccion('Estaciones con más afluencia')
-            tabla = por_est.sort_values('afluencia', ascending=False).head(12)
-            st.dataframe(tabla[['nombre', 'nombre_linea', 'afluencia']], hide_index=True, height=480,
+            tabla = por_est.sort_values('afluencia', ascending=False).head(15)
+            st.dataframe(tabla[['nombre', 'nombre_linea', 'afluencia']], hide_index=True, height=460,
                          column_config={'nombre': 'Estación', 'nombre_linea': 'Línea',
                                         'afluencia': st.column_config.ProgressColumn(
                                             'Pasajeros al día', format='%,.0f', min_value=0,
                                             max_value=float(por_est['afluencia'].max()))})
+            st.markdown('<p class="nota">Afluencia diaria típica (mediana) en el periodo, sin contar días de cierre.</p>',
+                        unsafe_allow_html=True)
         else:
             seccion('Estaciones con más anomalías')
-            tabla = por_est.sort_values('anomalias', ascending=False).head(12)
-            st.dataframe(tabla[['nombre', 'nombre_linea', 'anomalias']], hide_index=True, height=480,
+            tabla = por_est.sort_values('anomalias', ascending=False).head(15)
+            st.dataframe(tabla[['nombre', 'nombre_linea', 'anomalias']], hide_index=True, height=460,
                          column_config={'nombre': 'Estación', 'nombre_linea': 'Línea',
                                         'anomalias': st.column_config.ProgressColumn(
                                             'Anomalías', format='%d', min_value=0,
                                             max_value=float(max(por_est['anomalias'].max(), 1)))})
+            st.markdown('<p class="nota">Días del periodo en que la estación se salió de lo normal.</p>',
+                        unsafe_allow_html=True)
+        st.markdown('<p class="nota">Para ver el detalle de una estación abre <b>Series de tiempo</b>.</p>',
+                    unsafe_allow_html=True)
 
 # ---------------------------------------------------------------- series de tiempo
 with tab_series:
@@ -360,20 +283,6 @@ with tab_series:
                                     'causa': 'Causa encontrada', 'descripcion_incidente': 'Detalle'})
     else:
         st.info('Esta estación no tiene anomalías graves registradas.')
-
-# ---------------------------------------------------------------- ArcGIS
-with tab_arcgis:
-    if arcgis_url:
-        if hasattr(st, 'iframe'):
-            st.iframe(arcgis_url, height=720)
-        else:   # versiones de Streamlit anteriores a st.iframe
-            components.iframe(arcgis_url, height=720, scrolling=True)
-        st.markdown(f'<p class="nota">Si el mapa no carga, ábrelo directamente: <a href="{arcgis_url}" target="_blank">'
-                    'ver en ArcGIS Online</a>.</p>', unsafe_allow_html=True)
-    else:
-        st.info('Aún no hay un mapa de ArcGIS configurado. Pon el enlace del mapa web o dashboard (compartido como '
-                'público) en la constante ARCGIS_URL al inicio de dashboard/app.py, o en los Secrets de Streamlit Cloud '
-                'como arcgis_url.')
 
 st.markdown('<p class="nota" style="text-align:center;margin-top:28px">Trabajo Terminal 2026-B125 · Datos abiertos de SEMOVI '
             '(datos.cdmx.gob.mx) · Proyecto académico, no es un sitio oficial del STC Metro.</p>', unsafe_allow_html=True)
