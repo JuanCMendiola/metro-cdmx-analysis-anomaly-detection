@@ -203,36 +203,28 @@ with tab_mapa:
     por_est['anomalias_txt'] = por_est['anomalias'].map('{:,.0f}'.format)
     por_est['color'] = por_est['linea'].map(lambda l: hex_rgb(COLORES_LINEA.get(l, GRIS)))
 
-    # Calor por estacion como halos en metros (escalan con el zoom y no se funden en una mancha como el
-    # HeatmapLayer, que agrega en pixeles). Solo brillan las estaciones por encima de la mediana.
+    # Cada estacion es un circulo cuyo tamano y color (amarillo -> naranja -> rojo) indican el valor.
+    # El radio va en pixeles: se ve igual a cualquier zoom y no se funde en una mancha.
     por_est['peso'] = por_est['afluencia'] if ver == 'Afluencia' else por_est['anomalias']
-    base = por_est['peso'].quantile(0.5)
-    intensidad = ((por_est['peso'] - base) / max(por_est['peso'].max() - base, 1)).clip(0, 1) ** 0.7
-    por_est['halo'] = 120 + 650 * intensidad
-    por_est['nucleo'] = 60 + 260 * intensidad
+    intensidad = (por_est['peso'] / max(por_est['peso'].max(), 1)).clip(0, 1) ** 0.5
 
-    def gradiente(t, alfa):
-        # amarillo -> naranja -> rojo oscuro
+    def gradiente(t):
         a, b = ((255, 214, 0), (242, 101, 34)) if t < 0.5 else ((242, 101, 34), (160, 20, 20))
         u = t * 2 if t < 0.5 else (t - 0.5) * 2
-        return [int(a[k] + (b[k] - a[k]) * u) for k in range(3)] + [alfa]
+        return [int(a[k] + (b[k] - a[k]) * u) for k in range(3)] + [235]
 
-    por_est['color_halo'] = [gradiente(t, int(25 + 70 * t)) for t in intensidad]
-    por_est['color_nucleo'] = [gradiente(t, int(90 + 140 * t)) for t in intensidad]
-    calientes = por_est[intensidad > 0]
+    por_est['radio_px'] = 3 + 13 * intensidad
+    por_est['relleno'] = [gradiente(t) for t in intensidad]
+    por_est = por_est.sort_values('radio_px', ascending=False)   # los chicos quedan encima y se pueden seleccionar
 
     izq, der = st.columns([2.6, 1])
     with izq:
-        capas = [pdk.Layer('ScatterplotLayer', data=calientes, get_position='[lon, lat]', get_radius='halo',
-                           get_fill_color='color_halo', stroked=False, pickable=False),
-                 pdk.Layer('ScatterplotLayer', data=calientes, get_position='[lon, lat]', get_radius='nucleo',
-                           get_fill_color='color_nucleo', stroked=False, pickable=False),
-                 pdk.Layer('PathLayer', data=red, get_path='path', get_color='color', width_units='pixels',
-                           get_width=3.5, cap_rounded=True, joint_rounded=True, pickable=False),
+        capas = [pdk.Layer('PathLayer', data=red, get_path='path', get_color='color', width_units='pixels',
+                           get_width=4, cap_rounded=True, joint_rounded=True, pickable=False),
                  pdk.Layer('ScatterplotLayer', id='estaciones', data=por_est, get_position='[lon, lat]',
-                           get_radius=55, radius_min_pixels=2.5, radius_max_pixels=7, get_fill_color=[255, 255, 255, 235],
-                           get_line_color=[46, 46, 46, 255], line_width_min_pixels=1, stroked=True,
-                           pickable=True, auto_highlight=True, highlight_color=[242, 101, 34, 255])]
+                           radius_units='pixels', get_radius='radio_px', get_fill_color='relleno',
+                           get_line_color=[255, 255, 255, 255], line_width_units='pixels', get_line_width=1.5,
+                           stroked=True, pickable=True, auto_highlight=True, highlight_color=[46, 46, 46, 255])]
         vista = pdk.ViewState(latitude=19.41, longitude=-99.13, zoom=10.8, pitch=0, min_zoom=9.8, max_zoom=16)
         if arcgis_capa:
             try:
@@ -241,7 +233,7 @@ with tab_mapa:
                                        line_width_min_pixels=2, point_radius_min_pixels=3, pickable=False))
             except Exception as e:
                 st.warning(f'No se pudo cargar la capa de ArcGIS: {e}')
-        deck = pdk.Deck(layers=capas, map_provider='carto', map_style=pdk.map_styles.CARTO_DARK, initial_view_state=vista,
+        deck = pdk.Deck(layers=capas, map_provider='carto', map_style=pdk.map_styles.CARTO_LIGHT, initial_view_state=vista,
                         tooltip={'html': '<b>{nombre}</b> · {nombre_linea}<br/>Afluencia diaria típica: <b>{afluencia_txt}</b>'
                                          '<br/>Anomalías en el periodo: <b>{anomalias_txt}</b>',
                                  'style': {'backgroundColor': GRIS_OSCURO, 'color': 'white', 'fontFamily': FUENTE}})
@@ -261,9 +253,9 @@ with tab_mapa:
                     '<b style="display:inline-block;width:120px;height:10px;border-radius:5px;'
                     'background:linear-gradient(90deg,#FFD600,#F26522,#A01414)"></b>'
                     + ('Más pasajeros' if ver == 'Afluencia' else 'Más anomalías') + '</span></div>', unsafe_allow_html=True)
-        st.markdown('<p class="nota">' + ('El brillo alrededor de cada estación indica cuántos pasajeros recibe al día. '
+        st.markdown('<p class="nota">' + ('Tamaño y color de cada círculo = pasajeros que recibe la estación al día. '
                                           if ver == 'Afluencia' else
-                                          'El brillo alrededor de cada estación indica cuántas anomalías tuvo en el periodo. ') +
+                                          'Tamaño y color de cada círculo = anomalías de la estación en el periodo. ') +
                     'Pasa el cursor sobre una estación para ver sus datos. ' +
                     'Haz clic en una estación y abre <b>Series de tiempo</b> para ver su detalle.</p>', unsafe_allow_html=True)
 
