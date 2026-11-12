@@ -1,5 +1,5 @@
 # Orquestador: corre data/recoleccion_y_limpieza.py, eda/analisis_exploratorio.py
-# y feature_engineering/feature_engineering.py en orden, cada uno como proceso
+# feature_engineering/feature_engineering.py y modeling/prophet_mad.py en orden, cada uno como proceso
 # independiente, para dejar listos los checkpoints (data/processed/*.pkl) y las
 # graficas que necesita modeling/modelado.ipynb. Pensado para correr una sola
 # vez despues de clonar el repo (o cuando quieras regenerar todo desde cero).
@@ -11,9 +11,10 @@ import subprocess
 import sys
 
 PASOS = [
-    ("1/3", "data/recoleccion_y_limpieza.py"),
-    ("2/3", "eda/analisis_exploratorio.py"),
-    ("3/3", "feature_engineering/feature_engineering.py"),
+    ("1/4", "data/recoleccion_y_limpieza.py"),
+    ("2/4", "eda/analisis_exploratorio.py"),
+    ("3/4", "feature_engineering/feature_engineering.py"),
+    ("4/4", "modeling/prophet_mad.py"),
 ]
 
 for numero, script in PASOS:
@@ -24,6 +25,6 @@ for numero, script in PASOS:
         sys.exit(resultado.returncode)
 
 print(
-    "\nListo. Checkpoints en data/processed/*.pkl y graficas en eda/img/ y "
-    "feature_engineering/img/. Ahora puedes abrir modeling/modelado.ipynb."
+    "\nListo. Checkpoints en data/processed/*.pkl y graficas en eda/img/, "
+    "feature_engineering/img/ y modeling/img_pronosticos/. Ahora puedes abrir modeling/modelado.ipynb."
 )
