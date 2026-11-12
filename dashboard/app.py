@@ -203,28 +203,37 @@ with tab_mapa:
     por_est['anomalias_txt'] = por_est['anomalias'].map('{:,.0f}'.format)
     por_est['color'] = por_est['linea'].map(lambda l: hex_rgb(COLORES_LINEA.get(l, GRIS)))
 
+    # Calor por estacion como halos en metros (escalan con el zoom y no se funden en una mancha como el
+    # HeatmapLayer, que agrega en pixeles). Solo brillan las estaciones por encima de la mediana.
     por_est['peso'] = por_est['afluencia'] if ver == 'Afluencia' else por_est['anomalias']
-    escala = por_est['peso'] / max(por_est['peso'].max(), 1)
-    # Estaciones: blancas en afluencia; en anomalias crecen y se tinen de rojo segun cuantas tuvieron
-    por_est['radio'] = 70 + (260 * escala if ver == 'Anomalías' else 0)
-    por_est['relleno'] = [[255, 255, 255, 230]] * len(por_est) if ver == 'Afluencia' else \
-        escala.map(lambda t: [255, int(255 - 200 * t), int(255 - 230 * t), 235]).tolist()
-    calor = ([[255, 224, 178, 0], [255, 204, 128, 90], [253, 160, 70, 160], [242, 101, 34, 200], [200, 40, 20, 230], [140, 10, 10, 245]]
-             if ver == 'Anomalías' else
-             [[254, 229, 217, 0], [252, 187, 161, 90], [252, 146, 114, 150], [242, 101, 34, 190], [222, 45, 38, 220], [165, 15, 21, 240]])
+    base = por_est['peso'].quantile(0.5)
+    intensidad = ((por_est['peso'] - base) / max(por_est['peso'].max() - base, 1)).clip(0, 1) ** 0.7
+    por_est['halo'] = 120 + 650 * intensidad
+    por_est['nucleo'] = 60 + 260 * intensidad
+
+    def gradiente(t, alfa):
+        # amarillo -> naranja -> rojo oscuro
+        a, b = ((255, 214, 0), (242, 101, 34)) if t < 0.5 else ((242, 101, 34), (160, 20, 20))
+        u = t * 2 if t < 0.5 else (t - 0.5) * 2
+        return [int(a[k] + (b[k] - a[k]) * u) for k in range(3)] + [alfa]
+
+    por_est['color_halo'] = [gradiente(t, int(25 + 70 * t)) for t in intensidad]
+    por_est['color_nucleo'] = [gradiente(t, int(90 + 140 * t)) for t in intensidad]
+    calientes = por_est[intensidad > 0]
 
     izq, der = st.columns([2.6, 1])
     with izq:
-        capas = [pdk.Layer('HeatmapLayer', data=por_est, get_position='[lon, lat]', get_weight='peso',
-                           radius_pixels=32, intensity=1, threshold=0.12, aggregation='SUM', opacity=0.75,
-                           color_range=calor),
+        capas = [pdk.Layer('ScatterplotLayer', data=calientes, get_position='[lon, lat]', get_radius='halo',
+                           get_fill_color='color_halo', stroked=False, pickable=False),
+                 pdk.Layer('ScatterplotLayer', data=calientes, get_position='[lon, lat]', get_radius='nucleo',
+                           get_fill_color='color_nucleo', stroked=False, pickable=False),
                  pdk.Layer('PathLayer', data=red, get_path='path', get_color='color', width_units='pixels',
-                           get_width=4, cap_rounded=True, joint_rounded=True, pickable=False),
+                           get_width=3.5, cap_rounded=True, joint_rounded=True, pickable=False),
                  pdk.Layer('ScatterplotLayer', id='estaciones', data=por_est, get_position='[lon, lat]',
-                           get_radius='radio', radius_min_pixels=3, get_fill_color='relleno',
+                           get_radius=55, radius_min_pixels=2.5, radius_max_pixels=7, get_fill_color=[255, 255, 255, 235],
                            get_line_color=[46, 46, 46, 255], line_width_min_pixels=1, stroked=True,
                            pickable=True, auto_highlight=True, highlight_color=[242, 101, 34, 255])]
-        vista = pdk.ViewState(latitude=19.41, longitude=-99.13, zoom=10.8, pitch=0)
+        vista = pdk.ViewState(latitude=19.41, longitude=-99.13, zoom=10.8, pitch=0, min_zoom=9.8, max_zoom=16)
         if arcgis_capa:
             try:
                 capas.append(pdk.Layer('GeoJsonLayer', data=capa_arcgis(arcgis_capa), stroked=True, filled=True,
@@ -247,9 +256,14 @@ with tab_mapa:
         st.markdown('<div class="leyenda">' + ''.join(
             f'<span><i style="background:{COLORES_LINEA[l]}"></i>{nombre_linea(l)}</span>'
             for l in sorted(COLORES_LINEA, key=lambda x: (len(x), x))) + '</div>', unsafe_allow_html=True)
-        st.markdown('<p class="nota">' + ('Zonas más intensas = estaciones con más pasajeros al día. '
+        st.markdown('<div class="leyenda"><span style="display:inline-flex;align-items:center;gap:6px">'
+                    + ('Menos pasajeros' if ver == 'Afluencia' else 'Menos anomalías') +
+                    '<b style="display:inline-block;width:120px;height:10px;border-radius:5px;'
+                    'background:linear-gradient(90deg,#FFD600,#F26522,#A01414)"></b>'
+                    + ('Más pasajeros' if ver == 'Afluencia' else 'Más anomalías') + '</span></div>', unsafe_allow_html=True)
+        st.markdown('<p class="nota">' + ('El brillo alrededor de cada estación indica cuántos pasajeros recibe al día. '
                                           if ver == 'Afluencia' else
-                                          'Zonas más rojas y puntos más grandes = estaciones con más anomalías. ') +
+                                          'El brillo alrededor de cada estación indica cuántas anomalías tuvo en el periodo. ') +
                     'Pasa el cursor sobre una estación para ver sus datos. ' +
                     'Haz clic en una estación y abre <b>Series de tiempo</b> para ver su detalle.</p>', unsafe_allow_html=True)
 
