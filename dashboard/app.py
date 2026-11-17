@@ -8,6 +8,10 @@
 # dashboard/preparar_datos.py), asi que se puede desplegar tal cual en
 # Streamlit Community Cloud.
 #
+# La pestana activa y los filtros viven en la URL (bind='query-params'): si la
+# sesion se pierde por inactividad y el navegador reconecta o recarga, la pagina
+# vuelve con la misma vista y los mismos filtros. Requiere Streamlit >= 1.67.
+#
 # Correr con la raiz del repo como working directory:
 #   streamlit run dashboard/app.py
 
@@ -16,7 +20,6 @@ from pathlib import Path
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
-import streamlit.components.v1 as components
 
 BASE = Path(__file__).resolve().parent
 REPO = BASE.parent
@@ -38,6 +41,41 @@ CRITICA = 'CRÍTICA (Consenso)'
 MENORES = ['ALTA (Solo Prophet)', 'MEDIA (Solo MAD)']
 CIERRE = 'CIERRE (Operativo)'
 PERIODOS = {'Último año': 365, 'Últimos 3 meses': 91, 'Todo el histórico': None}
+
+# Vigia de conexion: Streamlit muestra el elemento stConnectionStatus solo mientras NO hay conexion con
+# el servidor. Si lleva asi mas de 45 s con la pestana visible y el servidor si responde, la pagina se
+# recarga sola (los filtros se conservan porque estan en la URL). Maximo 3 recargas cada 10 minutos.
+VIGIA_CONEXION = """<script>
+(function () {
+  if (window.__vigiaMetro) return;
+  window.__vigiaMetro = true;
+  var REVISAR = 5000, ESPERA = 45000, MAX_RECARGAS = 3, VENTANA = 600000;
+  var desde = null, ultimo = Date.now();
+  function recargasRecientes() {
+    try {
+      return JSON.parse(sessionStorage.getItem('vigiaMetro') || '[]')
+        .filter(function (t) { return Date.now() - t < VENTANA; });
+    } catch (e) { return []; }
+  }
+  setInterval(function () {
+    var ahora = Date.now();
+    var pausa = ahora - ultimo > 3 * REVISAR;   // la pestana estuvo dormida o en segundo plano
+    ultimo = ahora;
+    var sinConexion = !!document.querySelector('[data-testid="stConnectionStatus"]');
+    if (!sinConexion || document.hidden) { desde = null; return; }
+    if (pausa || desde === null) { desde = ahora; return; }   // empieza (o reinicia) la cuenta
+    if (ahora - desde < ESPERA) return;
+    desde = ahora;
+    var previas = recargasRecientes();
+    if (previas.length >= MAX_RECARGAS || !navigator.onLine) return;
+    fetch('_stcore/health', { cache: 'no-store' }).then(function (r) {
+      if (!r.ok) return;
+      try { sessionStorage.setItem('vigiaMetro', JSON.stringify(previas.concat(Date.now()))); } catch (e) {}
+      location.reload();
+    }).catch(function () {});
+  }, REVISAR);
+})();
+</script>"""
 
 st.set_page_config(page_title='Monitor de anomalías · Metro CDMX', layout='wide')
 
@@ -84,8 +122,9 @@ def seccion(texto):
     st.markdown(f'<div class="seccion">{texto}</div>', unsafe_allow_html=True)
 
 
-@st.cache_data(show_spinner='Cargando datos…')
+@st.cache_resource(show_spinner='Cargando datos…')
 def cargar():
+    # cache_resource: una sola copia en memoria compartida por todas las sesiones (no se modifica)
     series = pd.read_parquet(DATOS / 'series_estaciones.parquet')
     for col in ['linea', 'estacion']:
         series[col] = series[col].astype(str)
@@ -143,17 +182,21 @@ kpi(c[2], 'Anomalías graves (último año)', f'{ultimo_anio["prioridad_auditori
 kpi(c[3], 'Pronóstico hasta', f'{futuro["fecha"].max():%d/%m/%Y}', 'afluencia esperada por estación')
 st.write('')
 
-tab_mapa, tab_series = st.tabs(['Mapa', 'Series de tiempo'])
+
+def abrir_estacion():
+    # Al marcar una fila del ranking se abre la serie de tiempo de esa estacion
+    filas = st.session_state['ranking']['selection']['rows']
+    if filas:
+        st.session_state['linea'], st.session_state['estacion'] = st.session_state['ranking_estaciones'][filas[0]]
+        st.session_state['vista'] = 'Series de tiempo'
+
 
 # ---------------------------------------------------------------- mapa (ArcGIS) + ranking de estaciones
-with tab_mapa:
+def vista_mapa():
     izq, der = st.columns([2.5, 1])
     with izq:
         if arcgis_url:
-            if hasattr(st, 'iframe'):
-                st.iframe(arcgis_url, height=640)
-            else:   # versiones de Streamlit anteriores a st.iframe
-                components.iframe(arcgis_url, height=640, scrolling=True)
+            st.iframe(arcgis_url, height=640)
             st.markdown(f'<p class="nota">Si el mapa no carga, ábrelo directamente: <a href="{arcgis_url}" target="_blank">'
                         'ver en ArcGIS Online</a>.</p>', unsafe_allow_html=True)
         else:
@@ -161,10 +204,10 @@ with tab_mapa:
                     'la constante ARCGIS_URL al inicio de dashboard/app.py, o en los Secrets de Streamlit Cloud como arcgis_url.')
 
     with der:
-        ver = st.radio('Ver', ['Afluencia', 'Anomalías'], horizontal=True)
-        periodo = st.selectbox('Periodo', list(PERIODOS), key='periodo_mapa')
+        ver = st.radio('Ver', ['Afluencia', 'Anomalías'], horizontal=True, key='ver', bind='query-params')
+        periodo = st.selectbox('Periodo', list(PERIODOS), key='periodo', bind='query-params')
         menores = ver == 'Anomalías' and st.toggle(
-            'Incluir anomalías leves', value=False,
+            'Incluir anomalías leves', value=False, key='leves', bind='query-params',
             help='Por defecto solo se cuentan las graves: días en que el pronóstico (Prophet) y la '
                  'comparación con semanas anteriores (MAD) coinciden en que algo raro pasó.')
 
@@ -179,40 +222,42 @@ with tab_mapa:
         por_est['nombre_linea'] = por_est['linea'].map(nombre_linea)
 
         if ver == 'Afluencia':
-            seccion('Estaciones con más afluencia')
-            tabla = por_est.sort_values('afluencia', ascending=False).head(15)
-            st.dataframe(tabla[['nombre', 'nombre_linea', 'afluencia']], hide_index=True, height=460,
-                         column_config={'nombre': 'Estación', 'nombre_linea': 'Línea',
-                                        'afluencia': st.column_config.ProgressColumn(
-                                            'Pasajeros al día', format='%,.0f', min_value=0,
-                                            max_value=float(por_est['afluencia'].max()))})
-            st.markdown('<p class="nota">Afluencia diaria típica (mediana) en el periodo, sin contar días de cierre.</p>',
-                        unsafe_allow_html=True)
+            columna, titulo, encabezado, formato = 'afluencia', 'Estaciones con más afluencia', 'Pasajeros al día', '%,.0f'
+            nota = 'Afluencia diaria típica (mediana) en el periodo, sin contar días de cierre.'
         else:
-            seccion('Estaciones con más anomalías')
-            tabla = por_est.sort_values('anomalias', ascending=False).head(15)
-            st.dataframe(tabla[['nombre', 'nombre_linea', 'anomalias']], hide_index=True, height=460,
-                         column_config={'nombre': 'Estación', 'nombre_linea': 'Línea',
-                                        'anomalias': st.column_config.ProgressColumn(
-                                            'Anomalías', format='%d', min_value=0,
-                                            max_value=float(max(por_est['anomalias'].max(), 1)))})
-            st.markdown('<p class="nota">Días del periodo en que la estación se salió de lo normal.</p>',
-                        unsafe_allow_html=True)
-        st.markdown('<p class="nota">Para ver el detalle de una estación abre <b>Series de tiempo</b>.</p>',
-                    unsafe_allow_html=True)
+            columna, titulo, encabezado, formato = 'anomalias', 'Estaciones con más anomalías', 'Anomalías', '%d'
+            nota = 'Días del periodo en que la estación se salió de lo normal.'
+        seccion(titulo)
+        tabla = por_est.sort_values(columna, ascending=False).head(15)
+        st.session_state['ranking_estaciones'] = list(zip(tabla['linea'], tabla['estacion']))
+        st.dataframe(tabla[['nombre', 'nombre_linea', columna]], hide_index=True, height=460,
+                     key='ranking', on_select=abrir_estacion, selection_mode='single-row',
+                     column_config={'nombre': 'Estación', 'nombre_linea': 'Línea',
+                                    columna: st.column_config.ProgressColumn(
+                                        encabezado, format=formato, min_value=0,
+                                        max_value=float(max(por_est[columna].max(), 1)))})
+        st.markdown(f'<p class="nota">{nota}</p><p class="nota">Marca la casilla de una estación para abrir su '
+                    '<b>serie de tiempo</b>.</p>', unsafe_allow_html=True)
+
 
 # ---------------------------------------------------------------- series de tiempo
-with tab_series:
+def vista_series():
     lineas = list(dict.fromkeys(estaciones['linea']))
-    if st.session_state.get('linea_serie') not in lineas:
-        st.session_state['linea_serie'], st.session_state['est_serie'] = 'linea 1', 'pantitlán'
+    # Linea y estacion se guardan en la URL a mano (sin bind): asi abrir_estacion() puede fijarlas desde el
+    # ranking sin que un valor viejo de la URL las sobrescriba al volver a mostrarse.
+    url = st.query_params
     c1, c2, c3 = st.columns([1, 1.6, 1.6])
-    linea_e = c1.selectbox('Línea', lineas, format_func=nombre_linea, key='linea_serie')
+    if st.session_state.get('linea') not in lineas:
+        st.session_state['linea'] = url.get('linea') if url.get('linea') in lineas else lineas[0]
+    linea_e = c1.selectbox('Línea', lineas, format_func=nombre_linea, key='linea')
     opciones = estaciones.loc[estaciones['linea'] == linea_e, 'estacion'].tolist()
-    if st.session_state.get('est_serie') not in opciones:
-        st.session_state['est_serie'] = opciones[0]
-    est_e = c2.selectbox('Estación', opciones, format_func=nombre_estacion, key='est_serie')
-    periodo_s = c3.radio('Mostrar', ['Último año y pronóstico', 'Todo el histórico'], horizontal=True)
+    if st.session_state.get('estacion') not in opciones:   # primera vez o cambio de linea
+        st.session_state['estacion'] = (url.get('estacion') if url.get('estacion') in opciones
+                                        else 'pantitlán' if 'pantitlán' in opciones else opciones[0])
+    est_e = c2.selectbox('Estación', opciones, format_func=nombre_estacion, key='estacion')
+    url['linea'], url['estacion'] = linea_e, est_e
+    periodo_s = c3.radio('Mostrar', ['Último año y pronóstico', 'Todo el histórico'], horizontal=True,
+                         key='mostrar', bind='query-params')
     clave = f'{linea_e}|{est_e}'
 
     s = series[(series['linea'] == linea_e) & (series['estacion'] == est_e)].sort_values('fecha')
@@ -263,10 +308,12 @@ with tab_series:
                       font=dict(family=FUENTE, color=GRIS_OSCURO, size=12), hovermode='closest',
                       legend=dict(orientation='h', yanchor='bottom', y=1.0, xanchor='right', x=1, title=None))
     fig.update_yaxes(tickformat=',', title='Pasajeros por día', rangemode='tozero')
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, config={'displaylogo': False,
+                                 'modeBarButtonsToRemove': ['select2d', 'lasso2d', 'autoScale2d', 'zoomIn2d', 'zoomOut2d']})
     st.markdown('<p class="nota">La franja gris es el rango de afluencia que el modelo considera normal para cada día '
                 '(toma en cuenta día de la semana, temporada y festivos). Los puntos rojos son días que se salieron de forma '
-                'grave; la línea naranja es lo que se espera en los próximos meses.</p>', unsafe_allow_html=True)
+                'grave; la línea naranja es lo que se espera en los próximos meses. Arrastra sobre la gráfica para acercarte '
+                'a un periodo y haz doble clic para regresar.</p>', unsafe_allow_html=True)
 
     seccion('Anomalías graves más recientes')
     tabla = (s[s['prioridad_auditoria'].eq(CRITICA)].sort_values('fecha', ascending=False).head(10)
@@ -284,5 +331,15 @@ with tab_series:
     else:
         st.info('Esta estación no tiene anomalías graves registradas.')
 
+# Solo se calcula la pestana abierta; la pestana activa queda en la URL
+tab_mapa, tab_series = st.tabs(['Mapa', 'Series de tiempo'], key='vista', bind='query-params')
+if tab_mapa.open:
+    with tab_mapa:
+        vista_mapa()
+if tab_series.open:
+    with tab_series:
+        vista_series()
+
 st.markdown('<p class="nota" style="text-align:center;margin-top:28px">Trabajo Terminal 2026-B125 · Datos abiertos de SEMOVI '
             '(datos.cdmx.gob.mx) · Proyecto académico, no es un sitio oficial del STC Metro.</p>', unsafe_allow_html=True)
+st.html(VIGIA_CONEXION, unsafe_allow_javascript=True)

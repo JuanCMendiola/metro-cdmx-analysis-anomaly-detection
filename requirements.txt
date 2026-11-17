@@ -19,6 +19,6 @@ ipykernel>=6.29
 jupytext>=1.16
 
 # Dashboard prototype (dashboard/app.py)
-streamlit>=1.50
+streamlit>=1.67
 pyarrow>=15
 requests>=2.31

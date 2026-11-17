@@ -69,6 +69,30 @@ Pensado para usuarios, con dos pestañas:
   afluencia real, rango normal de Prophet, pronóstico y anomalías marcadas, con la
   causa encontrada en la investigación OSINT cuando existe.
 
+Al marcar una estación en el ranking se abre su serie de tiempo.
+
+## Sesión, inactividad y URL
+
+Streamlit borra la sesión de un visitante unos 2 minutos después de que su
+navegador pierde la conexión (pestaña en segundo plano, equipo suspendido, red
+inestable). Antes, al reconectar, la página volvía con los filtros por defecto o
+se quedaba sin responder. Ahora:
+
+- La pestaña activa y los filtros se guardan en la URL (`bind="query-params"` en
+  los filtros del mapa; línea y estación se escriben a mano en `st.query_params`
+  para poder fijarlas desde el ranking). Al reconectar o recargar, la página
+  vuelve igual. De paso, la URL sirve como enlace directo a una estación, p. ej.
+  `?vista=Series+de+tiempo&linea=linea+12&estacion=tezonco`.
+- `VIGIA_CONEXION` (JavaScript al final de `app.py`) recarga la página si lleva
+  más de 45 s sin conexión con la pestaña visible y el servidor sí responde
+  (máximo 3 recargas cada 10 minutos). Se apoya en el elemento
+  `stConnectionStatus` de Streamlit 1.67; si una versión futura lo renombra, el
+  vigía deja de actuar pero no rompe nada.
+- Solo se calcula la pestaña abierta (`tab.open`).
+
+Requiere Streamlit >= 1.67 (`bind`, pestañas con estado, `st.iframe`, `st.html`
+con JavaScript).
+
 ## Siguientes pasos
 
 - Cada vez que se actualicen los datos de SEMOVI o se reentrene el modelo, volver a

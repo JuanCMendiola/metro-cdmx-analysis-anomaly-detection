@@ -1,7 +1,7 @@
 # Dependencias solo del dashboard (Streamlit Community Cloud usa este archivo
 # porque esta junto a dashboard/app.py; el requirements.txt de la raiz es el del
 # pipeline completo).
-streamlit>=1.50
+streamlit>=1.67
 pandas>=2.2
 plotly>=5.22
 pyarrow>=15
