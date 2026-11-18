@@ -29,6 +29,12 @@ alerta = pd.read_excel('propuesta_anomalias_futuras.xlsx', sheet_name='Dias en a
 alerta['fecha'] = pd.to_datetime(alerta['fecha'])
 alerta.to_parquet(f'{SALIDA}/riesgo_dias_alerta.parquet', index=False)
 
+# Bitacora OSINT de las anomalias futuras auditadas (ago-nov 2026), para la tabla de "Series de tiempo"
+auditadas = pd.read_excel('bitacora_osint_anomalias_futuras_validada.xlsx')
+auditadas.columns = auditadas.columns.str.lower()
+auditadas['fecha'] = pd.to_datetime(auditadas['fecha']).dt.date
+auditadas.to_csv(f'{SALIDA}/anomalias_auditadas.csv', index=False)
+
 print(f"Serie diaria: {len(series):,} filas ({series['fecha'].min().date()} -> {series['fecha'].max().date()}) | "
       f"riesgo: {len(alerta):,} dias en alerta")
 print('Archivos en', SALIDA, ':', {f: f'{os.path.getsize(os.path.join(SALIDA, f)) / 1e6:.1f} MB' for f in os.listdir(SALIDA)})

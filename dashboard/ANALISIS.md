@@ -41,7 +41,9 @@ tal cual:
   a partir de `data/processed/prophet_series.pkl` (de `modeling/prophet_mad.py`)
   y de `propuesta_anomalias_futuras.csv/.xlsx` (de `modeling/modelado.ipynb`).
   Hay que volver a correrlo cada vez que se actualicen el detector o el modelo.
-- `bitacora_investigacion_anomalias_criticas.csv` (investigación OSINT).
+- `dashboard/data/anomalias_auditadas.csv` (investigación OSINT de los días
+  pronosticados de ago-nov 2026): también lo genera `preparar_datos.py`, a partir
+  de `bitacora_osint_anomalias_futuras_validada.xlsx` en la raíz del repo.
 - `dashboard/estaciones_coordenadas.csv`.
 
 Correr local: `streamlit run dashboard/app.py` (desde la raíz del repo). El tema
@@ -66,8 +68,9 @@ Pensado para usuarios, con dos pestañas:
   la derecha, el ranking de estaciones con más afluencia o más anomalías en el
   periodo elegido (las anomalías leves se pueden incluir con un interruptor).
 - **Series de tiempo:** se elige línea y estación en listas desplegables; muestra
-  afluencia real, rango normal de Prophet, pronóstico y anomalías marcadas, con la
-  causa encontrada en la investigación OSINT cuando existe.
+  afluencia real, rango normal de Prophet, pronóstico y anomalías marcadas. Abajo,
+  la tabla de las últimas anomalías auditadas (días pronosticados de ago-nov 2026
+  investigados con OSINT), de la estación o de todas.
 
 Al marcar una estación en el ranking se abre su serie de tiempo.
 

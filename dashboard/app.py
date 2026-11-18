@@ -131,11 +131,16 @@ def cargar():
     series['prioridad_auditoria'] = series['prioridad_auditoria'].astype(object)
     series['diferencia'] = series['afluencia'] - series['yhat']
     top = pd.read_parquet(DATOS / 'riesgo_top_estaciones.parquet')
-    bitacora = pd.read_csv(REPO / 'bitacora_investigacion_anomalias_criticas.csv')
-    bitacora.columns = bitacora.columns.str.lower()
-    bitacora['fecha'] = pd.to_datetime(bitacora['fecha']).dt.normalize()
-    bitacora['causa'] = bitacora['hallazgo_principal'].str.split('(').str[0].str.strip()
-    return series, top, bitacora
+    # Bitacora OSINT de los dias pronosticados (ago-nov 2026) que ya se investigaron
+    auditadas = pd.read_csv(DATOS / 'anomalias_auditadas.csv')
+    auditadas['fecha'] = pd.to_datetime(auditadas['fecha']).dt.normalize()
+    auditadas['causa'] = auditadas['hallazgo_principal'].str.split('(').str[0].str.strip()
+    auditadas['ocurrio'] = auditadas['ocurrio_evento'].str.split(' - ').str[0]
+    auditadas['tipo'] = auditadas['direccion_probable'].map(
+        {'Alza (Pico atípico)': 'Más gente de lo normal', 'Baja (Caída atípica)': 'Menos gente de lo normal'}).fillna('Sin definir')
+    auditadas['grupo'] = auditadas['estrato'].map(
+        {'A - Alta': 'Riesgo alto', 'B - Media': 'Riesgo medio', 'C - Control': 'Control (riesgo bajo)'})
+    return series, top, auditadas
 
 
 def config_arcgis(clave, valor):
@@ -149,13 +154,13 @@ def config_arcgis(clave, valor):
 
 
 faltan = [p for p in [DATOS / 'series_estaciones.parquet', DATOS / 'riesgo_top_estaciones.parquet',
-                      REPO / 'bitacora_investigacion_anomalias_criticas.csv'] if not p.exists()]
+                      DATOS / 'anomalias_auditadas.csv'] if not p.exists()]
 if faltan:
     st.error('Faltan datos del dashboard: ' + ', '.join(str(p.relative_to(REPO)) for p in faltan) +
              '. Corre `python dashboard/preparar_datos.py` desde la raíz del repo.')
     st.stop()
 
-series, top, bitacora = cargar()
+series, top, auditadas = cargar()
 hist = series[~series['es_futuro']]
 futuro = series[series['es_futuro']]
 ultimo_dato = hist['fecha'].max()
@@ -315,21 +320,31 @@ def vista_series():
                 'grave; la línea naranja es lo que se espera en los próximos meses. Arrastra sobre la gráfica para acercarte '
                 'a un periodo y haz doble clic para regresar.</p>', unsafe_allow_html=True)
 
-    seccion('Anomalías graves más recientes')
-    tabla = (s[s['prioridad_auditoria'].eq(CRITICA)].sort_values('fecha', ascending=False).head(10)
-             .merge(bitacora[['fecha', 'linea', 'estacion', 'causa', 'descripcion_incidente']],
-                    on=['fecha', 'linea', 'estacion'], how='left'))
+    seccion('Últimas anomalías auditadas')
+    todas = st.toggle('Ver todas las estaciones', value=False, key='todas_auditadas', bind='query-params')
+    tabla = auditadas if todas else auditadas[(auditadas['linea'] == linea_e) & (auditadas['estacion'] == est_e)]
     if len(tabla):
-        tabla['tipo'] = (tabla['diferencia'] > 0).map({True: 'Más gente de lo normal', False: 'Menos gente de lo normal'})
-        tabla['causa'] = tabla['causa'].fillna('Sin investigar')
-        st.dataframe(tabla.assign(fecha=tabla['fecha'].dt.date)[['fecha', 'tipo', 'afluencia', 'yhat', 'causa', 'descripcion_incidente']],
-                     hide_index=True,
-                     column_config={'fecha': 'Fecha', 'tipo': 'Qué pasó',
-                                    'afluencia': st.column_config.NumberColumn('Real', format='%,.0f'),
-                                    'yhat': st.column_config.NumberColumn('Esperado', format='%,.0f'),
-                                    'causa': 'Causa encontrada', 'descripcion_incidente': 'Detalle'})
+        tabla = tabla.sort_values('fecha', ascending=False).assign(
+            fecha=lambda d: d['fecha'].dt.date, nombre=lambda d: d['estacion'].map(nombre_estacion),
+            nombre_linea=lambda d: d['linea'].map(nombre_linea))
+        columnas = (['nombre', 'nombre_linea'] if todas else []) + [
+            'fecha', 'grupo', 'prob_critica', 'ocurrio', 'tipo', 'afluencia_esperada', 'afluencia_real_semovi',
+            'causa', 'descripcion_incidente', 'link_fuente_1']
+        st.dataframe(tabla[columnas], hide_index=True,
+                     column_config={'nombre': 'Estación', 'nombre_linea': 'Línea', 'fecha': 'Fecha',
+                                    'grupo': 'Grupo de la muestra',
+                                    'prob_critica': st.column_config.NumberColumn('Prob. de anomalía grave', format='percent'),
+                                    'ocurrio': '¿Ocurrió algo?', 'tipo': 'Qué pasó',
+                                    'afluencia_esperada': st.column_config.NumberColumn('Esperado', format='%,.0f'),
+                                    'afluencia_real_semovi': st.column_config.NumberColumn('Real', format='%,.0f'),
+                                    'causa': 'Causa encontrada', 'descripcion_incidente': 'Detalle',
+                                    'link_fuente_1': st.column_config.LinkColumn('Fuente', display_text='Ver nota')})
     else:
-        st.info('Esta estación no tiene anomalías graves registradas.')
+        st.info('Esta estación no está en la muestra auditada. Activa "Ver todas las estaciones" para ver las demás.')
+    st.markdown(f'<p class="nota">Días de agosto a noviembre de 2026 que el modelo de riesgo marcó como posibles anomalías '
+                f'y que se investigaron en noticias y redes (OSINT): {len(auditadas)} días en '
+                f'{auditadas[["linea", "estacion"]].drop_duplicates().shape[0]} estaciones. Los días de "Control" se investigaron '
+                'igual que los demás para comparar contra los que marcó el modelo.</p>', unsafe_allow_html=True)
 
 # Solo se calcula la pestana abierta; la pestana activa queda en la URL
 tab_mapa, tab_series = st.tabs(['Mapa', 'Series de tiempo'], key='vista', bind='query-params')
