@@ -10,6 +10,7 @@ eda/                    Exploratory data analysis (+ eda/img/, saved charts)
 feature_engineering/    Rolling stats, ACF/PACF, STL decomposition, model-ready dataset (+ feature_engineering/img/, saved charts)
 modeling/               Prophet modeling notebook (active WIP) + sarima_backup.py (archived SARIMA/SARIMAX exploration)
 dashboard/              Streamlit prototype: map of demand/anomalies per station - active WIP
+validacion_predicciones/ Validation of the future-anomaly predictions: manual OSINT log + real SEMOVI ridership (+ img/, resultados/)
 ```
 
 Each of `data/`, `eda/` and `feature_engineering/` is a single plain `.py` file (percent-cell format, runnable in VS Code / Jupytext) plus an `ANALISIS.md` with that stage's notes/findings. See "What changed from the original notebook" below for the full picture.
@@ -49,6 +50,14 @@ This runs `data/recoleccion_y_limpieza.py` -> `eda/analisis_exploratorio.py` -> 
    ```
 
    It's a first pass at mapping the network: a "Demanda total" view (bubble map sized by accumulated ridership per station) and an "Anomalias" view (bubble map sized by anomaly count, colored by average impact, with line/priority/date filters). See `dashboard/ANALISIS.md` for where the station coordinates came from and their current limitations (they're from a third-party source, not yet validated against the CDMX government's official station geometry dataset).
+
+6. Validation of the predictions (`validacion_predicciones/`): the prediction OSINT log was researched **manually** on a stratified sample of 79 alert days (Aug-Nov 2026) and is stored in `validacion_predicciones/datos/`, together with the model run it was sampled from and the real SEMOVI ridership published so far. The script only reads it:
+
+   ```
+   python validacion_predicciones/validacion_predicciones.py
+   ```
+
+   It computes the OSINT confirmation rates per stratum (and weighted to the 417-day universe), applies the repo's detector to the real ridership of the alert days, and saves the tables to `validacion_predicciones/resultados/` and the four charts to `validacion_predicciones/img/`. It needs no checkpoint from the earlier steps. Methodology, confirmation criterion, how to read the rates and results: `validacion_predicciones/ANALISIS.md`.
 
 ## What changed from the original notebook
 

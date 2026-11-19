@@ -1,0 +1,205 @@
+﻿ID_Validacion,Columna,Valor_Anterior,Valor_Nuevo,Motivo
+VAL-045,Estatus_Investigacion,En Proceso,Terminado,"Fila con todos los campos llenos que seguía ""En Proceso"""
+VAL-051,Estatus_Investigacion,En Proceso,Terminado,"Fila con todos los campos llenos que seguía ""En Proceso"""
+VAL-062,Estatus_Investigacion,En Proceso,Terminado,"Fila con todos los campos llenos que seguía ""En Proceso"""
+VAL-002,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-004,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-005,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-006,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-007,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-008,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-009,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-010,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-011,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-013,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-014,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-018,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-021,Ocurrio_Evento,Sin información suficiente,Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-022,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-023,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-026,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-031,Ocurrio_Evento,Sí - Evento confirmado,Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-037,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-038,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-042,Ocurrio_Evento,No - Sin evento (día normal),Parcial - Evento cercano/indirecto,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-052,Ocurrio_Evento,Sí - Evento confirmado,No - Sin evento (día normal),Consolidación de la OSINT; ver Observaciones de la fila
+VAL-070,Ocurrio_Evento,Sí - Evento confirmado,No - Sin evento (día normal),Consolidación de la OSINT; ver Observaciones de la fila
+VAL-072,Ocurrio_Evento,Parcial - Evento cercano/indirecto,No - Sin evento (día normal),Consolidación de la OSINT; ver Observaciones de la fila
+VAL-075,Ocurrio_Evento,Parcial - Evento cercano/indirecto,No - Sin evento (día normal),Consolidación de la OSINT; ver Observaciones de la fila
+VAL-077,Ocurrio_Evento,Parcial - Evento cercano/indirecto,No - Sin evento (día normal),Consolidación de la OSINT; ver Observaciones de la fila
+VAL-079,Ocurrio_Evento,Parcial - Evento cercano/indirecto,No - Sin evento (día normal),Consolidación de la OSINT; ver Observaciones de la fila
+VAL-002,Direccion_Probable,,Indeterminada,"Fila ""No - Sin evento"" con campo vacío; se iguala al resto de filas ""No"""
+VAL-016,Direccion_Probable,Alza (Pico atípico),Baja (Caída atípica),Consolidación de la OSINT; ver Observaciones de la fila
+VAL-026,Direccion_Probable,,Indeterminada,"Fila ""No - Sin evento"" con campo vacío; se iguala al resto de filas ""No"""
+VAL-052,Direccion_Probable,Alza (Pico atípico),Indeterminada,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-070,Direccion_Probable,Alza (Pico atípico),Indeterminada,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-072,Direccion_Probable,Alza (Pico atípico),Indeterminada,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-002,Hallazgo_Principal,,Feriado No Oficial / Cultural,"Fila ""No - Sin evento"" con campo vacío; se iguala al resto de filas ""No"""
+VAL-004,Hallazgo_Principal,Falsa Alarma (Se investigó y fue ruido normal),Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-005,Hallazgo_Principal,Falsa Alarma (Se investigó y fue ruido normal),Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-006,Hallazgo_Principal,Falsa Alarma (Se investigó y fue ruido normal),Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-007,Hallazgo_Principal,Falsa Alarma (Se investigó y fue ruido normal),Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-008,Hallazgo_Principal,Falsa Alarma (Se investigó y fue ruido normal),Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-009,Hallazgo_Principal,Falsa Alarma (Se investigó y fue ruido normal),Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-010,Hallazgo_Principal,Falsa Alarma (Se investigó y fue ruido normal),Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-011,Hallazgo_Principal,Falsa Alarma (Se investigó y fue ruido normal),Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-013,Hallazgo_Principal,Falsa Alarma (Se investigó y fue ruido normal),Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-014,Hallazgo_Principal,Falsa Alarma (Se investigó y fue ruido normal),Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-016,Hallazgo_Principal,"Evento Masivo (Concierto, partido, manifestación)",Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-018,Hallazgo_Principal,Falsa Alarma (Se investigó y fue ruido normal),Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-021,Hallazgo_Principal,Falsa Alarma (Se investigó y fue ruido normal),Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-022,Hallazgo_Principal,Falsa Alarma (Se investigó y fue ruido normal),Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-023,Hallazgo_Principal,Falsa Alarma (Se investigó y fue ruido normal),Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-026,Hallazgo_Principal,,Feriado No Oficial / Cultural,"Fila ""No - Sin evento"" con campo vacío; se iguala al resto de filas ""No"""
+VAL-031,Hallazgo_Principal,"Falla Técnica / Eléctrica (Cortocircuito, energía)",Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-037,Hallazgo_Principal,Falsa Alarma (Se investigó y fue ruido normal),Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-038,Hallazgo_Principal,Falsa Alarma (Se investigó y fue ruido normal),Feriado No Oficial / Cultural,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-049,Hallazgo_Principal,Falla Oculta (No hay reporte oficial del incidente),Clima Extremo (Inundaciones severas),El equipo indica que la causa probable fueron las lluvias
+VAL-052,Hallazgo_Principal,Contingencia Ambiental,Falsa Alarma (Se investigó y fue ruido normal),Consolidación de la OSINT; ver Observaciones de la fila
+VAL-070,Hallazgo_Principal,Contingencia Ambiental,Falsa Alarma (Se investigó y fue ruido normal),Consolidación de la OSINT; ver Observaciones de la fila
+VAL-072,Hallazgo_Principal,Contingencia Ambiental,Falsa Alarma (Se investigó y fue ruido normal),Consolidación de la OSINT; ver Observaciones de la fila
+VAL-075,Hallazgo_Principal,Contingencia Ambiental,Falsa Alarma (Se investigó y fue ruido normal),Consolidación de la OSINT; ver Observaciones de la fila
+VAL-077,Hallazgo_Principal,Contingencia Ambiental,Falsa Alarma (Se investigó y fue ruido normal),Consolidación de la OSINT; ver Observaciones de la fila
+VAL-079,Hallazgo_Principal,Contingencia Ambiental,Falsa Alarma (Se investigó y fue ruido normal),Consolidación de la OSINT; ver Observaciones de la fila
+VAL-002,Descripcion_Incidente,,Feriado del 16 de septiembre: el Metro operó con horario de día festivo (7:00 a 24:00) y hubo Desfile Cívico-Militar. Afecta la afluencia de toda la red; no se encontró un evento específico en la estación,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-004,Descripcion_Incidente,,Feriado del 16 de septiembre: el Metro operó con horario de día festivo (7:00 a 24:00) y hubo Desfile Cívico-Militar. Afecta la afluencia de toda la red; no se encontró un evento específico en la estación,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-005,Descripcion_Incidente,,Feriado del 16 de septiembre: el Metro operó con horario de día festivo (7:00 a 24:00) y hubo Desfile Cívico-Militar. Afecta la afluencia de toda la red; no se encontró un evento específico en la estación,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-006,Descripcion_Incidente,,Feriado del 16 de septiembre: el Metro operó con horario de día festivo (7:00 a 24:00) y hubo Desfile Cívico-Militar. Afecta la afluencia de toda la red; no se encontró un evento específico en la estación,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-007,Descripcion_Incidente,,Feriado del 16 de septiembre: el Metro operó con horario de día festivo (7:00 a 24:00) y hubo Desfile Cívico-Militar. Afecta la afluencia de toda la red; no se encontró un evento específico en la estación,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-008,Descripcion_Incidente,,Feriado del 16 de septiembre: el Metro operó con horario de día festivo (7:00 a 24:00) y hubo Desfile Cívico-Militar. Afecta la afluencia de toda la red; no se encontró un evento específico en la estación,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-009,Descripcion_Incidente,,Feriado del 16 de septiembre: el Metro operó con horario de día festivo (7:00 a 24:00) y hubo Desfile Cívico-Militar. Afecta la afluencia de toda la red; no se encontró un evento específico en la estación,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-010,Descripcion_Incidente,,Feriado del 16 de septiembre: el Metro operó con horario de día festivo (7:00 a 24:00) y hubo Desfile Cívico-Militar. Afecta la afluencia de toda la red; no se encontró un evento específico en la estación,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-011,Descripcion_Incidente,,Feriado del 16 de septiembre: el Metro operó con horario de día festivo (7:00 a 24:00) y hubo Desfile Cívico-Militar. Afecta la afluencia de toda la red; no se encontró un evento específico en la estación,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-013,Descripcion_Incidente,,Feriado del 16 de septiembre: el Metro operó con horario de día festivo (7:00 a 24:00) y hubo Desfile Cívico-Militar. Afecta la afluencia de toda la red; no se encontró un evento específico en la estación,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-014,Descripcion_Incidente,,Feriado del 16 de septiembre: el Metro operó con horario de día festivo (7:00 a 24:00) y hubo Desfile Cívico-Militar. Afecta la afluencia de toda la red; no se encontró un evento específico en la estación,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-016,Descripcion_Incidente,Actividades de las Fiestas Patrias organizadas por el Ayuntamiento de Aquiles Serdán,Feriado del 16 de septiembre: el Metro operó con horario de día festivo (7:00 a 24:00) y la afluencia cayó en toda la red. No se encontró un evento específico en la estación,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-018,Descripcion_Incidente,,Feriado del 16 de septiembre: el Metro operó con horario de día festivo (7:00 a 24:00) y hubo Desfile Cívico-Militar. Afecta la afluencia de toda la red; no se encontró un evento específico en la estación,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-021,Descripcion_Incidente,concluyó el Operativo Cero pirotecnia implementado por el Sistema de Transporte Colectivo (STC) Metro de la Ciudad de México,Feriado del 16 de septiembre: el Metro operó con horario de día festivo (7:00 a 24:00) y hubo Desfile Cívico-Militar. Afecta la afluencia de toda la red; no se encontró un evento específico en la estación,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-022,Descripcion_Incidente,,Feriado del 16 de septiembre: el Metro operó con horario de día festivo (7:00 a 24:00) y hubo Desfile Cívico-Militar. Afecta la afluencia de toda la red; no se encontró un evento específico en la estación,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-023,Descripcion_Incidente,,Feriado del 16 de septiembre: el Metro operó con horario de día festivo (7:00 a 24:00) y hubo Desfile Cívico-Militar. Afecta la afluencia de toda la red; no se encontró un evento específico en la estación,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-026,Descripcion_Incidente,,Feriado del 16 de septiembre: el Metro operó con horario de día festivo (7:00 a 24:00) y hubo Desfile Cívico-Militar. Afecta la afluencia de toda la red; no se encontró un evento específico en la estación,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-031,Descripcion_Incidente,"incendio provocado por la quema de basura en el exterior de las instalaciones, en la interestación entre Oceanía y Deportivo Oceanía de la Línea B del Metro de la Ciudad de México.","Día de Muertos (2 de noviembre), con actividades en toda la ciudad. No se encontró un evento específico en la estación ese día",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-037,Descripcion_Incidente,,"Día de Muertos (2 de noviembre), con actividades en toda la ciudad. No se encontró un evento específico en la estación ese día",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-038,Descripcion_Incidente,,"Día de Muertos (2 de noviembre), con actividades en toda la ciudad. No se encontró un evento específico en la estación ese día",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-042,Descripcion_Incidente,Este día no se encontro una causa especifica pero investigando mas días previos hubo un gran evento en esta estacion y sus alrededores.,"Día de Muertos (2 de noviembre), con actividades en toda la ciudad. No se encontró un evento específico en la estación ese día",Ídem
+VAL-049,Descripcion_Incidente,Solo hay reporte de un accidente de una persona en las escaleras electricas del metro pero nada que afecte directamente a la afluencia ,"Causa probable: lluvias. Ese día se reportaron afectaciones por lluvia en 3 estaciones, incluido el cierre del transbordo en Martín Carrera",Aclaración del equipo 12-nov
+VAL-052,Descripcion_Incidente,"No hay causa directa, pero ese día se activo la contigencia ambiental ""no circula"" y se informaron aumento de afluencia en la linea ","No se encontró una causa específica. Ese día aplicó el Hoy No Circula habitual, sin contingencia ambiental",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-065,Descripcion_Incidente,"Metro implementó marcha de seguridad en varias líneas de la red, incluida la Línea 4 (que pasa por Consulado), lo que ocasionó avance lento de los trenes y retrasos para los usuarios durante las primeras horas de la mañana","Metro implementó marcha de seguridad por lluvia en varias líneas de la red, lo que ocasionó avance lento de los trenes y retrasos para los usuarios durante las primeras horas de la mañana",Descripción copiada de VAL-048: mencionaba Línea 4 / Consulado en una fila de Chabacano L8
+VAL-070,Descripcion_Incidente,"No hay causa directa, pero ese día se activo la contigencia ambiental ""no circula"" y se informaron aumento de afluencia en la linea ","No se encontró una causa específica. Ese día aplicó el Hoy No Circula habitual, sin contingencia ambiental",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-072,Descripcion_Incidente,"No hay causa directa, pero ese día se activo la contigencia ambiental ""no circula"" y además se registraron manifestaciones en diferentes partes de la ciudad","No se encontró una causa específica. Ese día aplicó el Hoy No Circula habitual, sin contingencia ambiental",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-075,Descripcion_Incidente,"No hay causa directa, pero ese día se activo la contigencia ambiental ""no circula""","No se encontró una causa específica. Ese día aplicó el Hoy No Circula habitual, sin contingencia, y la prensa reportó la Línea 4 con buen avance y afluencia controlada (los retrasos fueron en Líneas 3, 7, A y B)",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-077,Descripcion_Incidente,"No hay causa directa, pero ese día se activo la contigencia ambiental ""no circula""","No se encontró una causa específica. Ese día aplicó el Hoy No Circula habitual, sin contingencia, y la prensa reportó la Línea 4 con buen avance y afluencia controlada (los retrasos fueron en Líneas 3, 7, A y B)",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-079,Descripcion_Incidente,"No hay causa directa, pero ese día se activo la contigencia ambiental ""no circula""","No se encontró una causa específica. Ese día aplicó el Hoy No Circula habitual, sin contingencia, y la prensa reportó la Línea 1 con buen avance y afluencia controlada (los retrasos fueron en Líneas 3, 7, A y B)",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-002,Link_Fuente_1,,https://www.unotv.com/estados/ciudad-de-mexico/horarios-del-transporte-publico-en-cdmx-durante-las-fiestas-patrias-2026/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-004,Link_Fuente_1,,https://www.unotv.com/estados/ciudad-de-mexico/horarios-del-transporte-publico-en-cdmx-durante-las-fiestas-patrias-2026/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-005,Link_Fuente_1,,https://www.unotv.com/estados/ciudad-de-mexico/horarios-del-transporte-publico-en-cdmx-durante-las-fiestas-patrias-2026/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-006,Link_Fuente_1,,https://www.unotv.com/estados/ciudad-de-mexico/horarios-del-transporte-publico-en-cdmx-durante-las-fiestas-patrias-2026/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-007,Link_Fuente_1,,https://www.unotv.com/estados/ciudad-de-mexico/horarios-del-transporte-publico-en-cdmx-durante-las-fiestas-patrias-2026/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-008,Link_Fuente_1,,https://www.unotv.com/estados/ciudad-de-mexico/horarios-del-transporte-publico-en-cdmx-durante-las-fiestas-patrias-2026/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-009,Link_Fuente_1,,https://www.unotv.com/estados/ciudad-de-mexico/horarios-del-transporte-publico-en-cdmx-durante-las-fiestas-patrias-2026/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-010,Link_Fuente_1,,https://www.unotv.com/estados/ciudad-de-mexico/horarios-del-transporte-publico-en-cdmx-durante-las-fiestas-patrias-2026/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-011,Link_Fuente_1,,https://www.unotv.com/estados/ciudad-de-mexico/horarios-del-transporte-publico-en-cdmx-durante-las-fiestas-patrias-2026/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-013,Link_Fuente_1,,https://www.unotv.com/estados/ciudad-de-mexico/horarios-del-transporte-publico-en-cdmx-durante-las-fiestas-patrias-2026/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-014,Link_Fuente_1,,https://www.unotv.com/estados/ciudad-de-mexico/horarios-del-transporte-publico-en-cdmx-durante-las-fiestas-patrias-2026/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-016,Link_Fuente_1,facebook.com/ayuntamientoaquiles/posts/celebremos-juntos-nuestras-tradiciones-este-16-de-septiembre-aquiles-serdán-se-l/1500931572081333/,https://www.unotv.com/estados/ciudad-de-mexico/horarios-del-transporte-publico-en-cdmx-durante-las-fiestas-patrias-2026/,"Link sin ""https://"""
+VAL-018,Link_Fuente_1,,https://www.unotv.com/estados/ciudad-de-mexico/horarios-del-transporte-publico-en-cdmx-durante-las-fiestas-patrias-2026/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-021,Link_Fuente_1,,https://www.unotv.com/estados/ciudad-de-mexico/horarios-del-transporte-publico-en-cdmx-durante-las-fiestas-patrias-2026/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-022,Link_Fuente_1,,https://www.unotv.com/estados/ciudad-de-mexico/horarios-del-transporte-publico-en-cdmx-durante-las-fiestas-patrias-2026/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-023,Link_Fuente_1,,https://www.unotv.com/estados/ciudad-de-mexico/horarios-del-transporte-publico-en-cdmx-durante-las-fiestas-patrias-2026/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-026,Link_Fuente_1,,https://www.unotv.com/estados/ciudad-de-mexico/horarios-del-transporte-publico-en-cdmx-durante-las-fiestas-patrias-2026/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-031,Link_Fuente_1,https://www.jornada.com.mx/noticia/2026/11/04/capital/linea-b-del-metro-ofrece-servicio-provisional-de-buenavista-a-oceania-por-dano-generado-por-quema-de-basura-en-interestacion,https://www.infobae.com/mexico/2026/10/29/que-hacer-el-dia-de-muertos-2026-en-cdmx-guia-completa-de-actividades-y-conciertos-sin-costo-por-alcaldia/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-035,Link_Fuente_1,https://cartelera.cdmx.gob.mx/41844/30-10-2026/ofrenda-monumental,https://www.cronica.com.mx/nacional/2026/09/15/desfile-militar-en-cdmx-16-de-septiembre-calles-y-estaciones-del-metro-cerradas/,"El link anterior era de la ofrenda monumental del 30-oct, no del desfile del 16-sep"
+VAL-036,Link_Fuente_1,https://cartelera.cdmx.gob.mx/41844/30-10-2026/ofrenda-monumental,https://www.cronica.com.mx/nacional/2026/09/15/desfile-militar-en-cdmx-16-de-septiembre-calles-y-estaciones-del-metro-cerradas/,"El link anterior era de la ofrenda monumental del 30-oct, no del desfile del 16-sep"
+VAL-037,Link_Fuente_1,,https://www.infobae.com/mexico/2026/10/29/que-hacer-el-dia-de-muertos-2026-en-cdmx-guia-completa-de-actividades-y-conciertos-sin-costo-por-alcaldia/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-038,Link_Fuente_1,,https://www.infobae.com/mexico/2026/10/29/que-hacer-el-dia-de-muertos-2026-en-cdmx-guia-completa-de-actividades-y-conciertos-sin-costo-por-alcaldia/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-042,Link_Fuente_1,,https://www.infobae.com/mexico/2026/10/29/que-hacer-el-dia-de-muertos-2026-en-cdmx-guia-completa-de-actividades-y-conciertos-sin-costo-por-alcaldia/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-049,Link_Fuente_1,https://heraldodemexico.com.mx/nacional/2024/8/7/metro-cdmx-que-paso-en-la-estacion-consulado-de-linea-hoy-miercoles-de-agosto-627661.html,https://www.excelsior.com.mx/ciudad-de-mexico/cierran-transbordo-metro-martin-carrera,Link anterior era de 2024; el equipo dio la fuente correcta
+VAL-052,Link_Fuente_1,https://www.unotv.com/estados/ciudad-de-mexico/hoy-no-circula-lunes-12-de-octubre-de-2026-en-cdmx-y-edomex-autos-con-engomado-amarillo-placas-5-y-6/,https://www.elimparcial.com/mexico/2026/10/19/hoy-no-circula-lunes-19-de-octubre-revisa-que-autos-no-pueden-circular-en-cdmx-y-edomex/,"El link anterior era del Hoy No Circula del 12-oct, no del 19-oct"
+VAL-070,Link_Fuente_1,https://www.unotv.com/estados/ciudad-de-mexico/hoy-no-circula-lunes-12-de-octubre-de-2026-en-cdmx-y-edomex-autos-con-engomado-amarillo-placas-5-y-6/,https://www.elimparcial.com/mexico/2026/10/19/hoy-no-circula-lunes-19-de-octubre-revisa-que-autos-no-pueden-circular-en-cdmx-y-edomex/,"El link anterior era del Hoy No Circula del 12-oct, no del 19-oct"
+VAL-076,Link_Fuente_1,mbito.com/mexico/informacion-general/estado-del-metro-cdmx-vivo-hoy-1-septiembre-2026-estas-son-las-lineas-afectadas-y-estaciones-cerradas-n6316994,https://www.ambito.com/mexico/informacion-general/estado-del-metro-cdmx-vivo-hoy-1-septiembre-2026-estas-son-las-lineas-afectadas-y-estaciones-cerradas-n6316994,"Link truncado (faltaba ""https://www.a"" de ambito.com)"
+VAL-075,Link_Fuente_2,,https://www.publimetro.com.mx/noticias/2026/11/03/metro-cdmx-hoy-3-de-noviembre-retrasos-de-hasta-20-minutos-en-estas-lineas/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-077,Link_Fuente_2,,https://www.publimetro.com.mx/noticias/2026/11/03/metro-cdmx-hoy-3-de-noviembre-retrasos-de-hasta-20-minutos-en-estas-lineas/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-079,Link_Fuente_2,,https://www.publimetro.com.mx/noticias/2026/11/03/metro-cdmx-hoy-3-de-noviembre-retrasos-de-hasta-20-minutos-en-estas-lineas/,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-001,Afluencia_Real_SEMOVI,,1971,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-002,Afluencia_Real_SEMOVI,,6386,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-003,Afluencia_Real_SEMOVI,,389,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-004,Afluencia_Real_SEMOVI,,9095,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-005,Afluencia_Real_SEMOVI,,2266,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-006,Afluencia_Real_SEMOVI,,4017,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-007,Afluencia_Real_SEMOVI,,6034,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-008,Afluencia_Real_SEMOVI,,666,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-009,Afluencia_Real_SEMOVI,,1961,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-010,Afluencia_Real_SEMOVI,,16488,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-011,Afluencia_Real_SEMOVI,,3485,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-012,Afluencia_Real_SEMOVI,,11243,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-013,Afluencia_Real_SEMOVI,,1693,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-014,Afluencia_Real_SEMOVI,,7536,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-015,Afluencia_Real_SEMOVI,,8886,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-016,Afluencia_Real_SEMOVI,,4680,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-017,Afluencia_Real_SEMOVI,,2838,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-018,Afluencia_Real_SEMOVI,,6149,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-019,Afluencia_Real_SEMOVI,,1605,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-020,Afluencia_Real_SEMOVI,,6177,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-021,Afluencia_Real_SEMOVI,,4700,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-022,Afluencia_Real_SEMOVI,,1425,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-023,Afluencia_Real_SEMOVI,,10798,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-024,Afluencia_Real_SEMOVI,,22627,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-025,Afluencia_Real_SEMOVI,,23864,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-026,Afluencia_Real_SEMOVI,,11058,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-027,Afluencia_Real_SEMOVI,,9489,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-028,Afluencia_Real_SEMOVI,,4101,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-035,Afluencia_Real_SEMOVI,,16722,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-036,Afluencia_Real_SEMOVI,,0,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-043,Afluencia_Real_SEMOVI,,5170,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-047,Afluencia_Real_SEMOVI,,2045,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-048,Afluencia_Real_SEMOVI,,3459,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-049,Afluencia_Real_SEMOVI,,3100,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-050,Afluencia_Real_SEMOVI,,5454,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-054,Afluencia_Real_SEMOVI,,8027,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-056,Afluencia_Real_SEMOVI,,8961,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-057,Afluencia_Real_SEMOVI,,44533,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-058,Afluencia_Real_SEMOVI,,5630,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-060,Afluencia_Real_SEMOVI,,3732,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-062,Afluencia_Real_SEMOVI,,10425,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-063,Afluencia_Real_SEMOVI,,1254,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-064,Afluencia_Real_SEMOVI,,18019,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-065,Afluencia_Real_SEMOVI,,3740,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-067,Afluencia_Real_SEMOVI,,2058,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-069,Afluencia_Real_SEMOVI,,1943,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-071,Afluencia_Real_SEMOVI,,5588,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-073,Afluencia_Real_SEMOVI,,1817,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-076,Afluencia_Real_SEMOVI,,9149,Afluencia real publicada por SEMOVI (datos hasta 30-sep-2026)
+VAL-002,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-004,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-005,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-006,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-007,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-008,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-009,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-010,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-011,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-013,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-014,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-016,Observaciones,,"Se reemplazó el link anterior, que era del municipio Aquiles Serdán (Chihuahua). Afluencia real 26% menor a la esperada",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-017,Observaciones,,Sin link: día feriado (16-sep) con desfile cívico cercano; se explica en la descripción,Aclaración del equipo 12-nov
+VAL-018,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-019,Observaciones,,Sin link: día feriado (16-sep) con desfile cívico cercano; se explica en la descripción,Aclaración del equipo 12-nov
+VAL-021,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-022,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-023,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-026,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-031,Observaciones,,"Corregida: el incendio de la Línea B entre Oceanía y Deportivo Oceanía ocurrió el 4-nov, no el 2-nov",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-035,Observaciones,,Link verificado por el equipo (12-nov),Verificación del equipo
+VAL-036,Observaciones,,Link verificado por el equipo (12-nov),Verificación del equipo
+VAL-037,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-038,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",Consolidación de la OSINT; ver Observaciones de la fila
+VAL-042,Observaciones,,"Reclasificada de ""No"" a ""Parcial"": feriado que afecta la afluencia de forma indirecta, según el criterio de la metodología",La nota se mueve a Observaciones porque no describe un incidente de ese día
+VAL-049,Observaciones,,Fuente proporcionada por el equipo (12-nov),Aclaración del equipo 12-nov
+VAL-052,Observaciones,,Reclasificada como ruido: las fuentes indican que no se activó contingencia ambiental,Verificación del equipo
+VAL-065,Observaciones,,Link verificado por el equipo (12-nov),Verificación del equipo
+VAL-070,Observaciones,,Reclasificada como ruido: las fuentes indican que no se activó contingencia ambiental,Verificación del equipo
+VAL-072,Observaciones,,Reclasificada como ruido: las fuentes indican que no se activó contingencia ambiental,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-074,Observaciones,,Sin link: Día de Muertos; se explica en la descripción,Aclaración del equipo 12-nov
+VAL-075,Observaciones,,Reclasificada como ruido tras una segunda búsqueda sin encontrar causa,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-077,Observaciones,,Reclasificada como ruido tras una segunda búsqueda sin encontrar causa,Consolidación de la OSINT; ver Observaciones de la fila
+VAL-079,Observaciones,,Reclasificada como ruido tras una segunda búsqueda sin encontrar causa,Consolidación de la OSINT; ver Observaciones de la fila
