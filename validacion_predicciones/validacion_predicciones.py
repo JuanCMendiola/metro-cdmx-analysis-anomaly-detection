@@ -8,6 +8,7 @@
 
 # %%
 import os
+import sys
 import unicodedata
 import numpy as np
 import pandas as pd
@@ -15,6 +16,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
+sys.path.insert(0, os.getcwd())   # historial.py vive en la raiz del repo
+from historial import registrar_corrida
 
 CARPETA = 'validacion_predicciones'
 DATOS = f'{CARPETA}/datos'
@@ -330,3 +333,16 @@ fig.tight_layout(rect=(0, 0.14, 1, 0.9))
 fig.savefig(f'{IMG}/04_afluencia_real_por_nivel_de_riesgo.png', dpi=200)
 plt.close(fig)
 print(f'Gráficas guardadas en {IMG}/ y tablas en {RES}/')
+
+# Historial: tablas a historico/ (git) y graficas a historico_local/
+pond, todos = tasas.loc['Ponderada (universo)'], tasas_real.loc['Todos los dias en alerta']
+registrar_corrida(
+    'validacion_predicciones',
+    archivos=sorted(f'{RES}/{f}' for f in os.listdir(RES) if f.endswith('.csv')),
+    archivos_locales=sorted(f'{IMG}/{f}' for f in os.listdir(IMG) if f.endswith('.png')),
+    metricas={'osint_tasa_si_ponderada_pct': round(float(pond['tasa_si_pct']), 1),
+              'osint_tasa_si_parcial_ponderada_pct': round(float(pond['tasa_si_parcial_pct']), 1),
+              'dias_en_alerta_con_dato_real': len(cruce),
+              **{f'real_{k}': (round(float(v), 1) if isinstance(v, float) else v) for k, v in todos.items()}},
+    parametros={'fecha_corte_osint': FECHA_CORTE, 'archivo_semovi': SEMOVI, 'corrida_modelo': CORRIDA},
+)

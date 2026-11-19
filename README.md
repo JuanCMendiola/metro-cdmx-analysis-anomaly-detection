@@ -12,6 +12,8 @@ modeling/               Prophet modeling notebook (active WIP) + sarima_backup.p
 dashboard/              Streamlit prototype: map of demand/anomalies per station - active WIP
 validacion_predicciones/ Validation of the future-anomaly predictions: manual OSINT log + real SEMOVI ridership (+ img/, resultados/)
 estaciones_y_causas/    Most conflictive lines/stations, their causes and each cause's effect on ridership (+ img/, resultados/)
+historial.py            Saves a copy of every run's outputs + a manifest (commit, parameters, key metrics) instead of only overwriting them
+historico/              Run history committed to git: one folder per stage and run + registro_corridas.csv (heavy copies go to historico_local/, not committed)
 ```
 
 Each of `data/`, `eda/` and `feature_engineering/` is a single plain `.py` file (percent-cell format, runnable in VS Code / Jupytext) plus an `ANALISIS.md` with that stage's notes/findings. See "What changed from the original notebook" below for the full picture.
@@ -67,6 +69,25 @@ This runs `data/recoleccion_y_limpieza.py` -> `eda/analisis_exploratorio.py` -> 
    ```
 
    Tables go to `estaciones_y_causas/resultados/` and charts to `estaciones_y_causas/img/`. Reading guide, results and limitations: `estaciones_y_causas/ANALISIS.md`.
+
+### Run history (`historial.py`)
+
+Every stage still writes its outputs to the same paths as before (the notebook and the dashboard read them from there), but each run now also keeps a dated copy, so a new run no longer erases the previous one. At the end of each script, `registrar_corrida()` saves:
+
+- `historico/<etapa>/<AAAA-MM-DD_HHMMSS>/manifiesto.json`: date and time (CDMX), git commit, scripts with uncommitted changes, parameters (thresholds, seeds, horizon), key metrics and the sha256 fingerprint of every output.
+- The small outputs next to the manifest, in `historico/` (committed to git), and the heavy ones (master, `.pkl` checkpoints, the dashboard's daily series, charts) gzip-compressed in `historico_local/` (git-ignored, stays on the machine that ran it). Files above 5 MB always go to `historico_local/`.
+- One row per run in `historico/registro_corridas.csv`, to compare runs at a glance. If a run produces exactly the same files as the previous run of that stage, nothing is copied again; the row just says which run it matches (`igual_a`).
+
+| Stage (`etapa`) | Written by | In git (`historico/`) | Local only (`historico_local/`) |
+|---|---|---|---|
+| `datos` | `data/recoleccion_y_limpieza.py` | manifest (SEMOVI URL, rows, date range) | `dataset_original_copy.pkl`, `metro_simple.pkl` |
+| `deteccion` | `modeling/prophet_mad.py` | manifest (counts per priority, Prophet/MAD parameters) | `master_auditoria_consenso_MAD.csv`, `prophet_series.pkl` |
+| `muestra_osint` | `modelado.ipynb` (only when a new sample is drawn) | `muestra_estratificada_auditoria_manual.csv/.xlsx` | - |
+| `modelo_riesgo` | `modelado.ipynb` (proposal cell) | `propuesta_anomalias_futuras.csv/.xlsx`, test metrics, hyperparameters | - |
+| `tablero` | `dashboard/preparar_datos.py` | risk parquets, `anomalias_auditadas.csv` | `series_estaciones.parquet` |
+| `estaciones_y_causas`, `validacion_predicciones` | their scripts | `resultados/*.csv` | `img/*.png` |
+
+The history is committed like any other file: after a run that matters (for example, one an OSINT sample is drawn from), commit `historico/` so the team keeps it. Commit code changes *before* the run, so the manifest's commit is enough to reproduce it (the script warns otherwise). For a quick test that should not be recorded: `SIN_HISTORIAL=1 python <script>`.
 
 ## What changed from the original notebook
 
