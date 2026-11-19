@@ -1,0 +1,84 @@
+{
+  "id": "2026-11-19_145731",
+  "etapa": "validacion_predicciones",
+  "fecha_hora": "2026-11-19T14:57:31-06:00",
+  "commit": "443a96a",
+  "rama": "claude/project-thread-37hjdq",
+  "codigo_sin_commit": [],
+  "python": "3.13.18",
+  "parametros": {
+    "fecha_corte_osint": "2026-11-05",
+    "archivo_semovi": "validacion_predicciones/datos/afluenciastc_desglosado_2026-01_a_2026-09.csv",
+    "corrida_modelo": "validacion_predicciones/datos/propuesta_anomalias_futuras_corrida_validacion.xlsx"
+  },
+  "metricas": {
+    "osint_tasa_si_ponderada_pct": 61.3,
+    "osint_tasa_si_parcial_ponderada_pct": 80.4,
+    "dias_en_alerta_con_dato_real": 230,
+    "real_dias_en_alerta": 230.0,
+    "real_criticas": 31.0,
+    "real_tasa_critica_pct": 13.5,
+    "real_cualquier_anomalia_pct": 53.5,
+    "real_dentro_de_banda_pct": 61.3,
+    "real_dif_mediana_vs_esperada_pct": -19.9
+  },
+  "nota": "",
+  "archivos": [
+    {
+      "ruta": "validacion_predicciones/resultados/causas_osint_prediccion.csv",
+      "bytes": 562,
+      "sha256": "2cff09a43851e5a74980eeea80961c8435592d0f791c2e0dbc55f703ac7d91f3",
+      "local": false,
+      "copia": "historico/validacion_predicciones/2026-11-19_145731/validacion_predicciones/resultados/causas_osint_prediccion.csv"
+    },
+    {
+      "ruta": "validacion_predicciones/resultados/dias_en_alerta_vs_afluencia_real.csv",
+      "bytes": 26112,
+      "sha256": "c08abc2585d4ce0001b218febf039cb11565888a4d8c7b5868c09d38719dbe75",
+      "local": false,
+      "copia": "historico/validacion_predicciones/2026-11-19_145731/validacion_predicciones/resultados/dias_en_alerta_vs_afluencia_real.csv"
+    },
+    {
+      "ruta": "validacion_predicciones/resultados/tasas_afluencia_real_por_estrato.csv",
+      "bytes": 355,
+      "sha256": "7e96739c15b9451267a2c08566d82923637468f3c69a4f28d2b1206cfa00e2b9",
+      "local": false,
+      "copia": "historico/validacion_predicciones/2026-11-19_145731/validacion_predicciones/resultados/tasas_afluencia_real_por_estrato.csv"
+    },
+    {
+      "ruta": "validacion_predicciones/resultados/tasas_osint_por_estrato.csv",
+      "bytes": 296,
+      "sha256": "710d315f59117c7142e89e12da1b18202607093546b7e8cee559e81ac37ca2a6",
+      "local": false,
+      "copia": "historico/validacion_predicciones/2026-11-19_145731/validacion_predicciones/resultados/tasas_osint_por_estrato.csv"
+    },
+    {
+      "ruta": "validacion_predicciones/img/01_causas_historico_vs_prediccion.png",
+      "bytes": 433730,
+      "sha256": "1a3a919121a340666076f887779f4656cd995f4df9ef7824f5b640fe7c5a7fac",
+      "local": true,
+      "copia": "historico_local/validacion_predicciones/2026-11-19_145731/validacion_predicciones/img/01_causas_historico_vs_prediccion.png"
+    },
+    {
+      "ruta": "validacion_predicciones/img/02_calendario_riesgo_historico_vs_prediccion.png",
+      "bytes": 493333,
+      "sha256": "83a9166c8008fe630f0756773a3f01367b233ab093c7da48ff4546adfffeb970",
+      "local": true,
+      "copia": "historico_local/validacion_predicciones/2026-11-19_145731/validacion_predicciones/img/02_calendario_riesgo_historico_vs_prediccion.png"
+    },
+    {
+      "ruta": "validacion_predicciones/img/03_osint_por_nivel_de_riesgo.png",
+      "bytes": 299037,
+      "sha256": "c4e37b5683b5a73937670b108725b5fa69a07fe831755c5fcca922a0ba80cabe",
+      "local": true,
+      "copia": "historico_local/validacion_predicciones/2026-11-19_145731/validacion_predicciones/img/03_osint_por_nivel_de_riesgo.png"
+    },
+    {
+      "ruta": "validacion_predicciones/img/04_afluencia_real_por_nivel_de_riesgo.png",
+      "bytes": 236239,
+      "sha256": "5fa4bc38d6c7f1aa946bfa35fb784516af317252cc8838a879a86870fb6c2be7",
+      "local": true,
+      "copia": "historico_local/validacion_predicciones/2026-11-19_145731/validacion_predicciones/img/04_afluencia_real_por_nivel_de_riesgo.png"
+    }
+  ]
+}

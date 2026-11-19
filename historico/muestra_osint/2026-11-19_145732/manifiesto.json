@@ -1,0 +1,32 @@
+{
+  "id": "2026-11-19_145732",
+  "etapa": "muestra_osint",
+  "fecha_hora": "2026-11-19T14:57:32-06:00",
+  "commit": "443a96a",
+  "rama": "claude/project-thread-37hjdq",
+  "codigo_sin_commit": [],
+  "python": "3.13.18",
+  "parametros": {
+    "tamano_muestra": 372,
+    "estratos": "linea x direccion_anomalia",
+    "random_state": 42
+  },
+  "metricas": {},
+  "nota": "Corrida inicial importada: archivos vigentes en main al 19-nov-2026 (no se volvió a correr el notebook)",
+  "archivos": [
+    {
+      "ruta": "muestra_estratificada_auditoria_manual.csv",
+      "bytes": 69803,
+      "sha256": "761afa4ee785461fd72723544becf8d0635486c50b4d11b4e803cd7ec14a021b",
+      "local": false,
+      "copia": "historico/muestra_osint/2026-11-19_145732/muestra_estratificada_auditoria_manual.csv"
+    },
+    {
+      "ruta": "muestra_estratificada_auditoria_manual.xlsx",
+      "bytes": 47686,
+      "sha256": "578ed28e88b3eea44c3d5443bf42e90ffb7ff711028ce07db5c65da514fe87d3",
+      "local": false,
+      "copia": "historico/muestra_osint/2026-11-19_145732/muestra_estratificada_auditoria_manual.xlsx"
+    }
+  ]
+}

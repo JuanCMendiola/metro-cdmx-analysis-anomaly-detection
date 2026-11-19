@@ -1,0 +1,105 @@
+{
+  "id": "2026-11-19_145727",
+  "etapa": "estaciones_y_causas",
+  "fecha_hora": "2026-11-19T14:57:27-06:00",
+  "commit": "443a96a",
+  "rama": "claude/project-thread-37hjdq",
+  "codigo_sin_commit": [],
+  "python": "3.13.18",
+  "parametros": {},
+  "metricas": {
+    "lineas_mas_afectadas_por_estacion": [
+      "linea 2",
+      "linea 9",
+      "linea 3"
+    ],
+    "anomalias_osint": 371
+  },
+  "nota": "",
+  "archivos": [
+    {
+      "ruta": "estaciones_y_causas/resultados/causas_ciclicas_programadas_esporadicas.csv",
+      "bytes": 727,
+      "sha256": "5d3a343f8812130c62e92ec63e7a1e2805dec73f9eed9e002916025d49267944",
+      "local": false,
+      "copia": "historico/estaciones_y_causas/2026-11-19_145727/estaciones_y_causas/resultados/causas_ciclicas_programadas_esporadicas.csv"
+    },
+    {
+      "ruta": "estaciones_y_causas/resultados/causas_por_linea_osint.csv",
+      "bytes": 681,
+      "sha256": "01904693ef8da8d12ffcf62a3ed2bf3efa2096344392279b2f201e518205f88e",
+      "local": false,
+      "copia": "historico/estaciones_y_causas/2026-11-19_145727/estaciones_y_causas/resultados/causas_por_linea_osint.csv"
+    },
+    {
+      "ruta": "estaciones_y_causas/resultados/efecto_por_causa.csv",
+      "bytes": 916,
+      "sha256": "ac46c43747467ea3d7b3adeadd68f5fe3e2cfa99d09785d554adcd5147bb9f6d",
+      "local": false,
+      "copia": "historico/estaciones_y_causas/2026-11-19_145727/estaciones_y_causas/resultados/efecto_por_causa.csv"
+    },
+    {
+      "ruta": "estaciones_y_causas/resultados/estaciones_conflictivas.csv",
+      "bytes": 20342,
+      "sha256": "fcff691ba466333ec6a98da85b30b45ac9d1cb1076e426dfe2fb49cfe6fb0a6c",
+      "local": false,
+      "copia": "historico/estaciones_y_causas/2026-11-19_145727/estaciones_y_causas/resultados/estaciones_conflictivas.csv"
+    },
+    {
+      "ruta": "estaciones_y_causas/resultados/fechas_recurrentes.csv",
+      "bytes": 605,
+      "sha256": "6a1d908b4f6ef3e8581ea80473eeefaaaf20076cb7a38f9649feae2423c3c764",
+      "local": false,
+      "copia": "historico/estaciones_y_causas/2026-11-19_145727/estaciones_y_causas/resultados/fechas_recurrentes.csv"
+    },
+    {
+      "ruta": "estaciones_y_causas/resultados/lineas_conflictivas.csv",
+      "bytes": 1465,
+      "sha256": "27032826cb8e533a06322c4581624300422d60cbfc2daed9924ccd2956cb064b",
+      "local": false,
+      "copia": "historico/estaciones_y_causas/2026-11-19_145727/estaciones_y_causas/resultados/lineas_conflictivas.csv"
+    },
+    {
+      "ruta": "estaciones_y_causas/resultados/tipo_de_causa_por_linea.csv",
+      "bytes": 378,
+      "sha256": "f3cb1e68588c8932340f07a2c2b6b2eca247258e4528b30bd7e109f9709b1b2e",
+      "local": false,
+      "copia": "historico/estaciones_y_causas/2026-11-19_145727/estaciones_y_causas/resultados/tipo_de_causa_por_linea.csv"
+    },
+    {
+      "ruta": "estaciones_y_causas/img/01_lineas_conflictivas.png",
+      "bytes": 461022,
+      "sha256": "351c9a6c01f15e0f2e5890540535ed0587d6a7bcd6f59cd432b54b487b2d4ee4",
+      "local": true,
+      "copia": "historico_local/estaciones_y_causas/2026-11-19_145727/estaciones_y_causas/img/01_lineas_conflictivas.png"
+    },
+    {
+      "ruta": "estaciones_y_causas/img/02_causas_por_linea.png",
+      "bytes": 448927,
+      "sha256": "765f192d67437c4675b20592c01a2e8976e514f70f39301121b4acb0d9672374",
+      "local": true,
+      "copia": "historico_local/estaciones_y_causas/2026-11-19_145727/estaciones_y_causas/img/02_causas_por_linea.png"
+    },
+    {
+      "ruta": "estaciones_y_causas/img/03_estaciones_conflictivas.png",
+      "bytes": 552016,
+      "sha256": "da69d81c5a84754ecfb0eec599e221eaffe98de4d877a47c2894183ba63b160d",
+      "local": true,
+      "copia": "historico_local/estaciones_y_causas/2026-11-19_145727/estaciones_y_causas/img/03_estaciones_conflictivas.png"
+    },
+    {
+      "ruta": "estaciones_y_causas/img/04_efecto_por_causa.png",
+      "bytes": 427492,
+      "sha256": "37c432766d007d481080718602126de9825557553edb6fabd12f639ba7ed6cb9",
+      "local": true,
+      "copia": "historico_local/estaciones_y_causas/2026-11-19_145727/estaciones_y_causas/img/04_efecto_por_causa.png"
+    },
+    {
+      "ruta": "estaciones_y_causas/img/05_causas_ciclicas_y_esporadicas.png",
+      "bytes": 383344,
+      "sha256": "47eb4e674c25bd91255e67bac1a69515bc6b7b200e1aa2763162cb6b1812a288",
+      "local": true,
+      "copia": "historico_local/estaciones_y_causas/2026-11-19_145727/estaciones_y_causas/img/05_causas_ciclicas_y_esporadicas.png"
+    }
+  ]
+}
