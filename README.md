@@ -11,6 +11,7 @@ feature_engineering/    Rolling stats, ACF/PACF, STL decomposition, model-ready 
 modeling/               Prophet modeling notebook (active WIP) + sarima_backup.py (archived SARIMA/SARIMAX exploration)
 dashboard/              Streamlit prototype: map of demand/anomalies per station - active WIP
 validacion_predicciones/ Validation of the future-anomaly predictions: manual OSINT log + real SEMOVI ridership (+ img/, resultados/)
+estaciones_y_causas/    Most conflictive lines/stations, their causes and each cause's effect on ridership (+ img/, resultados/)
 ```
 
 Each of `data/`, `eda/` and `feature_engineering/` is a single plain `.py` file (percent-cell format, runnable in VS Code / Jupytext) plus an `ANALISIS.md` with that stage's notes/findings. See "What changed from the original notebook" below for the full picture.
@@ -58,6 +59,14 @@ This runs `data/recoleccion_y_limpieza.py` -> `eda/analisis_exploratorio.py` -> 
    ```
 
    It computes the OSINT confirmation rates per stratum (and weighted to the 417-day universe), applies the repo's detector to the real ridership of the alert days, and saves the tables to `validacion_predicciones/resultados/` and the four charts to `validacion_predicciones/img/`. It needs no checkpoint from the earlier steps. Methodology, confirmation criterion, how to read the rates and results: `validacion_predicciones/ANALISIS.md`.
+
+7. Conflictive stations and causes (`estaciones_y_causas/`): combines the full detector output (`master_auditoria_consenso_MAD.csv`) with the historical OSINT log to rank lines and stations by passengers affected on CRITICAL days, show which causes dominate on each line, and measure how much each cause moves ridership (direction and typical % change). It is also the basis of the early-warning system proposed as future work.
+
+   ```
+   python estaciones_y_causas/estaciones_y_causas.py
+   ```
+
+   Tables go to `estaciones_y_causas/resultados/` and charts to `estaciones_y_causas/img/`. Reading guide, results and limitations: `estaciones_y_causas/ANALISIS.md`.
 
 ## What changed from the original notebook
 
