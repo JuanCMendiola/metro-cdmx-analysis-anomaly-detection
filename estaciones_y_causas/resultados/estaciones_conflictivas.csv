@@ -1,197 +1,197 @@
-﻿linea,estacion,dias_criticos,pct_caidas,pasajeros_afectados,pasajeros_en_caidas,pasajeros_en_alzas,cambio_tipico_pct,causas_osint,registros_osint
-linea 2,zócalo/tenochtitlan,56,92.9,1585279.0,1506493.0,78786.0,65.2,Evento Masivo (1); Feriado No Oficial / Cultural (1),2
-linea 2,allende,94,19.1,1541355.0,318333.0,1223022.0,59.8,Incidente Externo (1); Efecto Sustitución (1),2
-linea 8,constitución de 1917,48,64.6,1419423.0,933940.0,485483.0,28.2,Feriado No Oficial / Cultural (2),2
-linea 2,cuatro caminos,49,83.7,1199508.0,1057464.0,142044.0,33.8,Feriado No Oficial / Cultural (1); Falla Oculta (1),2
-linea 3,indios verdes,47,80.9,1196311.0,1015592.0,180719.0,28.5,,0
-linea 3,universidad,40,92.5,1059769.0,1009143.0,50626.0,51.8,Falla Oculta (1),1
-linea 2,tasqueña,46,87.0,958439.0,866534.0,91905.0,35.8,,0
-linea 3,copilco,45,91.1,877235.0,838405.0,38830.0,59.3,Falla Mecánica (2); Feriado No Oficial / Cultural (2); Falla Oculta (1); Clima Extremo (1); Falsa Alarma (1),7
-linea 9,tacubaya,46,80.4,815657.0,686801.0,128856.0,34.4,Evento Masivo (1),1
-linea 2,pino suárez,52,53.8,799651.0,459920.0,339731.0,43.6,Incidente Externo (1); Evento Masivo (1),2
-linea 9,velódromo,39,38.5,693157.0,256099.0,437058.0,68.6,Falla Oculta (1),1
-linea 5,pantitlán,45,77.8,689429.0,577837.0,111592.0,31.3,Falla Oculta (1); Feriado No Oficial / Cultural (1); Contingencia Ambiental (1),3
-linea b,buenavista,37,86.5,686694.0,630280.0,56414.0,33.2,Evento Masivo (1); Efecto Sustitución (1),2
-linea 2,bellas artes,52,50.0,683239.0,323309.0,359930.0,49.4,Evento Masivo (5); Contingencia Ambiental (1),6
-linea 9,puebla,51,45.1,659025.0,301281.0,357744.0,38.4,Evento Masivo (1),1
-linea 8,san juan de letrán,61,44.3,626837.0,259529.0,367308.0,39.4,Evento Masivo (2); Efecto Sustitución (1); Cierre Programado (1),4
-linea a,la paz,39,94.9,625174.0,607139.0,18035.0,35.5,Falla Oculta (1),1
-linea 1,pino suárez,45,42.2,625159.0,283683.0,341476.0,47.6,,0
-linea 2,hidalgo,50,58.0,623748.0,370636.0,253112.0,48.8,Incidente Externo (1); Evento Masivo (1); Feriado No Oficial / Cultural (1),3
-linea 1,insurgentes,39,41.0,616818.0,267206.0,349612.0,48.3,Evento Masivo (1); Cierre Programado (1),2
-linea 9,ciudad deportiva,53,0.0,615022.0,-0.0,615022.0,134.8,Evento Masivo (2); Falla Oculta (1); Falla Técnica / Eléctrica (1); Clima Extremo (1),5
-linea 7,polanco,45,68.9,613096.0,472447.0,140649.0,51.9,Evento Masivo (2); Feriado No Oficial / Cultural (1); Contingencia Ambiental (1),4
-linea a,pantitlán,52,61.5,585305.0,370008.0,215297.0,34.6,Falla Mecánica (1); Evento Masivo (1),2
-linea 2,revolución,55,41.8,578367.0,260287.0,318080.0,44.4,Evento Masivo (1); Incidente Externo (1); Feriado No Oficial / Cultural (1),3
-linea 7,barranca del muerto,37,83.8,571070.0,521264.0,49806.0,55.2,Evento Masivo (1); Falla Mecánica (1); Cierre Programado (1); Falla Técnica / Eléctrica (1),4
-linea 9,pantitlán,40,82.5,559146.0,486114.0,73032.0,29.8,Falla Oculta (1); Falla Mecánica (1); Cierre Programado (1),3
-linea b,ciudad azteca,37,89.2,515536.0,455956.0,59580.0,30.0,Falla Mecánica (1),1
-linea 5,politécnico,41,68.3,507574.0,366364.0,141210.0,44.1,Clima Extremo (1); Falsa Alarma (1),2
-linea 2,tacuba,54,70.4,505444.0,372456.0,132988.0,30.2,Falla Oculta (1),1
-linea 3,miguel ángel de quevedo,45,66.7,504726.0,339675.0,165051.0,37.5,Falla Mecánica (1),1
-linea 9,chilpancingo,42,81.0,504604.0,443873.0,60731.0,37.4,Falla Oculta (1),1
-linea 3,la raza,53,67.9,491567.0,366592.0,124975.0,36.6,Falla Oculta (1),1
-linea 8,bellas artes,55,30.9,491204.0,138729.0,352475.0,46.4,Evento Masivo (1),1
-linea 2,normal,37,78.4,486835.0,410014.0,76821.0,44.9,,0
-linea a,santa marta,41,61.0,478455.0,320964.0,157491.0,32.4,Falsa Alarma (1); Feriado No Oficial / Cultural (1),2
-linea 3,niños héroes,52,82.7,469756.0,403390.0,66366.0,49.1,,0
-linea 1,pantitlán,49,57.1,451505.0,273684.0,177821.0,27.0,Efecto Sustitución (1); Contingencia Ambiental (1); Falla Oculta (1),3
-linea 2,chabacano,55,63.6,451293.0,309170.0,142123.0,33.3,Falla Oculta (2); Feriado No Oficial / Cultural (2),4
-linea 8,coyuya,51,64.7,445606.0,307285.0,138321.0,35.2,Falsa Alarma (1); Feriado No Oficial / Cultural (1),2
-linea 3,coyoacán,54,64.8,439456.0,319611.0,119845.0,40.5,Evento Cívico / Jornada Electoral (1); Falsa Alarma (1); Falla Técnica / Eléctrica (1); Evento Masivo (1),4
-linea 6,martín carrera,47,53.2,439187.0,249869.0,189318.0,42.1,Evento Masivo (1); Falsa Alarma (1),2
-linea a,tepalcates,45,73.3,436872.0,351229.0,85643.0,35.2,Feriado No Oficial / Cultural (2),2
-linea 6,lindavista,61,59.0,420081.0,258656.0,161425.0,41.1,Falsa Alarma (2); Falla Oculta (1); Clima Extremo (1),4
-linea 3,juárez,54,44.4,413487.0,162292.0,251195.0,52.1,,0
-linea 7,el rosario,38,84.2,410663.0,353244.0,57419.0,42.4,,0
-linea 2,xola,46,52.2,398614.0,173181.0,225433.0,55.3,Evento Masivo (1); Falla Mecánica (1),2
-linea b,múzquiz,52,69.2,397501.0,290805.0,106696.0,28.6,Falla Oculta (2); Feriado No Oficial / Cultural (1),3
-linea 3,deportivo 18 de marzo,37,86.5,393262.0,330406.0,62856.0,38.5,Evento Masivo (1); Falsa Alarma (1),2
-linea b,lagunilla,49,55.1,386996.0,227731.0,159265.0,38.4,Clima Extremo (1),1
-linea 1,merced,34,61.8,386883.0,272023.0,114860.0,31.4,,0
-linea 7,san joaquín,41,75.6,383336.0,306032.0,77304.0,50.3,Evento Masivo (2); Falla Oculta (1); Falla Técnica / Eléctrica (1); Incidente Externo (1),5
-linea 2,general anaya,53,69.8,381569.0,285033.0,96536.0,44.3,Falsa Alarma (1),1
-linea 6,ferrería/arena ciudad de méxico,40,72.5,376504.0,296791.0,79713.0,49.0,,0
-linea 12,insurgentes sur,34,70.6,372859.0,305598.0,67261.0,44.9,Falla Mecánica (2); Evento Masivo (1); Incidente Externo (1),4
-linea 7,auditorio,33,63.6,368738.0,263430.0,105308.0,42.4,,0
-linea 3,hospital general,57,70.2,368363.0,283527.0,84836.0,43.5,Evento Cívico / Jornada Electoral (1),1
-linea 3,balderas,37,54.1,363964.0,200459.0,163505.0,55.0,,0
-linea b,tepito,44,47.7,361720.0,195099.0,166621.0,38.2,,0
-linea b,ecatepec,47,76.6,361303.0,290813.0,70490.0,32.0,Feriado No Oficial / Cultural (1); Efecto Sustitución (1); Falla Oculta (1),3
-linea 12,tláhuac,18,94.4,360741.0,346707.0,14034.0,34.6,Falla Oculta (1); Evento Masivo (1); Incidente Externo (1),3
-linea 8,uam-i,52,73.1,356180.0,260961.0,95219.0,31.6,Efecto Sustitución (1),1
-linea 3,etiopía/plaza de la transparencia,45,68.9,354613.0,267881.0,86732.0,41.7,Falla Mecánica (1),1
-linea 1,chapultepec,26,46.2,346209.0,175124.0,171085.0,37.9,,0
-linea 2,san antonio abad,57,59.6,343564.0,204357.0,139207.0,33.3,Cierre Programado (1),1
-linea 8,escuadrón 201,53,67.9,339527.0,235544.0,103983.0,36.4,Falla Mecánica (1); Falla Oculta (1); Clima Extremo (1),3
-linea 8,salto del agua,54,42.6,333975.0,157348.0,176627.0,30.9,Cierre Programado (1); Feriado No Oficial / Cultural (1),2
-linea 4,martín carrera,47,85.1,333251.0,293400.0,39851.0,40.1,Clima Extremo (1),1
-linea 2,nativitas,60,56.7,332008.0,199134.0,132874.0,30.1,Falla Oculta (1),1
-linea 9,mixiuhca,46,69.6,328796.0,248612.0,80184.0,37.8,Falla Oculta (1),1
-linea 3,hidalgo,43,41.9,320194.0,131136.0,189058.0,46.8,Cierre Programado (1),1
-linea 7,mixcoac,48,83.3,318836.0,272120.0,46716.0,35.3,Cierre Programado (1); Clima Extremo (1),2
-linea 1,balderas,37,67.6,318758.0,225338.0,93420.0,37.9,Cierre Programado (3); Clima Extremo (1); Feriado No Oficial / Cultural (1),5
-linea 2,ermita,61,57.4,316680.0,198674.0,118006.0,32.9,Evento Masivo (1); Feriado No Oficial / Cultural (1),2
-linea 2,villa de cortés,53,58.5,315461.0,194434.0,121027.0,34.7,,0
-linea 9,chabacano,45,31.1,312842.0,63321.0,249521.0,62.3,Falla Oculta (1),1
-linea a,guelatao,43,72.1,309007.0,236678.0,72329.0,40.4,Falsa Alarma (1),1
-linea 1,zaragoza,42,66.7,305816.0,224615.0,81201.0,27.2,Clima Extremo (1),1
-linea b,san lázaro,53,64.2,302164.0,201589.0,100575.0,30.2,Clima Extremo (1),1
-linea 2,san cosme,44,63.6,302154.0,203814.0,98340.0,39.7,Falsa Alarma (1),1
-linea b,río de los remedios,52,65.4,293579.0,203841.0,89738.0,31.2,Falsa Alarma (1),1
-linea a,los reyes,44,77.3,285611.0,230426.0,55185.0,30.0,Feriado No Oficial / Cultural (2); Falla Mecánica (1); Incidente Externo (1),4
-linea 8,garibaldi/lagunilla,52,55.8,284748.0,170856.0,113892.0,30.0,Falla Técnica / Eléctrica (1); Falla Oculta (1); Clima Extremo (1),3
-linea 3,zapata,32,71.9,278504.0,202532.0,75972.0,41.0,Clima Extremo (2); Falla Oculta (1); Falsa Alarma (1); Evento Masivo (1),5
-linea 3,tlatelolco,40,60.0,276068.0,151208.0,124860.0,39.7,Feriado No Oficial / Cultural (2); Falla Mecánica (1),3
-linea 1,observatorio,21,52.4,275239.0,120473.0,154766.0,30.4,Feriado No Oficial / Cultural (1); Cierre Programado (1),2
-linea b,impulsora,37,75.7,270764.0,210571.0,60193.0,35.2,Falla Mecánica (1),1
-linea b,nezahualcóyotl,39,66.7,267610.0,192098.0,75512.0,37.1,Feriado No Oficial / Cultural (1); Falla Mecánica (1); Clima Extremo (1),3
-linea 8,iztacalco,41,65.9,267329.0,184689.0,82640.0,38.5,,0
-linea 9,patriotismo,44,72.7,266622.0,211321.0,55301.0,40.5,Falsa Alarma (1); Falla Mecánica (1),2
-linea 2,cuitláhuac,54,77.8,264259.0,215155.0,49104.0,35.4,Falsa Alarma (2),2
-linea 1,san lázaro,44,54.5,263843.0,139902.0,123941.0,31.5,Feriado No Oficial / Cultural (2); Falla Mecánica (1); Falla Oculta (1); Evento Masivo (1),5
-linea 2,viaducto,51,72.5,259836.0,198301.0,61535.0,36.9,Falsa Alarma (1); Clima Extremo (1); Falla Mecánica (1),3
-linea 3,centro médico,52,65.4,258591.0,185070.0,73521.0,33.8,Falla Oculta (1),1
-linea 3,eugenia,62,72.6,255835.0,190126.0,65709.0,36.3,Falla Técnica / Eléctrica (3); Falla Oculta (1),4
-linea 1,sevilla,29,51.7,254815.0,132829.0,121986.0,41.8,Cierre Programado (1); Falla Oculta (1),2
-linea b,deportivo oceanía,50,80.0,251560.0,205958.0,45602.0,40.2,Falsa Alarma (2); Falla Oculta (1),3
-linea 3,viveros/derechos humanos,43,81.4,251509.0,215430.0,36079.0,36.2,Contingencia Ambiental (1); Clima Extremo (1),2
-linea 9,jamaica,56,30.4,251319.0,62686.0,188633.0,36.1,Falla Técnica / Eléctrica (2),2
-linea 8,iztapalapa,57,24.6,250672.0,45873.0,204799.0,40.6,Falsa Alarma (2),2
-linea 5,terminal aérea,55,74.5,250525.0,184695.0,65830.0,27.3,Feriado No Oficial / Cultural (1),1
-linea 3,división del norte,49,61.2,249101.0,161624.0,87477.0,44.1,,0
-linea 2,portales,46,69.6,247522.0,186410.0,61112.0,26.1,Feriado No Oficial / Cultural (2); Efecto Sustitución (1); Falla Oculta (1),4
-linea 12,atlalilco,37,78.4,244292.0,185669.0,58623.0,36.6,,0
-linea a,acatitla,54,74.1,240797.0,186055.0,54742.0,25.8,Falla Oculta (2); Incidente Externo (1); Falla Técnica / Eléctrica (1),4
-linea 12,periférico oriente,23,73.9,240029.0,186032.0,53997.0,30.4,Cierre Programado (1),1
-linea b,villa de aragón,38,84.2,236731.0,207529.0,29202.0,42.7,Clima Extremo (2); Contingencia Ambiental (1),3
-linea 2,colegio militar,34,85.3,234736.0,212865.0,21871.0,50.7,Feriado No Oficial / Cultural (1); Clima Extremo (1); Incidente Externo (1); Contingencia Ambiental (1); Falsa Alarma (1),5
-linea 7,constituyentes,30,30.0,234342.0,52888.0,181454.0,55.7,Falla Oculta (1),1
-linea b,plaza aragón,52,61.5,221617.0,132297.0,89320.0,22.3,Falla Mecánica (1),1
-linea 5,autobuses del norte,31,51.6,215217.0,117660.0,97557.0,34.1,Feriado No Oficial / Cultural (2); Falsa Alarma (1),3
-linea 7,san pedro de los pinos,47,66.0,214290.0,153240.0,61050.0,57.4,Feriado No Oficial / Cultural (1),1
-linea b,olímpica,51,76.5,210851.0,163806.0,47045.0,25.4,,0
-linea 8,doctores,47,63.8,208881.0,131492.0,77389.0,38.0,Falla Oculta (2),2
-linea 6,la villa/basílica,21,38.1,208675.0,52741.0,155934.0,58.2,,0
-linea 1,cuauhtémoc,35,48.6,207338.0,96060.0,111278.0,43.5,,0
-linea 1,isabel la católica,24,66.7,200332.0,99404.0,100928.0,44.3,Incidente Externo (1); Clima Extremo (1); Feriado No Oficial / Cultural (1),3
-linea 6,el rosario,33,81.8,198725.0,171285.0,27440.0,39.1,Falla Mecánica (1),1
-linea 1,moctezuma,37,56.8,198401.0,119321.0,79080.0,29.5,,0
-linea 12,mexicaltzingo,38,84.2,198162.0,176705.0,21457.0,35.1,Feriado No Oficial / Cultural (1),1
-linea 1,tacubaya,30,80.0,198087.0,162865.0,35222.0,34.1,Falla Oculta (1); Clima Extremo (1),2
-linea a,peñón viejo,57,78.9,195278.0,154433.0,40845.0,26.8,Falsa Alarma (1),1
-linea 8,atlalilco,45,60.0,192987.0,112787.0,80200.0,30.5,Feriado No Oficial / Cultural (1); Clima Extremo (1),2
-linea 8,apatlaco,59,64.4,192214.0,125147.0,67067.0,29.2,Evento Masivo (1); Contingencia Ambiental (1),2
-linea 9,centro médico,47,70.2,188446.0,145551.0,42895.0,31.6,Falla Oculta (1); Falsa Alarma (1),2
-linea 7,aquiles serdán,42,54.8,188166.0,111777.0,76389.0,41.7,Evento Masivo (1); Falsa Alarma (1); Feriado No Oficial / Cultural (1),3
-linea 1,boulevard puerto aéreo,45,60.0,185923.0,119426.0,66497.0,24.0,Clima Extremo (1); Falla Oculta (1),2
-linea 3,potrero,49,67.3,181205.0,130179.0,51026.0,26.0,,0
-linea a,agrícola oriental,47,68.1,180922.0,110900.0,70022.0,32.7,Falsa Alarma (1),1
-linea 7,refinería,39,61.5,178548.0,100423.0,78125.0,38.0,,0
-linea 7,camarones,43,72.1,173982.0,134017.0,39965.0,36.0,Feriado No Oficial / Cultural (2); Falsa Alarma (1),3
-linea 2,popotla,47,70.2,171944.0,130963.0,40981.0,45.2,Feriado No Oficial / Cultural (1),1
-linea 1,gómez farias,30,73.3,166181.0,134637.0,31544.0,29.3,Efecto Sustitución (1); Feriado No Oficial / Cultural (1),2
-linea a,canal de san juan,51,66.7,162318.0,116126.0,46192.0,24.8,Falsa Alarma (1); Clima Extremo (1),2
-linea 1,candelaria,29,51.7,156006.0,91175.0,64831.0,27.9,Incidente Externo (2),2
-linea 8,obrera,45,73.3,153553.0,118062.0,35491.0,25.2,Falla Mecánica (1),1
-linea 8,cerro de la estrella,57,49.1,151457.0,73599.0,77858.0,27.7,Contingencia Ambiental (1); Falla Técnica / Eléctrica (1),2
-linea 9,lázaro cárdenas,42,83.3,151270.0,129165.0,22105.0,34.3,,0
-linea 12,mixcoac,28,85.7,150954.0,137900.0,13054.0,42.3,Falsa Alarma (1); Falla Técnica / Eléctrica (1); Falla Oculta (1),3
-linea 4,candelaria,34,52.9,149885.0,81079.0,68806.0,42.6,,0
-linea 7,san antonio,37,70.3,145850.0,111738.0,34112.0,44.1,Feriado No Oficial / Cultural (1),1
-linea 2,panteones,38,76.3,144381.0,118269.0,26112.0,37.8,Incidente Externo (1),1
-linea 5,la raza,37,81.1,143575.0,119881.0,23694.0,40.7,Evento Masivo (1),1
-linea 4,fray servando,36,52.8,142810.0,80099.0,62711.0,39.2,,0
-linea b,oceanía,40,60.0,142110.0,71479.0,70631.0,35.2,Falla Mecánica (1); Clima Extremo (1),2
-linea 12,parque de los venados,44,72.7,141399.0,113621.0,27778.0,33.8,Falsa Alarma (1),1
-linea 8,aculco,58,60.3,139726.0,84585.0,55141.0,27.9,Falla Técnica / Eléctrica (1); Feriado No Oficial / Cultural (1),2
-linea b,romero rubio,40,67.5,135950.0,95284.0,40666.0,24.1,,0
-linea 12,zapata,43,65.1,126647.0,92895.0,33752.0,22.2,Falla Oculta (1); Evento Masivo (1); Falsa Alarma (1),3
-linea 6,vallejo,52,71.2,125705.0,88127.0,37578.0,39.5,,0
-linea 12,culhuacán,32,71.9,124528.0,97712.0,26816.0,23.9,Efecto Sustitución (1),1
-linea 12,hospital 20 de noviembre,36,83.3,123528.0,110322.0,13206.0,38.1,Falsa Alarma (1),1
-linea 4,canal del norte,52,71.2,121889.0,94939.0,26950.0,28.8,Feriado No Oficial / Cultural (2); Falsa Alarma (2); Falla Mecánica (1),5
-linea 5,oceanía,36,83.3,119306.0,86030.0,33276.0,37.1,Falsa Alarma (1),1
-linea b,guerrero,55,34.5,118737.0,37106.0,81631.0,32.3,Falsa Alarma (2); Feriado No Oficial / Cultural (1); Falla Técnica / Eléctrica (1),4
-linea 7,tacuba,53,64.2,117319.0,80139.0,37180.0,30.1,Falla Mecánica (1),1
-linea 8,chabacano,57,33.3,117004.0,31913.0,85091.0,44.9,Clima Extremo (1); Falsa Alarma (1),2
-linea 6,norte 45,54,81.5,116652.0,101178.0,15474.0,44.4,Falla Oculta (1),1
-linea 6,uam-azcapotzalco,48,79.2,114248.0,92909.0,21339.0,35.1,Falsa Alarma (1); Evento Masivo (1); Feriado No Oficial / Cultural (1),3
-linea 4,jamaica,52,46.2,110956.0,50976.0,59980.0,29.5,Evento Masivo (1); Falsa Alarma (1),2
-linea 12,calle 11,33,66.7,110396.0,80665.0,29731.0,24.8,Falsa Alarma (4); Clima Extremo (1); Cierre Programado (1),6
-linea 12,nopalera,15,100.0,107737.0,107737.0,0.0,31.3,Falsa Alarma (1); Clima Extremo (1); Feriado No Oficial / Cultural (1),3
-linea 3,guerrero,55,60.0,106023.0,62732.0,43291.0,22.1,Falsa Alarma (1); Feriado No Oficial / Cultural (1),2
-linea 12,eje central,30,83.3,105111.0,92933.0,12178.0,39.0,Falsa Alarma (2),2
-linea 1,salto del agua,22,77.3,104548.0,87830.0,16718.0,34.3,Falla Oculta (2); Feriado No Oficial / Cultural (1); Evento Masivo (1); Falsa Alarma (1),5
-linea b,garibaldi/lagunilla,35,54.3,103276.0,52118.0,51158.0,35.2,Incidente Externo (1); Falla Técnica / Eléctrica (1); Cierre Programado (1),3
-linea 5,aragón,51,66.7,102878.0,76110.0,26768.0,31.9,Feriado No Oficial / Cultural (1),1
-linea 1,balbuena,41,58.5,102360.0,65102.0,37258.0,29.8,Falla Mecánica (1),1
-linea 5,misterios,46,78.3,102341.0,81901.0,20440.0,33.1,Falsa Alarma (1); Falla Mecánica (1),2
-linea 12,zapotitlán,22,63.6,98499.0,61746.0,36753.0,32.4,Contingencia Ambiental (1); Falla Técnica / Eléctrica (1); Feriado No Oficial / Cultural (1),3
-linea 5,instituto del petróleo,50,62.0,96845.0,68347.0,28498.0,49.0,Falsa Alarma (2),2
-linea 12,tezonco,13,92.3,96128.0,91064.0,5064.0,34.9,Falla Oculta (2); Clima Extremo (1); Falla Mecánica (1),4
-linea b,ricardo flores magón,58,70.7,94910.0,65311.0,29599.0,26.5,Falla Oculta (2),2
-linea 7,tacubaya,49,55.1,92738.0,56029.0,36709.0,29.7,Falsa Alarma (1); Incidente Externo (1),2
-linea 4,morelos,50,58.0,91947.0,56236.0,35711.0,26.9,Falsa Alarma (2),2
-linea 12,ermita,27,81.5,90656.0,74137.0,16519.0,43.2,Falla Oculta (1); Clima Extremo (1); Falsa Alarma (1),3
-linea 12,san andrés tomatlán,26,88.5,86991.0,78717.0,8274.0,34.4,Falsa Alarma (2),2
-linea 6,tezozómoc,54,66.7,86464.0,63668.0,22796.0,33.8,Cierre Programado (1),1
-linea 8,la viga,48,56.2,82364.0,49589.0,32775.0,23.5,Evento Masivo (1),1
-linea 5,hangares,44,79.5,79321.0,63766.0,15555.0,36.9,,0
-linea b,morelos,47,55.3,79172.0,41088.0,38084.0,26.5,Efecto Sustitución (1); Clima Extremo (1); Falla Oculta (1); Falsa Alarma (1),4
-linea 12,olivos,17,88.2,78811.0,73386.0,5425.0,28.7,Falsa Alarma (2); Feriado No Oficial / Cultural (1); Cierre Programado (1),4
-linea 5,eduardo molina,38,84.2,75105.0,66855.0,8250.0,33.8,Evento Masivo (1),1
-linea b,bosque de aragón,37,59.5,73275.0,47739.0,25536.0,38.0,,0
-linea 8,santa anita,49,57.1,71878.0,42460.0,29418.0,33.1,Clima Extremo (1),1
-linea 1,juanacatlán,25,68.0,69468.0,50038.0,19430.0,45.5,,0
-linea 4,consulado,57,43.9,68743.0,29743.0,39000.0,37.8,Feriado No Oficial / Cultural (1),1
-linea 12,lomas estrella,31,67.7,65182.0,49024.0,16158.0,23.5,Falsa Alarma (2); Falla Oculta (1),3
-linea 6,instituto del petróleo,55,67.3,64279.0,49008.0,15271.0,54.2,Falsa Alarma (1); Falla Oculta (1),2
-linea 5,valle gómez,54,72.2,62871.0,46646.0,16225.0,31.1,Falla Mecánica (1); Falla Técnica / Eléctrica (1); Falsa Alarma (1),3
-linea 5,consulado,19,89.5,61884.0,34710.0,27174.0,43.3,Falsa Alarma (1),1
-linea 4,talismán,50,68.0,59807.0,42619.0,17188.0,38.8,Falsa Alarma (1),1
-linea 4,bondojito,34,82.4,57347.0,49943.0,7404.0,33.1,Falla Oculta (2); Falsa Alarma (1),3
-linea 4,santa anita,55,52.7,50771.0,26250.0,24521.0,44.3,Falsa Alarma (2); Evento Cívico / Jornada Electoral (1),3
-linea 6,deportivo 18 de marzo,61,41.0,40401.0,14758.0,25643.0,48.3,Feriado No Oficial / Cultural (1); Falsa Alarma (1); Evento Masivo (1); Incidente Externo (1),4
-linea 1,gómez farías,7,42.9,33825.0,15258.0,18567.0,25.0,Falla Oculta (1),1
-linea 12,tlaltenco,17,58.8,23971.0,16123.0,7848.0,23.4,Falsa Alarma (2); Evento Masivo (1),3
+﻿linea,estacion,dias_criticos,pct_caidas,pasajeros_afectados,pasajeros_en_caidas,pasajeros_en_alzas,cambio_tipico_pct,causas_osint,registros_osint,pct_dias_recurrentes
+linea 2,zócalo/tenochtitlan,56,92.9,1585279.0,1506493.0,78786.0,65.2,Evento Masivo (1); Feriado No Oficial / Cultural (1),2,14.3
+linea 2,allende,94,19.1,1541355.0,318333.0,1223022.0,59.8,Incidente Externo (1); Efecto Sustitución (1),2,16.0
+linea 8,constitución de 1917,48,64.6,1419423.0,933940.0,485483.0,28.2,Feriado No Oficial / Cultural (2),2,10.4
+linea 2,cuatro caminos,49,83.7,1199508.0,1057464.0,142044.0,33.8,Feriado No Oficial / Cultural (1); Falla Oculta (1),2,34.7
+linea 3,indios verdes,47,80.9,1196311.0,1015592.0,180719.0,28.5,,0,42.6
+linea 3,universidad,40,92.5,1059769.0,1009143.0,50626.0,51.8,Falla Oculta (1),1,30.0
+linea 2,tasqueña,46,87.0,958439.0,866534.0,91905.0,35.8,,0,13.0
+linea 3,copilco,45,91.1,877235.0,838405.0,38830.0,59.3,Falla Mecánica (2); Feriado No Oficial / Cultural (2); Falla Oculta (1); Clima Extremo (1); Falsa Alarma (1),7,35.6
+linea 9,tacubaya,46,80.4,815657.0,686801.0,128856.0,34.4,Evento Masivo (1),1,47.8
+linea 2,pino suárez,52,53.8,799651.0,459920.0,339731.0,43.6,Incidente Externo (1); Evento Masivo (1),2,19.2
+linea 9,velódromo,39,38.5,693157.0,256099.0,437058.0,68.6,Falla Oculta (1),1,5.1
+linea 5,pantitlán,45,77.8,689429.0,577837.0,111592.0,31.3,Falla Oculta (1); Feriado No Oficial / Cultural (1); Contingencia Ambiental (1),3,31.1
+linea b,buenavista,37,86.5,686694.0,630280.0,56414.0,33.2,Evento Masivo (1); Efecto Sustitución (1),2,27.0
+linea 2,bellas artes,52,50.0,683239.0,323309.0,359930.0,49.4,Evento Masivo (5); Contingencia Ambiental (1),6,28.8
+linea 9,puebla,51,45.1,659025.0,301281.0,357744.0,38.4,Evento Masivo (1),1,31.4
+linea 8,san juan de letrán,61,44.3,626837.0,259529.0,367308.0,39.4,Evento Masivo (2); Efecto Sustitución (1); Cierre Programado (1),4,32.8
+linea a,la paz,39,94.9,625174.0,607139.0,18035.0,35.5,Falla Oculta (1),1,38.5
+linea 1,pino suárez,45,42.2,625159.0,283683.0,341476.0,47.6,,0,20.0
+linea 2,hidalgo,50,58.0,623748.0,370636.0,253112.0,48.8,Incidente Externo (1); Evento Masivo (1); Feriado No Oficial / Cultural (1),3,38.0
+linea 1,insurgentes,39,41.0,616818.0,267206.0,349612.0,48.3,Evento Masivo (1); Cierre Programado (1),2,25.6
+linea 9,ciudad deportiva,53,0.0,615022.0,-0.0,615022.0,134.8,Evento Masivo (2); Falla Oculta (1); Falla Técnica / Eléctrica (1); Clima Extremo (1),5,11.3
+linea 7,polanco,45,68.9,613096.0,472447.0,140649.0,51.9,Evento Masivo (2); Feriado No Oficial / Cultural (1); Contingencia Ambiental (1),4,37.8
+linea a,pantitlán,52,61.5,585305.0,370008.0,215297.0,34.6,Falla Mecánica (1); Evento Masivo (1),2,30.8
+linea 2,revolución,55,41.8,578367.0,260287.0,318080.0,44.4,Evento Masivo (1); Incidente Externo (1); Feriado No Oficial / Cultural (1),3,21.8
+linea 7,barranca del muerto,37,83.8,571070.0,521264.0,49806.0,55.2,Evento Masivo (1); Falla Mecánica (1); Cierre Programado (1); Falla Técnica / Eléctrica (1),4,35.1
+linea 9,pantitlán,40,82.5,559146.0,486114.0,73032.0,29.8,Falla Oculta (1); Falla Mecánica (1); Cierre Programado (1),3,50.0
+linea b,ciudad azteca,37,89.2,515536.0,455956.0,59580.0,30.0,Falla Mecánica (1),1,10.8
+linea 5,politécnico,41,68.3,507574.0,366364.0,141210.0,44.1,Clima Extremo (1); Falsa Alarma (1),2,29.3
+linea 2,tacuba,54,70.4,505444.0,372456.0,132988.0,30.2,Falla Oculta (1),1,35.2
+linea 3,miguel ángel de quevedo,45,66.7,504726.0,339675.0,165051.0,37.5,Falla Mecánica (1),1,20.0
+linea 9,chilpancingo,42,81.0,504604.0,443873.0,60731.0,37.4,Falla Oculta (1),1,40.5
+linea 3,la raza,53,67.9,491567.0,366592.0,124975.0,36.6,Falla Oculta (1),1,32.1
+linea 8,bellas artes,55,30.9,491204.0,138729.0,352475.0,46.4,Evento Masivo (1),1,34.5
+linea 2,normal,37,78.4,486835.0,410014.0,76821.0,44.9,,0,21.6
+linea a,santa marta,41,61.0,478455.0,320964.0,157491.0,32.4,Falsa Alarma (1); Feriado No Oficial / Cultural (1),2,9.8
+linea 3,niños héroes,52,82.7,469756.0,403390.0,66366.0,49.1,,0,30.8
+linea 1,pantitlán,49,57.1,451505.0,273684.0,177821.0,27.0,Efecto Sustitución (1); Contingencia Ambiental (1); Falla Oculta (1),3,36.7
+linea 2,chabacano,55,63.6,451293.0,309170.0,142123.0,33.3,Falla Oculta (2); Feriado No Oficial / Cultural (2),4,23.6
+linea 8,coyuya,51,64.7,445606.0,307285.0,138321.0,35.2,Falsa Alarma (1); Feriado No Oficial / Cultural (1),2,17.6
+linea 3,coyoacán,54,64.8,439456.0,319611.0,119845.0,40.5,Evento Cívico / Jornada Electoral (1); Falsa Alarma (1); Falla Técnica / Eléctrica (1); Evento Masivo (1),4,24.1
+linea 6,martín carrera,47,53.2,439187.0,249869.0,189318.0,42.1,Evento Masivo (1); Falsa Alarma (1),2,27.7
+linea a,tepalcates,45,73.3,436872.0,351229.0,85643.0,35.2,Feriado No Oficial / Cultural (2),2,11.1
+linea 6,lindavista,61,59.0,420081.0,258656.0,161425.0,41.1,Falsa Alarma (2); Falla Oculta (1); Clima Extremo (1),4,41.0
+linea 3,juárez,54,44.4,413487.0,162292.0,251195.0,52.1,,0,18.5
+linea 7,el rosario,38,84.2,410663.0,353244.0,57419.0,42.4,,0,34.2
+linea 2,xola,46,52.2,398614.0,173181.0,225433.0,55.3,Evento Masivo (1); Falla Mecánica (1),2,17.4
+linea b,múzquiz,52,69.2,397501.0,290805.0,106696.0,28.6,Falla Oculta (2); Feriado No Oficial / Cultural (1),3,15.4
+linea 3,deportivo 18 de marzo,37,86.5,393262.0,330406.0,62856.0,38.5,Evento Masivo (1); Falsa Alarma (1),2,40.5
+linea b,lagunilla,49,55.1,386996.0,227731.0,159265.0,38.4,Clima Extremo (1),1,16.3
+linea 1,merced,34,61.8,386883.0,272023.0,114860.0,31.4,,0,5.9
+linea 7,san joaquín,41,75.6,383336.0,306032.0,77304.0,50.3,Evento Masivo (2); Falla Oculta (1); Falla Técnica / Eléctrica (1); Incidente Externo (1),5,31.7
+linea 2,general anaya,53,69.8,381569.0,285033.0,96536.0,44.3,Falsa Alarma (1),1,22.6
+linea 6,ferrería/arena ciudad de méxico,40,72.5,376504.0,296791.0,79713.0,49.0,,0,30.0
+linea 12,insurgentes sur,34,70.6,372859.0,305598.0,67261.0,44.9,Falla Mecánica (2); Evento Masivo (1); Incidente Externo (1),4,23.5
+linea 7,auditorio,33,63.6,368738.0,263430.0,105308.0,42.4,,0,6.1
+linea 3,hospital general,57,70.2,368363.0,283527.0,84836.0,43.5,Evento Cívico / Jornada Electoral (1),1,40.4
+linea 3,balderas,37,54.1,363964.0,200459.0,163505.0,55.0,,0,16.2
+linea b,tepito,44,47.7,361720.0,195099.0,166621.0,38.2,,0,27.3
+linea b,ecatepec,47,76.6,361303.0,290813.0,70490.0,32.0,Feriado No Oficial / Cultural (1); Efecto Sustitución (1); Falla Oculta (1),3,17.0
+linea 12,tláhuac,18,94.4,360741.0,346707.0,14034.0,34.6,Falla Oculta (1); Evento Masivo (1); Incidente Externo (1),3,22.2
+linea 8,uam-i,52,73.1,356180.0,260961.0,95219.0,31.6,Efecto Sustitución (1),1,17.3
+linea 3,etiopía/plaza de la transparencia,45,68.9,354613.0,267881.0,86732.0,41.7,Falla Mecánica (1),1,26.7
+linea 1,chapultepec,26,46.2,346209.0,175124.0,171085.0,37.9,,0,23.1
+linea 2,san antonio abad,57,59.6,343564.0,204357.0,139207.0,33.3,Cierre Programado (1),1,35.1
+linea 8,escuadrón 201,53,67.9,339527.0,235544.0,103983.0,36.4,Falla Mecánica (1); Falla Oculta (1); Clima Extremo (1),3,22.6
+linea 8,salto del agua,54,42.6,333975.0,157348.0,176627.0,30.9,Cierre Programado (1); Feriado No Oficial / Cultural (1),2,14.8
+linea 4,martín carrera,47,85.1,333251.0,293400.0,39851.0,40.1,Clima Extremo (1),1,23.4
+linea 2,nativitas,60,56.7,332008.0,199134.0,132874.0,30.1,Falla Oculta (1),1,13.3
+linea 9,mixiuhca,46,69.6,328796.0,248612.0,80184.0,37.8,Falla Oculta (1),1,21.7
+linea 3,hidalgo,43,41.9,320194.0,131136.0,189058.0,46.8,Cierre Programado (1),1,46.5
+linea 7,mixcoac,48,83.3,318836.0,272120.0,46716.0,35.3,Cierre Programado (1); Clima Extremo (1),2,22.9
+linea 1,balderas,37,67.6,318758.0,225338.0,93420.0,37.9,Cierre Programado (3); Clima Extremo (1); Feriado No Oficial / Cultural (1),5,8.1
+linea 2,ermita,61,57.4,316680.0,198674.0,118006.0,32.9,Evento Masivo (1); Feriado No Oficial / Cultural (1),2,24.6
+linea 2,villa de cortés,53,58.5,315461.0,194434.0,121027.0,34.7,,0,15.1
+linea 9,chabacano,45,31.1,312842.0,63321.0,249521.0,62.3,Falla Oculta (1),1,22.2
+linea a,guelatao,43,72.1,309007.0,236678.0,72329.0,40.4,Falsa Alarma (1),1,11.6
+linea 1,zaragoza,42,66.7,305816.0,224615.0,81201.0,27.2,Clima Extremo (1),1,4.8
+linea b,san lázaro,53,64.2,302164.0,201589.0,100575.0,30.2,Clima Extremo (1),1,28.3
+linea 2,san cosme,44,63.6,302154.0,203814.0,98340.0,39.7,Falsa Alarma (1),1,22.7
+linea b,río de los remedios,52,65.4,293579.0,203841.0,89738.0,31.2,Falsa Alarma (1),1,23.1
+linea a,los reyes,44,77.3,285611.0,230426.0,55185.0,30.0,Feriado No Oficial / Cultural (2); Falla Mecánica (1); Incidente Externo (1),4,18.2
+linea 8,garibaldi/lagunilla,52,55.8,284748.0,170856.0,113892.0,30.0,Falla Técnica / Eléctrica (1); Falla Oculta (1); Clima Extremo (1),3,28.8
+linea 3,zapata,32,71.9,278504.0,202532.0,75972.0,41.0,Clima Extremo (2); Falla Oculta (1); Falsa Alarma (1); Evento Masivo (1),5,40.6
+linea 3,tlatelolco,40,60.0,276068.0,151208.0,124860.0,39.7,Feriado No Oficial / Cultural (2); Falla Mecánica (1),3,20.0
+linea 1,observatorio,21,52.4,275239.0,120473.0,154766.0,30.4,Feriado No Oficial / Cultural (1); Cierre Programado (1),2,9.5
+linea b,impulsora,37,75.7,270764.0,210571.0,60193.0,35.2,Falla Mecánica (1),1,0.0
+linea b,nezahualcóyotl,39,66.7,267610.0,192098.0,75512.0,37.1,Feriado No Oficial / Cultural (1); Falla Mecánica (1); Clima Extremo (1),3,25.6
+linea 8,iztacalco,41,65.9,267329.0,184689.0,82640.0,38.5,,0,9.8
+linea 9,patriotismo,44,72.7,266622.0,211321.0,55301.0,40.5,Falsa Alarma (1); Falla Mecánica (1),2,36.4
+linea 2,cuitláhuac,54,77.8,264259.0,215155.0,49104.0,35.4,Falsa Alarma (2),2,20.4
+linea 1,san lázaro,44,54.5,263843.0,139902.0,123941.0,31.5,Feriado No Oficial / Cultural (2); Falla Mecánica (1); Falla Oculta (1); Evento Masivo (1),5,36.4
+linea 2,viaducto,51,72.5,259836.0,198301.0,61535.0,36.9,Falsa Alarma (1); Clima Extremo (1); Falla Mecánica (1),3,31.4
+linea 3,centro médico,52,65.4,258591.0,185070.0,73521.0,33.8,Falla Oculta (1),1,38.5
+linea 3,eugenia,62,72.6,255835.0,190126.0,65709.0,36.3,Falla Técnica / Eléctrica (3); Falla Oculta (1),4,21.0
+linea 1,sevilla,29,51.7,254815.0,132829.0,121986.0,41.8,Cierre Programado (1); Falla Oculta (1),2,0.0
+linea b,deportivo oceanía,50,80.0,251560.0,205958.0,45602.0,40.2,Falsa Alarma (2); Falla Oculta (1),3,22.0
+linea 3,viveros/derechos humanos,43,81.4,251509.0,215430.0,36079.0,36.2,Contingencia Ambiental (1); Clima Extremo (1),2,18.6
+linea 9,jamaica,56,30.4,251319.0,62686.0,188633.0,36.1,Falla Técnica / Eléctrica (2),2,48.2
+linea 8,iztapalapa,57,24.6,250672.0,45873.0,204799.0,40.6,Falsa Alarma (2),2,10.5
+linea 5,terminal aérea,55,74.5,250525.0,184695.0,65830.0,27.3,Feriado No Oficial / Cultural (1),1,18.2
+linea 3,división del norte,49,61.2,249101.0,161624.0,87477.0,44.1,,0,22.4
+linea 2,portales,46,69.6,247522.0,186410.0,61112.0,26.1,Feriado No Oficial / Cultural (2); Efecto Sustitución (1); Falla Oculta (1),4,15.2
+linea 12,atlalilco,37,78.4,244292.0,185669.0,58623.0,36.6,,0,10.8
+linea a,acatitla,54,74.1,240797.0,186055.0,54742.0,25.8,Falla Oculta (2); Incidente Externo (1); Falla Técnica / Eléctrica (1),4,7.4
+linea 12,periférico oriente,23,73.9,240029.0,186032.0,53997.0,30.4,Cierre Programado (1),1,8.7
+linea b,villa de aragón,38,84.2,236731.0,207529.0,29202.0,42.7,Clima Extremo (2); Contingencia Ambiental (1),3,23.7
+linea 2,colegio militar,34,85.3,234736.0,212865.0,21871.0,50.7,Feriado No Oficial / Cultural (1); Clima Extremo (1); Incidente Externo (1); Contingencia Ambiental (1); Falsa Alarma (1),5,23.5
+linea 7,constituyentes,30,30.0,234342.0,52888.0,181454.0,55.7,Falla Oculta (1),1,33.3
+linea b,plaza aragón,52,61.5,221617.0,132297.0,89320.0,22.3,Falla Mecánica (1),1,23.1
+linea 5,autobuses del norte,31,51.6,215217.0,117660.0,97557.0,34.1,Feriado No Oficial / Cultural (2); Falsa Alarma (1),3,12.9
+linea 7,san pedro de los pinos,47,66.0,214290.0,153240.0,61050.0,57.4,Feriado No Oficial / Cultural (1),1,29.8
+linea b,olímpica,51,76.5,210851.0,163806.0,47045.0,25.4,,0,11.8
+linea 8,doctores,47,63.8,208881.0,131492.0,77389.0,38.0,Falla Oculta (2),2,25.5
+linea 6,la villa/basílica,21,38.1,208675.0,52741.0,155934.0,58.2,,0,47.6
+linea 1,cuauhtémoc,35,48.6,207338.0,96060.0,111278.0,43.5,,0,5.7
+linea 1,isabel la católica,24,66.7,200332.0,99404.0,100928.0,44.3,Incidente Externo (1); Clima Extremo (1); Feriado No Oficial / Cultural (1),3,29.2
+linea 6,el rosario,33,81.8,198725.0,171285.0,27440.0,39.1,Falla Mecánica (1),1,21.2
+linea 1,moctezuma,37,56.8,198401.0,119321.0,79080.0,29.5,,0,5.4
+linea 12,mexicaltzingo,38,84.2,198162.0,176705.0,21457.0,35.1,Feriado No Oficial / Cultural (1),1,39.5
+linea 1,tacubaya,30,80.0,198087.0,162865.0,35222.0,34.1,Falla Oculta (1); Clima Extremo (1),2,26.7
+linea a,peñón viejo,57,78.9,195278.0,154433.0,40845.0,26.8,Falsa Alarma (1),1,24.6
+linea 8,atlalilco,45,60.0,192987.0,112787.0,80200.0,30.5,Feriado No Oficial / Cultural (1); Clima Extremo (1),2,26.7
+linea 8,apatlaco,59,64.4,192214.0,125147.0,67067.0,29.2,Evento Masivo (1); Contingencia Ambiental (1),2,13.6
+linea 9,centro médico,47,70.2,188446.0,145551.0,42895.0,31.6,Falla Oculta (1); Falsa Alarma (1),2,27.7
+linea 7,aquiles serdán,42,54.8,188166.0,111777.0,76389.0,41.7,Evento Masivo (1); Falsa Alarma (1); Feriado No Oficial / Cultural (1),3,28.6
+linea 1,boulevard puerto aéreo,45,60.0,185923.0,119426.0,66497.0,24.0,Clima Extremo (1); Falla Oculta (1),2,13.3
+linea 3,potrero,49,67.3,181205.0,130179.0,51026.0,26.0,,0,18.4
+linea a,agrícola oriental,47,68.1,180922.0,110900.0,70022.0,32.7,Falsa Alarma (1),1,12.8
+linea 7,refinería,39,61.5,178548.0,100423.0,78125.0,38.0,,0,15.4
+linea 7,camarones,43,72.1,173982.0,134017.0,39965.0,36.0,Feriado No Oficial / Cultural (2); Falsa Alarma (1),3,27.9
+linea 2,popotla,47,70.2,171944.0,130963.0,40981.0,45.2,Feriado No Oficial / Cultural (1),1,21.3
+linea 1,gómez farias,30,73.3,166181.0,134637.0,31544.0,29.3,Efecto Sustitución (1); Feriado No Oficial / Cultural (1),2,26.7
+linea a,canal de san juan,51,66.7,162318.0,116126.0,46192.0,24.8,Falsa Alarma (1); Clima Extremo (1),2,21.6
+linea 1,candelaria,29,51.7,156006.0,91175.0,64831.0,27.9,Incidente Externo (2),2,20.7
+linea 8,obrera,45,73.3,153553.0,118062.0,35491.0,25.2,Falla Mecánica (1),1,31.1
+linea 8,cerro de la estrella,57,49.1,151457.0,73599.0,77858.0,27.7,Contingencia Ambiental (1); Falla Técnica / Eléctrica (1),2,26.3
+linea 9,lázaro cárdenas,42,83.3,151270.0,129165.0,22105.0,34.3,,0,26.2
+linea 12,mixcoac,28,85.7,150954.0,137900.0,13054.0,42.3,Falsa Alarma (1); Falla Técnica / Eléctrica (1); Falla Oculta (1),3,32.1
+linea 4,candelaria,34,52.9,149885.0,81079.0,68806.0,42.6,,0,20.6
+linea 7,san antonio,37,70.3,145850.0,111738.0,34112.0,44.1,Feriado No Oficial / Cultural (1),1,27.0
+linea 2,panteones,38,76.3,144381.0,118269.0,26112.0,37.8,Incidente Externo (1),1,23.7
+linea 5,la raza,37,81.1,143575.0,119881.0,23694.0,40.7,Evento Masivo (1),1,24.3
+linea 4,fray servando,36,52.8,142810.0,80099.0,62711.0,39.2,,0,16.7
+linea b,oceanía,40,60.0,142110.0,71479.0,70631.0,35.2,Falla Mecánica (1); Clima Extremo (1),2,25.0
+linea 12,parque de los venados,44,72.7,141399.0,113621.0,27778.0,33.8,Falsa Alarma (1),1,22.7
+linea 8,aculco,58,60.3,139726.0,84585.0,55141.0,27.9,Falla Técnica / Eléctrica (1); Feriado No Oficial / Cultural (1),2,10.3
+linea b,romero rubio,40,67.5,135950.0,95284.0,40666.0,24.1,,0,25.0
+linea 12,zapata,43,65.1,126647.0,92895.0,33752.0,22.2,Falla Oculta (1); Evento Masivo (1); Falsa Alarma (1),3,41.9
+linea 6,vallejo,52,71.2,125705.0,88127.0,37578.0,39.5,,0,30.8
+linea 12,culhuacán,32,71.9,124528.0,97712.0,26816.0,23.9,Efecto Sustitución (1),1,18.8
+linea 12,hospital 20 de noviembre,36,83.3,123528.0,110322.0,13206.0,38.1,Falsa Alarma (1),1,47.2
+linea 4,canal del norte,52,71.2,121889.0,94939.0,26950.0,28.8,Feriado No Oficial / Cultural (2); Falsa Alarma (2); Falla Mecánica (1),5,38.5
+linea 5,oceanía,36,83.3,119306.0,86030.0,33276.0,37.1,Falsa Alarma (1),1,30.6
+linea b,guerrero,55,34.5,118737.0,37106.0,81631.0,32.3,Falsa Alarma (2); Feriado No Oficial / Cultural (1); Falla Técnica / Eléctrica (1),4,21.8
+linea 7,tacuba,53,64.2,117319.0,80139.0,37180.0,30.1,Falla Mecánica (1),1,24.5
+linea 8,chabacano,57,33.3,117004.0,31913.0,85091.0,44.9,Clima Extremo (1); Falsa Alarma (1),2,17.5
+linea 6,norte 45,54,81.5,116652.0,101178.0,15474.0,44.4,Falla Oculta (1),1,42.6
+linea 6,uam-azcapotzalco,48,79.2,114248.0,92909.0,21339.0,35.1,Falsa Alarma (1); Evento Masivo (1); Feriado No Oficial / Cultural (1),3,10.4
+linea 4,jamaica,52,46.2,110956.0,50976.0,59980.0,29.5,Evento Masivo (1); Falsa Alarma (1),2,36.5
+linea 12,calle 11,33,66.7,110396.0,80665.0,29731.0,24.8,Falsa Alarma (4); Clima Extremo (1); Cierre Programado (1),6,18.2
+linea 12,nopalera,15,100.0,107737.0,107737.0,0.0,31.3,Falsa Alarma (1); Clima Extremo (1); Feriado No Oficial / Cultural (1),3,13.3
+linea 3,guerrero,55,60.0,106023.0,62732.0,43291.0,22.1,Falsa Alarma (1); Feriado No Oficial / Cultural (1),2,20.0
+linea 12,eje central,30,83.3,105111.0,92933.0,12178.0,39.0,Falsa Alarma (2),2,20.0
+linea 1,salto del agua,22,77.3,104548.0,87830.0,16718.0,34.3,Falla Oculta (2); Feriado No Oficial / Cultural (1); Evento Masivo (1); Falsa Alarma (1),5,22.7
+linea b,garibaldi/lagunilla,35,54.3,103276.0,52118.0,51158.0,35.2,Incidente Externo (1); Falla Técnica / Eléctrica (1); Cierre Programado (1),3,22.9
+linea 5,aragón,51,66.7,102878.0,76110.0,26768.0,31.9,Feriado No Oficial / Cultural (1),1,23.5
+linea 1,balbuena,41,58.5,102360.0,65102.0,37258.0,29.8,Falla Mecánica (1),1,14.6
+linea 5,misterios,46,78.3,102341.0,81901.0,20440.0,33.1,Falsa Alarma (1); Falla Mecánica (1),2,26.1
+linea 12,zapotitlán,22,63.6,98499.0,61746.0,36753.0,32.4,Contingencia Ambiental (1); Falla Técnica / Eléctrica (1); Feriado No Oficial / Cultural (1),3,18.2
+linea 5,instituto del petróleo,50,62.0,96845.0,68347.0,28498.0,49.0,Falsa Alarma (2),2,44.0
+linea 12,tezonco,13,92.3,96128.0,91064.0,5064.0,34.9,Falla Oculta (2); Clima Extremo (1); Falla Mecánica (1),4,15.4
+linea b,ricardo flores magón,58,70.7,94910.0,65311.0,29599.0,26.5,Falla Oculta (2),2,24.1
+linea 7,tacubaya,49,55.1,92738.0,56029.0,36709.0,29.7,Falsa Alarma (1); Incidente Externo (1),2,44.9
+linea 4,morelos,50,58.0,91947.0,56236.0,35711.0,26.9,Falsa Alarma (2),2,30.0
+linea 12,ermita,27,81.5,90656.0,74137.0,16519.0,43.2,Falla Oculta (1); Clima Extremo (1); Falsa Alarma (1),3,33.3
+linea 12,san andrés tomatlán,26,88.5,86991.0,78717.0,8274.0,34.4,Falsa Alarma (2),2,15.4
+linea 6,tezozómoc,54,66.7,86464.0,63668.0,22796.0,33.8,Cierre Programado (1),1,14.8
+linea 8,la viga,48,56.2,82364.0,49589.0,32775.0,23.5,Evento Masivo (1),1,25.0
+linea 5,hangares,44,79.5,79321.0,63766.0,15555.0,36.9,,0,22.7
+linea b,morelos,47,55.3,79172.0,41088.0,38084.0,26.5,Efecto Sustitución (1); Clima Extremo (1); Falla Oculta (1); Falsa Alarma (1),4,38.3
+linea 12,olivos,17,88.2,78811.0,73386.0,5425.0,28.7,Falsa Alarma (2); Feriado No Oficial / Cultural (1); Cierre Programado (1),4,11.8
+linea 5,eduardo molina,38,84.2,75105.0,66855.0,8250.0,33.8,Evento Masivo (1),1,13.2
+linea b,bosque de aragón,37,59.5,73275.0,47739.0,25536.0,38.0,,0,10.8
+linea 8,santa anita,49,57.1,71878.0,42460.0,29418.0,33.1,Clima Extremo (1),1,12.2
+linea 1,juanacatlán,25,68.0,69468.0,50038.0,19430.0,45.5,,0,8.0
+linea 4,consulado,57,43.9,68743.0,29743.0,39000.0,37.8,Feriado No Oficial / Cultural (1),1,8.8
+linea 12,lomas estrella,31,67.7,65182.0,49024.0,16158.0,23.5,Falsa Alarma (2); Falla Oculta (1),3,19.4
+linea 6,instituto del petróleo,55,67.3,64279.0,49008.0,15271.0,54.2,Falsa Alarma (1); Falla Oculta (1),2,41.8
+linea 5,valle gómez,54,72.2,62871.0,46646.0,16225.0,31.1,Falla Mecánica (1); Falla Técnica / Eléctrica (1); Falsa Alarma (1),3,24.1
+linea 5,consulado,19,89.5,61884.0,34710.0,27174.0,43.3,Falsa Alarma (1),1,21.1
+linea 4,talismán,50,68.0,59807.0,42619.0,17188.0,38.8,Falsa Alarma (1),1,22.0
+linea 4,bondojito,34,82.4,57347.0,49943.0,7404.0,33.1,Falla Oculta (2); Falsa Alarma (1),3,23.5
+linea 4,santa anita,55,52.7,50771.0,26250.0,24521.0,44.3,Falsa Alarma (2); Evento Cívico / Jornada Electoral (1),3,7.3
+linea 6,deportivo 18 de marzo,61,41.0,40401.0,14758.0,25643.0,48.3,Feriado No Oficial / Cultural (1); Falsa Alarma (1); Evento Masivo (1); Incidente Externo (1),4,26.2
+linea 1,gómez farías,7,42.9,33825.0,15258.0,18567.0,25.0,Falla Oculta (1),1,0.0
+linea 12,tlaltenco,17,58.8,23971.0,16123.0,7848.0,23.4,Falsa Alarma (2); Evento Masivo (1),3,0.0

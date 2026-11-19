@@ -140,6 +140,56 @@ efecto_causa.round(1).to_csv(f'{RES}/efecto_por_causa.csv', encoding='utf-8-sig'
 print(efecto_causa.round(0).to_string())
 
 # %% [markdown]
+# ## 3b. Causas ciclicas, programadas y esporadicas
+# Ciclica: se repite con el calendario (feriados y vacaciones, temporada de lluvias, temporada de
+# contingencias). Programada: no es ciclica pero se anuncia antes (eventos masivos, cierres programados,
+# jornadas electorales). Esporadica: no se puede anticipar con el calendario (fallas, incidentes,
+# sustitucion por fallas en otro medio). Las dos primeras se pueden prevenir; la tercera pide deteccion
+# y respuesta rapida.
+# Evidencia de ciclicidad en el detector: un dia CRITICO es "recurrente" si la misma estacion tuvo otro
+# dia CRITICO en la misma fecha (mes-dia) en otro ano. Las fechas moviles (Semana Santa) no se cuentan,
+# asi que es un piso.
+
+# %%
+TIPO_CAUSA = {
+    'Feriado No Oficial / Cultural': 'Cíclica', 'Clima Extremo': 'Cíclica', 'Contingencia Ambiental': 'Cíclica',
+    'Evento Masivo': 'Programada', 'Cierre Programado': 'Programada', 'Evento Cívico / Jornada Electoral': 'Programada',
+    'Falla Oculta': 'Esporádica', 'Falla Mecánica': 'Esporádica', 'Falla Técnica / Eléctrica': 'Esporádica',
+    'Incidente Externo': 'Esporádica', 'Efecto Sustitución': 'Esporádica',
+    RUIDO: 'Falsa alarma',
+}
+TIPOS = ['Cíclica', 'Programada', 'Esporádica', 'Falsa alarma']
+osint['tipo_causa'] = osint['causa'].map(TIPO_CAUSA)
+osint['mes'] = pd.to_datetime(osint['fecha']).dt.month
+tipo_causa = osint.groupby(['tipo_causa', 'causa']).agg(
+    registros=('mes', 'size'),
+    meses_mas_frecuentes=('mes', lambda m: ', '.join(str(x) for x in m.value_counts().nlargest(3).index)),
+    pct_en_3_meses=('mes', lambda m: m.value_counts(normalize=True).nlargest(3).sum() * 100),
+).reset_index()
+tipo_causa['pct_de_registros'] = tipo_causa['registros'] / len(osint) * 100
+tipo_causa.round(1).to_csv(f'{RES}/causas_ciclicas_programadas_esporadicas.csv', index=False, encoding='utf-8-sig')
+tipo_linea = pd.crosstab(osint['linea'], osint['tipo_causa']).reindex(columns=TIPOS, fill_value=0)
+tipo_linea.loc['Toda la red'] = tipo_linea.sum()
+tipo_linea_pct = tipo_linea.div(tipo_linea.sum(axis=1), axis=0) * 100
+tipo_linea.assign(total=tipo_linea.sum(axis=1)).to_csv(f'{RES}/tipo_de_causa_por_linea.csv', encoding='utf-8-sig')
+print(tipo_linea_pct.round(0).to_string())
+
+criticas['fecha_dt'] = pd.to_datetime(criticas['fecha'])
+criticas['mes_dia'] = criticas['fecha_dt'].dt.strftime('%m-%d')
+anios = criticas.groupby(['estacion', 'mes_dia'])['fecha_dt'].transform(lambda f: f.dt.year.nunique())
+criticas['recurrente'] = anios >= 2
+estaciones['pct_dias_recurrentes'] = criticas.groupby(['linea', 'estacion'])['recurrente'].mean().reindex(estaciones.index) * 100
+lineas['pct_dias_recurrentes'] = criticas.groupby('linea')['recurrente'].mean().reindex(lineas.index) * 100
+fechas = criticas.groupby('mes_dia').agg(dias_criticos=('estacion', 'size'), dias_recurrentes=('recurrente', 'sum'),
+                                         anios=('fecha_dt', lambda f: f.dt.year.nunique()), estaciones=('estacion', 'nunique'))
+fechas = fechas.sort_values('dias_recurrentes', ascending=False)   # una fecha unica (p. ej. 11-jun-2026) no cuenta como recurrente
+fechas.head(30).to_csv(f'{RES}/fechas_recurrentes.csv', encoding='utf-8-sig')
+lineas.round(1).to_csv(f'{RES}/lineas_conflictivas.csv', encoding='utf-8-sig')
+estaciones.round(1).to_csv(f'{RES}/estaciones_conflictivas.csv', encoding='utf-8-sig')
+print(f"Dias criticos recurrentes (misma estacion y fecha en 2+ anos): {criticas['recurrente'].mean() * 100:.0f}%")
+print(fechas.head(12).to_string())
+
+# %% [markdown]
 # ## 4. Graficas
 
 # %%
@@ -259,5 +309,36 @@ fig.text(0.01, 0.015, 'Solo incluye días que el detector marcó como críticos:
          'no el efecto promedio de cada causa.', fontsize=9, color=TINTA2)
 fig.tight_layout(rect=(0, 0.04, 1, 0.9))
 fig.savefig(f'{IMG}/04_efecto_por_causa.png', dpi=200)
+plt.close(fig)
+# ---------- 05. Causas ciclicas, programadas y esporadicas por linea ----------
+t5 = tipo_linea_pct.loc[['Toda la red'] + list(lineas.index)].iloc[::-1]
+COLOR_TIPO = {'Cíclica': AZUL, 'Programada': '#9ec5f4', 'Esporádica': NARANJA, 'Falsa alarma': '#d6d5d0'}
+TINTA_TIPO = {'Cíclica': 'white', 'Programada': TINTA, 'Esporádica': TINTA, 'Falsa alarma': TINTA}
+ETIQ_TIPO = {'Cíclica': 'Cíclica (feriados, lluvias, contingencias)', 'Programada': 'Programada (eventos, cierres, elecciones)',
+             'Esporádica': 'Esporádica (fallas, incidentes)', 'Falsa alarma': 'Falsa alarma'}
+fig, ax = plt.subplots(figsize=(13, 7.5))
+y = np.arange(len(t5))
+izq = np.zeros(len(t5))
+for tipo in TIPOS:
+    v = t5[tipo].values
+    ax.barh(y, v, left=izq, height=0.62, color=COLOR_TIPO[tipo], edgecolor=FONDO, linewidth=1.5, label=ETIQ_TIPO[tipo])
+    for yi, vi, li in zip(y, v, izq):
+        if vi >= 7:
+            ax.text(li + vi / 2, yi, f'{vi:.0f}%', ha='center', va='center', fontsize=9, color=TINTA_TIPO[tipo])
+    izq += v
+ax.set_yticks(y)
+ax.set_yticklabels([('Toda la red' if i == 'Toda la red' else nombre_linea(i)) + f"  (n = {tipo_linea.loc[i].sum()})" for i in t5.index],
+                   fontsize=10)
+for lbl in ax.get_yticklabels():
+    if lbl.get_text().startswith('Toda'):
+        lbl.set_fontweight('bold')
+ax.set_xlim(0, 100); ax.set_xticks([0, 25, 50, 75, 100]); ax.set_xticklabels(['0%', '25%', '50%', '75%', '100%'])
+limpiar_ejes(ax, ('top', 'right', 'left', 'bottom'))
+fig.suptitle('¿Qué parte de las anomalías se puede prevenir?', fontsize=15, fontweight='bold', x=0.01, ha='left')
+fig.text(0.01, 0.905, 'Causas de la OSINT histórica agrupadas por si se repiten con el calendario, se anuncian antes o son imprevistas. '
+         'Líneas ordenadas por pasajeros afectados.', fontsize=10, color=TINTA2)
+fig.legend(loc='upper left', bbox_to_anchor=(0.005, 0.89), ncol=4, frameon=False, fontsize=9.5)
+fig.tight_layout(rect=(0, 0, 1, 0.87))
+fig.savefig(f'{IMG}/05_causas_ciclicas_y_esporadicas.png', dpi=200)
 plt.close(fig)
 print(f'Gráficas guardadas en {IMG}/ y tablas en {RES}/')

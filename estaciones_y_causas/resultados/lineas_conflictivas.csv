@@ -1,13 +1,13 @@
-﻿linea,estaciones,dias_criticos,pct_caidas,pasajeros_afectados,dias_criticos_por_estacion,pasajeros_afectados_por_estacion,registros_osint,pct_falsa_alarma_osint,causa_principal_osint,causa_principal_pct,segunda_causa_osint
-linea 2,24,1244,63.0,13125886.0,51.8,546911.9,49,12.2,Feriado No Oficial / Cultural,22.4,Evento Masivo
-linea 9,12,551,55.4,5345906.0,45.9,445492.2,20,10.0,Falla Oculta,35.0,Evento Masivo
-linea 3,21,991,68.8,9109539.0,47.2,433787.6,36,13.9,Falla Oculta,16.7,Feriado No Oficial / Cultural
-linea a,10,473,72.5,3499739.0,47.3,349973.9,20,25.0,Feriado No Oficial / Cultural,25.0,Falla Oculta
-linea 8,19,989,54.6,6125565.0,52.1,322398.2,35,11.4,Feriado No Oficial / Cultural,17.1,Evento Masivo
-linea 7,14,582,67.2,4010974.0,41.6,286498.1,27,11.1,Feriado No Oficial / Cultural,22.2,Evento Masivo
-linea b,21,950,66.1,5512056.0,45.2,262478.9,38,15.8,Falla Oculta,18.4,Clima Extremo
-linea 1,21,691,58.2,5467514.0,32.9,260357.8,38,2.6,Falla Oculta,21.1,Feriado No Oficial / Cultural
-linea 6,11,526,65.0,2190921.0,47.8,199174.6,18,33.3,Falla Oculta,16.7,Evento Masivo
-linea 5,13,547,73.9,2506871.0,42.1,192836.2,21,38.1,Feriado No Oficial / Cultural,23.8,Evento Masivo
-linea 12,20,564,77.1,2946621.0,28.2,147331.0,51,39.2,Falla Oculta,13.7,Feriado No Oficial / Cultural
-linea 4,10,467,60.6,1187406.0,46.7,118740.6,18,50.0,Feriado No Oficial / Cultural,16.7,Falla Oculta
+﻿linea,estaciones,dias_criticos,pct_caidas,pasajeros_afectados,dias_criticos_por_estacion,pasajeros_afectados_por_estacion,registros_osint,pct_falsa_alarma_osint,causa_principal_osint,causa_principal_pct,segunda_causa_osint,pct_dias_recurrentes
+linea 2,24,1244,63.0,13125886.0,51.8,546911.9,49,12.2,Feriado No Oficial / Cultural,22.4,Evento Masivo,22.8
+linea 9,12,551,55.4,5345906.0,45.9,445492.2,20,10.0,Falla Oculta,35.0,Evento Masivo,30.9
+linea 3,21,991,68.8,9109539.0,47.2,433787.6,36,13.9,Falla Oculta,16.7,Feriado No Oficial / Cultural,28.5
+linea a,10,473,72.5,3499739.0,47.3,349973.9,20,25.0,Feriado No Oficial / Cultural,25.0,Falla Oculta,18.6
+linea 8,19,989,54.6,6125565.0,52.1,322398.2,35,11.4,Feriado No Oficial / Cultural,17.1,Evento Masivo,20.4
+linea 7,14,582,67.2,4010974.0,41.6,286498.1,27,11.1,Feriado No Oficial / Cultural,22.2,Evento Masivo,28.9
+linea b,21,950,66.1,5512056.0,45.2,262478.9,38,15.8,Falla Oculta,18.4,Clima Extremo,21.2
+linea 1,21,691,58.2,5467514.0,32.9,260357.8,38,2.6,Falla Oculta,21.1,Feriado No Oficial / Cultural,17.4
+linea 6,11,526,65.0,2190921.0,47.8,199174.6,18,33.3,Falla Oculta,16.7,Evento Masivo,30.0
+linea 5,13,547,73.9,2506871.0,42.1,192836.2,21,38.1,Feriado No Oficial / Cultural,23.8,Evento Masivo,25.2
+linea 12,20,564,77.1,2946621.0,28.2,147331.0,51,39.2,Falla Oculta,13.7,Feriado No Oficial / Cultural,23.8
+linea 4,10,467,60.6,1187406.0,46.7,118740.6,18,50.0,Feriado No Oficial / Cultural,16.7,Falla Oculta,22.7
