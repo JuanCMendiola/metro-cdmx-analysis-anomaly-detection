@@ -1,0 +1,13 @@
+﻿causa,registros,pct_caidas,caidas,cambio_mediano_en_caidas_pct,pasajeros_medianos_en_caidas,alzas,cambio_mediano_en_alzas_pct,pasajeros_medianos_en_alzas
+Cierre Programado,18.0,83.3,15.0,-40.7,8094.0,3.0,35.6,5180.0
+Falla Técnica / Eléctrica,18.0,83.3,15.0,-29.5,2405.0,3.0,25.0,4926.0
+Feriado No Oficial / Cultural,56.0,80.4,45.0,-35.3,3875.0,11.0,93.8,4435.0
+Falla Mecánica,29.0,75.9,22.0,-28.2,4442.0,7.0,24.6,2844.0
+Falsa Alarma,74.0,71.6,53.0,-30.5,2421.0,21.0,34.6,2313.0
+Falla Oculta,55.0,63.6,35.0,-31.8,5276.0,20.0,24.4,3311.0
+Clima Extremo,33.0,63.6,21.0,-26.5,3268.0,12.0,32.4,4863.5
+Incidente Externo,17.0,58.8,10.0,-37.8,6385.5,7.0,23.8,4134.0
+Evento Masivo,44.0,40.9,18.0,-34.5,7911.0,26.0,48.4,6194.0
+Contingencia Ambiental,10.0,30.0,3.0,-30.6,2852.0,7.0,56.1,3684.0
+Efecto Sustitución,10.0,30.0,3.0,-29.7,6795.0,7.0,51.7,3790.0
+Evento Cívico / Jornada Electoral,3.0,0.0,0.0,,,3.0,75.6,2638.0
