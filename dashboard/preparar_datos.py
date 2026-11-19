@@ -8,6 +8,9 @@
 
 import os
 import pandas as pd
+import sys
+sys.path.insert(0, os.getcwd())   # historial.py vive en la raiz del repo
+from historial import registrar_corrida
 
 SALIDA = 'dashboard/data'
 os.makedirs(SALIDA, exist_ok=True)
@@ -38,3 +41,13 @@ auditadas.to_csv(f'{SALIDA}/anomalias_auditadas.csv', index=False)
 print(f"Serie diaria: {len(series):,} filas ({series['fecha'].min().date()} -> {series['fecha'].max().date()}) | "
       f"riesgo: {len(alerta):,} dias en alerta")
 print('Archivos en', SALIDA, ':', {f: f'{os.path.getsize(os.path.join(SALIDA, f)) / 1e6:.1f} MB' for f in os.listdir(SALIDA)})
+
+# Historial: version de los datos del tablero (la serie diaria pesa, va a historico_local/)
+registrar_corrida(
+    'tablero',
+    archivos=[f'{SALIDA}/riesgo_top_estaciones.parquet', f'{SALIDA}/riesgo_dias_alerta.parquet',
+              f'{SALIDA}/anomalias_auditadas.csv'],
+    archivos_locales=[f'{SALIDA}/series_estaciones.parquet'],
+    metricas={'filas_serie': len(series), 'fecha_fin_serie': str(series['fecha'].max().date()),
+              'dias_en_alerta': len(alerta), 'anomalias_auditadas': len(auditadas)},
+)

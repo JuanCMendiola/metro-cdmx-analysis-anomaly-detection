@@ -8,6 +8,9 @@
 
 import os
 import pandas as pd
+import sys
+sys.path.insert(0, os.getcwd())   # historial.py vive en la raiz del repo
+from historial import registrar_corrida
 
 # %%
 url = "https://datos.cdmx.gob.mx/dataset/f2046fd5-51b5-4876-b008-bd65d95f9a02/resource/0e8ffe58-28bb-4dde-afcd-e5f5b4de4ccb/download/afluenciastc_simple_02_2026.csv"
@@ -112,3 +115,19 @@ dataset_original_copy = metro.copy()
 # y modeling/ lo carguen sin tener que re-descargar y re-limpiar el CSV completo.
 os.makedirs('data/processed', exist_ok=True)
 dataset_original_copy.to_pickle('data/processed/dataset_original_copy.pkl')
+
+# %%
+# Historial: que datos se descargaron en esta corrida (SEMOVI actualiza los archivos;
+# la huella sha256 del manifiesto dice si los datos cambiaron entre corridas)
+registrar_corrida(
+    'datos',
+    archivos_locales=['data/processed/dataset_original_copy.pkl', 'data/processed/metro_simple.pkl'],
+    metricas={
+        'filas': len(dataset_original_copy),
+        'fecha_inicio': str(dataset_original_copy['fecha'].min().date()),
+        'fecha_fin': str(dataset_original_copy['fecha'].max().date()),
+        'estaciones_nombre': int(dataset_original_copy['estacion'].nunique()),
+        'registros_en_cero': int((dataset_original_copy['afluencia'] == 0).sum()),
+    },
+    parametros={'url_desglosado': url, 'desde': '2022-01-01'},
+)

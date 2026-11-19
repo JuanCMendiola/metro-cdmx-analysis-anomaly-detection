@@ -1,0 +1,5 @@
+id,etapa,fecha_hora,commit,codigo_sin_commit,archivos,igual_a,metricas,nota
+2026-11-19_145727,estaciones_y_causas,2026-11-19T14:57:27-06:00,443a96a,,12,,"{""lineas_mas_afectadas_por_estacion"": [""linea 2"", ""linea 9"", ""linea 3""], ""anomalias_osint"": 371}",
+2026-11-19_145731,validacion_predicciones,2026-11-19T14:57:31-06:00,443a96a,,8,,"{""osint_tasa_si_ponderada_pct"": 61.3, ""osint_tasa_si_parcial_ponderada_pct"": 80.4, ""dias_en_alerta_con_dato_real"": 230, ""real_dias_en_alerta"": 230.0, ""real_criticas"": 31.0, ""real_tasa_critica_pct"": 13.5, ""real_cualquier_anomalia_pct"": 53.5, ""real_dentro_de_banda_pct"": 61.3, ""real_dif_mediana_vs_esperada_pct"": -19.9}",
+2026-11-19_145732,muestra_osint,2026-11-19T14:57:32-06:00,443a96a,,2,,{},Corrida inicial importada: archivos vigentes en main al 19-nov-2026 (no se volvió a correr el notebook)
+2026-11-19_145732,modelo_riesgo,2026-11-19T14:57:32-06:00,443a96a,,2,,{},Corrida inicial importada: archivos vigentes en main al 19-nov-2026 (no se volvió a correr el notebook)

@@ -1,0 +1,13 @@
+﻿linea,Falsa Alarma,Feriado No Oficial / Cultural,Falla Oculta,Evento Masivo,Clima Extremo,Falla Mecánica,Cierre Programado,Falla Técnica / Eléctrica,Incidente Externo,Efecto Sustitución,Contingencia Ambiental,Evento Cívico / Jornada Electoral,total
+linea 1,1,7,8,3,5,2,6,0,3,2,1,0,38
+linea 12,20,4,7,4,4,3,3,2,2,1,1,0,51
+linea 2,6,11,6,11,2,2,1,0,6,2,2,0,49
+linea 3,5,5,6,3,4,5,1,4,0,0,1,2,36
+linea 4,9,3,2,1,1,1,0,0,0,0,0,1,18
+linea 5,8,5,1,2,1,2,0,1,0,0,1,0,21
+linea 6,6,2,3,3,1,1,1,0,1,0,0,0,18
+linea 7,3,6,2,6,1,2,2,2,2,0,1,0,27
+linea 8,4,6,4,5,5,2,2,3,0,2,2,0,35
+linea 9,2,0,7,4,1,2,1,3,0,0,0,0,20
+linea a,5,5,3,1,1,2,0,1,2,0,0,0,20
+linea b,6,4,7,1,7,5,1,2,1,3,1,0,38

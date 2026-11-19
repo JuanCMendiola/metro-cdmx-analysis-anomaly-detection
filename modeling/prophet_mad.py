@@ -11,12 +11,16 @@
 # Salidas:  master_auditoria_consenso_MAD.csv/.xlsx (raiz del repo),
 #           data/processed/prophet_series.pkl (insumo del modelo de riesgo del notebook),
 #           modeling/img_pronosticos/<linea>/<estacion>.png
+#           + copia de la corrida en historico/deteccion/ (ver historial.py)
 #
 # Correr con la raiz del repo como working directory:
 #   python modeling/prophet_mad.py
 
 import io
 import os
+import sys
+sys.path.insert(0, os.getcwd())   # historial.py vive en la raiz del repo
+from historial import registrar_corrida
 import re
 import unicodedata
 import pandas as pd
@@ -284,3 +288,20 @@ master_auditoria.to_excel('master_auditoria_consenso_MAD.xlsx', index=False)
 # Pronosticos de Prophet de todas las series (historico + DIAS_FUTURO dias futuros): insumo del modelo de riesgo (RF/XGBoost)
 os.makedirs('data/processed', exist_ok=True)
 series_prophet.to_pickle('data/processed/prophet_series.pkl')
+
+# Historial: copia de esta corrida (el master y los pronosticos pesan, van a historico_local/)
+conteo = series_prophet.loc[~series_prophet['es_futuro'], 'prioridad_auditoria'].value_counts()
+registrar_corrida(
+    'deteccion',
+    archivos_locales=['master_auditoria_consenso_MAD.csv', 'data/processed/prophet_series.pkl'],
+    metricas={
+        'estaciones': int(series_prophet[['linea', 'estacion']].drop_duplicates().shape[0]),
+        'fecha_inicio': str(df_limpio['fecha'].min().date()),
+        'fecha_fin': str(df_limpio['fecha'].max().date()),
+        'estacion_dias': int(conteo.sum()),
+        **{f'dias_{k}': int(v) for k, v in conteo.items()},
+    },
+    parametros={'umbral_z_mad': 3.5, 'ventana_mad': '5 mismos dias de la semana', 'umbral_cierre': UMBRAL_CIERRE,
+                'prophet_interval_width': 0.95, 'prophet_changepoint_prior_scale': 0.03,
+                'dias_futuro': DIAS_FUTURO, 'generar_graficas': GENERAR_GRAFICAS},
+)
