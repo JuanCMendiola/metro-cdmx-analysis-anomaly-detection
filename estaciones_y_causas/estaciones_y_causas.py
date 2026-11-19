@@ -26,6 +26,7 @@ os.makedirs(RES, exist_ok=True)
 
 MASTER = 'master_auditoria_consenso_MAD.csv'
 BITACORA = 'bitacora_investigacion_anomalias_criticas.csv'
+BITACORA_PRED = 'validacion_predicciones/datos/bitacora_validacion_predicciones_final.csv'   # OSINT de los dias en alerta 2026
 TOP_ESTACIONES = 15
 RUIDO = 'Falsa Alarma'   # causa que sirve de referencia: desviaciones sin evento identificado
 
@@ -170,6 +171,9 @@ tipo_causa['pct_de_registros'] = tipo_causa['registros'] / len(osint) * 100
 tipo_causa.round(1).to_csv(f'{RES}/causas_ciclicas_programadas_esporadicas.csv', index=False, encoding='utf-8-sig')
 tipo_linea = pd.crosstab(osint['linea'], osint['tipo_causa']).reindex(columns=TIPOS, fill_value=0)
 tipo_linea.loc['Toda la red'] = tipo_linea.sum()
+pred = pd.read_csv(BITACORA_PRED)
+pred_tipo = pred['Hallazgo_Principal'].str.strip().str.split(' (', regex=False).str[0].map(TIPO_CAUSA)
+tipo_linea.loc['Alertas de la predicción 2026'] = pred_tipo.value_counts().reindex(TIPOS, fill_value=0)
 tipo_linea_pct = tipo_linea.div(tipo_linea.sum(axis=1), axis=0) * 100
 tipo_linea.assign(total=tipo_linea.sum(axis=1)).to_csv(f'{RES}/tipo_de_causa_por_linea.csv', encoding='utf-8-sig')
 print(tipo_linea_pct.round(0).to_string())
@@ -199,10 +203,57 @@ plt.rcParams.update({'font.family': 'DejaVu Sans', 'figure.facecolor': FONDO, 'a
                      'text.color': TINTA, 'axes.labelcolor': TINTA2, 'xtick.color': TINTA2, 'ytick.color': TINTA,
                      'axes.edgecolor': REJILLA})
 
+# Colores de cada linea del Metro (nombres oficiales del STC; hex aproximados). La Linea B es verde y gris.
+COLOR_LINEA = {
+    'linea 1': '#E9468F',   # rosa mexicano
+    'linea 2': '#005EB8',   # azul
+    'linea 3': '#AF9800',   # verde olivo
+    'linea 4': '#6FBAB3',   # verde agua
+    'linea 5': '#FFD100',   # amarillo
+    'linea 6': '#DA291C',   # rojo
+    'linea 7': '#E87722',   # naranja
+    'linea 8': '#009A44',   # verde
+    'linea 9': '#6B3A25',   # cafe
+    'linea a': '#981D97',   # morado
+    'linea b': '#009A44',   # verde (con gris)
+    'linea 12': '#B99E51',  # dorado
+}
+GRIS_LINEA_B = '#A7A8AA'
+
+def barra_linea(ax, y, ancho, linea, alto=0.6, izquierda=0):
+    # Barra horizontal con el color de la linea; la Linea B se dibuja mitad verde, mitad gris.
+    if linea == 'linea b':
+        ax.barh(y + alto / 4, ancho, height=alto / 2, left=izquierda, color=COLOR_LINEA[linea])
+        ax.barh(y - alto / 4, ancho, height=alto / 2, left=izquierda, color=GRIS_LINEA_B)
+    else:
+        ax.barh(y, ancho, height=alto, left=izquierda, color=COLOR_LINEA[linea])
+
+def marcas_linea(ax, posiciones, lineas_fila, x=-0.008, ancho=0.012, alto=0.62):
+    # Cuadro de color de la linea junto a cada etiqueta del eje y.
+    from matplotlib.patches import Rectangle
+    tr = ax.get_yaxis_transform()
+    for yi, linea in zip(posiciones, lineas_fila):
+        if linea not in COLOR_LINEA:
+            continue
+        if linea == 'linea b':
+            arriba, abajo = (yi - alto / 2, yi) if ax.yaxis_inverted() else (yi, yi - alto / 2)   # verde arriba
+            ax.add_patch(Rectangle((x - ancho, arriba), ancho, alto / 2, transform=tr, color=COLOR_LINEA[linea], clip_on=False))
+            ax.add_patch(Rectangle((x - ancho, abajo), ancho, alto / 2, transform=tr, color=GRIS_LINEA_B, clip_on=False))
+        else:
+            ax.add_patch(Rectangle((x - ancho, yi - alto / 2), ancho, alto, transform=tr, color=COLOR_LINEA[linea], clip_on=False))
+    ax.tick_params(axis='y', pad=22)
+
 def limpiar_ejes(ax, ejes=('top', 'right', 'left')):
     for s in ejes:
         ax.spines[s].set_visible(False)
     ax.tick_params(length=0)
+
+DEF_CRITICO = 'Día crítico: Prophet y MAD coinciden en que la afluencia de la estación fue atípica (no incluye cierres).'
+DEF_OCULTA = 'Falla Oculta: la afluencia se comportó como en una falla, pero no hay reporte oficial del incidente.'
+FUENTE = 'Fuente: afluencia diaria de SEMOVI (datos.cdmx.gob.mx) y bitácora OSINT del proyecto.'
+
+def notas(fig, *lineas_texto):
+    fig.text(0.01, 0.012, '\n'.join(lineas_texto), fontsize=8.5, color=TINTA2, va='bottom')
 
 periodo = f"{pd.to_datetime(criticas['fecha']).min():%Y} a {pd.to_datetime(criticas['fecha']).max():%m/%Y}"
 
@@ -210,7 +261,8 @@ periodo = f"{pd.to_datetime(criticas['fecha']).min():%Y} a {pd.to_datetime(criti
 l = lineas.iloc[::-1]
 fig, ax = plt.subplots(figsize=(12, 7))
 y = np.arange(len(l))
-ax.barh(y, l['pasajeros_afectados_por_estacion'] / 1000, height=0.6, color=AZUL)
+for yi, (linea, f) in zip(y, l.iterrows()):
+    barra_linea(ax, yi, f['pasajeros_afectados_por_estacion'] / 1000, linea)
 for yi, (_, f) in zip(y, l.iterrows()):
     ax.text(f['pasajeros_afectados_por_estacion'] / 1000 + 6, yi,
             f"{f['dias_criticos']:.0f} días críticos · {f['pct_falsa_alarma_osint']:.0f}% falsas alarmas · causa principal: {f['causa_principal_osint']}",
@@ -223,9 +275,9 @@ limpiar_ejes(ax)
 fig.suptitle('¿Qué líneas son más conflictivas?', fontsize=15, fontweight='bold', x=0.01, ha='left')
 fig.text(0.01, 0.905, f'Anomalías críticas del detector, {periodo}. Se divide entre el número de estaciones para comparar líneas de distinto tamaño.',
          fontsize=10, color=TINTA2)
-fig.text(0.01, 0.015, 'Falsas alarmas y causa principal según la OSINT de la línea; la causa principal no cuenta las falsas alarmas.',
-         fontsize=9, color=TINTA2)
-fig.tight_layout(rect=(0, 0.03, 1, 0.9))
+notas(fig, 'Falsas alarmas y causa principal según la OSINT de cada línea; la causa principal no cuenta las falsas alarmas.',
+      DEF_CRITICO, DEF_OCULTA, FUENTE)
+fig.tight_layout(rect=(0, 0.09, 1, 0.9))
 fig.savefig(f'{IMG}/01_lineas_conflictivas.png', dpi=200)
 plt.close(fig)
 
@@ -243,13 +295,15 @@ ax.set_xticks(range(t.shape[1]))
 ax.set_xticklabels([textwrap.fill(c, 13) for c in t.columns], fontsize=9)
 ax.set_yticks(range(t.shape[0]))
 ax.set_yticklabels([f"{nombre_linea(i)}  (n = {lineas.loc[i, 'registros_osint']:.0f})" for i in t.index], fontsize=10)
+marcas_linea(ax, range(t.shape[0]), t.index, x=-0.004, ancho=0.008, alto=0.8)
 ax.set_xticks(np.arange(-.5, t.shape[1], 1), minor=True); ax.set_yticks(np.arange(-.5, t.shape[0], 1), minor=True)
 ax.grid(which='minor', color=FONDO, linewidth=2); ax.tick_params(which='both', length=0)
 for s in ax.spines.values(): s.set_visible(False)
 fig.suptitle('¿Por qué causas? Reparto de causas dentro de cada línea', fontsize=15, fontweight='bold', x=0.01, ha='left')
 fig.text(0.01, 0.92, f'Investigación OSINT de {len(osint)} anomalías críticas (muestra proporcional por línea). Cada fila suma 100%; n = registros investigados en la línea.',
          fontsize=10, color=TINTA2)
-fig.tight_layout(rect=(0, 0, 1, 0.91))
+notas(fig, DEF_OCULTA + ' Falsa Alarma: se investigó y no se encontró causa.', FUENTE)
+fig.tight_layout(rect=(0, 0.05, 1, 0.91))
 fig.savefig(f'{IMG}/02_causas_por_linea.png', dpi=200)
 plt.close(fig)
 
@@ -257,8 +311,9 @@ plt.close(fig)
 e = estaciones.head(TOP_ESTACIONES).iloc[::-1]
 fig, ax = plt.subplots(figsize=(13, 8))
 y = np.arange(len(e))
-ax.barh(y, e['pasajeros_en_caidas'] / 1e6, height=0.6, color=AZUL, label='Pasajeros de menos (caídas)')
-ax.barh(y, e['pasajeros_en_alzas'] / 1e6, left=e['pasajeros_en_caidas'] / 1e6, height=0.6, color=NARANJA,
+# Caidas y alzas en grises para no confundirse con los colores de las lineas
+ax.barh(y, e['pasajeros_en_caidas'] / 1e6, height=0.6, color='#4a4946', label='Pasajeros de menos (caídas)')
+ax.barh(y, e['pasajeros_en_alzas'] / 1e6, left=e['pasajeros_en_caidas'] / 1e6, height=0.6, color='#bdbcb6',
         label='Pasajeros de más (alzas)')
 for yi, (_, f) in zip(y, e.iterrows()):
     txt = f"{f['dias_criticos']:.0f} días críticos"
@@ -267,6 +322,7 @@ for yi, (_, f) in zip(y, e.iterrows()):
     ax.text(f['pasajeros_afectados'] / 1e6 + 0.02, yi, txt, va='center', fontsize=8.5, color=TINTA2)
 ax.set_yticks(y)
 ax.set_yticklabels([f'{nombre_estacion(est)} ({nombre_linea(lin)})' for lin, est in e.index], fontsize=10)
+marcas_linea(ax, y, [lin for lin, _ in e.index])
 ax.set_xlim(0, e['pasajeros_afectados'].max() / 1e6 * 2.1)
 ax.set_xlabel('Pasajeros afectados en días críticos (millones)')
 ax.xaxis.grid(True, color=REJILLA, linewidth=0.8); ax.set_axisbelow(True)
@@ -276,7 +332,8 @@ fig.suptitle(f'Las {TOP_ESTACIONES} estaciones con más pasajeros afectados por 
 fig.text(0.01, 0.915, f'Detector Prophet + MAD, {periodo}. Entre paréntesis, causas encontradas por la OSINT en esa estación (número de registros).',
          fontsize=10, color=TINTA2)
 fig.legend(loc='upper left', bbox_to_anchor=(0.005, 0.9), ncol=2, frameon=False, fontsize=10)
-fig.tight_layout(rect=(0, 0, 1, 0.86))
+notas(fig, 'Pasajeros afectados: suma de la diferencia entre la afluencia real y la esperada por Prophet en los días críticos.', DEF_CRITICO, DEF_OCULTA, FUENTE)
+fig.tight_layout(rect=(0, 0.08, 1, 0.86))
 fig.savefig(f'{IMG}/03_estaciones_conflictivas.png', dpi=200)
 plt.close(fig)
 
@@ -305,13 +362,13 @@ limpiar_ejes(ax)
 fig.suptitle('¿Cómo afecta cada causa a la afluencia?', fontsize=15, fontweight='bold', x=0.01, ha='left')
 fig.text(0.01, 0.915, 'Azul: cuando la causa bajó la afluencia. Naranja: cuando la subió. Entre paréntesis, número de registros OSINT. '
          'En gris, falsas alarmas como referencia.', fontsize=10, color=TINTA2)
-fig.text(0.01, 0.015, 'Solo incluye días que el detector marcó como críticos: mide cuánto se movió la afluencia cuando la causa sí produjo una anomalía, '
-         'no el efecto promedio de cada causa.', fontsize=9, color=TINTA2)
-fig.tight_layout(rect=(0, 0.04, 1, 0.9))
+notas(fig, 'Solo incluye días que el detector marcó como críticos: mide cuánto se movió la afluencia cuando la causa sí produjo una anomalía, '
+      'no el efecto promedio de cada causa.', DEF_OCULTA, FUENTE)
+fig.tight_layout(rect=(0, 0.07, 1, 0.9))
 fig.savefig(f'{IMG}/04_efecto_por_causa.png', dpi=200)
 plt.close(fig)
 # ---------- 05. Causas ciclicas, programadas y esporadicas por linea ----------
-t5 = tipo_linea_pct.loc[['Toda la red'] + list(lineas.index)].iloc[::-1]
+t5 = tipo_linea_pct.loc[['Alertas de la predicción 2026', 'Toda la red'] + list(lineas.index)].iloc[::-1]
 COLOR_TIPO = {'Cíclica': AZUL, 'Programada': '#9ec5f4', 'Esporádica': NARANJA, 'Falsa alarma': '#d6d5d0'}
 TINTA_TIPO = {'Cíclica': 'white', 'Programada': TINTA, 'Esporádica': TINTA, 'Falsa alarma': TINTA}
 ETIQ_TIPO = {'Cíclica': 'Cíclica (feriados, lluvias, contingencias)', 'Programada': 'Programada (eventos, cierres, elecciones)',
@@ -327,18 +384,21 @@ for tipo in TIPOS:
             ax.text(li + vi / 2, yi, f'{vi:.0f}%', ha='center', va='center', fontsize=9, color=TINTA_TIPO[tipo])
     izq += v
 ax.set_yticks(y)
-ax.set_yticklabels([('Toda la red' if i == 'Toda la red' else nombre_linea(i)) + f"  (n = {tipo_linea.loc[i].sum()})" for i in t5.index],
+ax.set_yticklabels([(i if not i.startswith('linea') else nombre_linea(i)) + f"  (n = {tipo_linea.loc[i].sum()})" for i in t5.index],
                    fontsize=10)
+marcas_linea(ax, y, t5.index)
 for lbl in ax.get_yticklabels():
-    if lbl.get_text().startswith('Toda'):
+    if not lbl.get_text().startswith('Línea'):
         lbl.set_fontweight('bold')
 ax.set_xlim(0, 100); ax.set_xticks([0, 25, 50, 75, 100]); ax.set_xticklabels(['0%', '25%', '50%', '75%', '100%'])
 limpiar_ejes(ax, ('top', 'right', 'left', 'bottom'))
 fig.suptitle('¿Qué parte de las anomalías se puede prevenir?', fontsize=15, fontweight='bold', x=0.01, ha='left')
-fig.text(0.01, 0.905, 'Causas de la OSINT histórica agrupadas por si se repiten con el calendario, se anuncian antes o son imprevistas. '
+fig.text(0.01, 0.905, 'Causas encontradas por la OSINT, agrupadas por si se repiten con el calendario, se anuncian antes o son imprevistas. '
          'Líneas ordenadas por pasajeros afectados.', fontsize=10, color=TINTA2)
 fig.legend(loc='upper left', bbox_to_anchor=(0.005, 0.89), ncol=4, frameon=False, fontsize=9.5)
-fig.tight_layout(rect=(0, 0, 1, 0.87))
+notas(fig, 'Histórico: 371 anomalías críticas 2022 a mar-2026. Predicción: 79 días que el modelo XGBoost marcó en alerta, ago a nov 2026.',
+      'Cíclica: se repite con el calendario. Programada: se anuncia con anticipación. Esporádica: no se puede anticipar.', FUENTE)
+fig.tight_layout(rect=(0, 0.07, 1, 0.87))
 fig.savefig(f'{IMG}/05_causas_ciclicas_y_esporadicas.png', dpi=200)
 plt.close(fig)
 print(f'Gráficas guardadas en {IMG}/ y tablas en {RES}/')

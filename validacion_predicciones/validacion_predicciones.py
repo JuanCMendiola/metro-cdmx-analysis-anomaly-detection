@@ -194,6 +194,8 @@ MESES = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', '
 fin_hist = hist['fecha'].max()
 periodo_hist = f"{hist['fecha'].min().year} a {MESES[fin_hist.month - 1].lower()} {fin_hist.year}"
 
+FUENTE = 'Fuente: bitácoras OSINT del proyecto (búsqueda manual de noticias) y afluencia diaria de SEMOVI (datos.cdmx.gob.mx).'
+
 # ---------- 01. Clasificacion de causas: % del historico vs % de la prediccion ----------
 ch = hist['causa'].value_counts().reindex(orden, fill_value=0)
 cp = pr['causa'].value_counts().reindex(orden, fill_value=0)
@@ -215,7 +217,10 @@ for s in ('top', 'right', 'left'): ax.spines[s].set_visible(False)
 ax.tick_params(axis='y', length=0)
 fig.suptitle('Clasificación de causas (OSINT): histórico vs predicción', fontsize=15, fontweight='bold', x=0.01, ha='left')
 fig.legend(loc='upper left', bbox_to_anchor=(0.005, 0.945), ncol=2, frameon=False, fontsize=10)
-fig.tight_layout(rect=(0, 0, 1, 0.93))
+fig.text(0.01, 0.012, 'Histórico: muestra de las anomalías críticas que detectó el modelo Prophet + MAD. Predicción: muestra de los días que el modelo XGBoost marcó en alerta.\n'
+         'Falsa Alarma: se investigó y no se encontró causa. Falla Oculta: la afluencia se comportó como en una falla, pero no hay reporte oficial.\n' + FUENTE,
+         fontsize=8.5, color=TINTA2, va='bottom')
+fig.tight_layout(rect=(0, 0.07, 1, 0.93))
 fig.savefig(f'{IMG}/01_causas_historico_vs_prediccion.png', dpi=200)
 plt.close(fig)
 
@@ -248,9 +253,10 @@ mapa(a1, th, MESES, f'Anomalías críticas históricas, {periodo_hist}\n(n = {le
 mapa(a2, tp, [MESES[m - 1] for m in meses_pred], f'Alertas de la predicción, 2026\n(n = {len(pr)})', False)
 fig.suptitle('Calendario de riesgo (estacionalidad de anomalías por causa): histórico vs predicción',
              fontsize=15, fontweight='bold', x=0.01, ha='left')
-fig.text(0.01, 0.01, 'Cada celda es el número de registros investigados. Cada panel tiene su propia escala de color (más oscuro = más registros dentro de ese panel).',
-         fontsize=9, color=TINTA2)
-fig.subplots_adjust(left=0.27, right=0.99, top=0.84, bottom=0.12)
+fig.text(0.01, 0.012, 'Cada celda es el número de registros investigados. Cada panel tiene su propia escala de color (más oscuro = más registros dentro de ese panel).\n'
+         'Izquierda: anomalías críticas que ya ocurrieron. Derecha: días que el modelo XGBoost marcó en alerta (meses que el modelo no vio).\n' + FUENTE,
+         fontsize=9, color=TINTA2, va='bottom')
+fig.subplots_adjust(left=0.27, right=0.99, top=0.84, bottom=0.16)
 fig.savefig(f'{IMG}/02_calendario_riesgo_historico_vs_prediccion.png', dpi=200)
 plt.close(fig)
 
@@ -282,9 +288,11 @@ fig.suptitle('¿Qué encontramos en los días que el modelo marcó en alerta?', 
 fig.text(0.01, 0.90, f'Búsqueda manual de noticias (OSINT) en {len(pred)} estación-días en alerta, ago a nov 2026, según el nivel de riesgo que les dio el modelo',
          fontsize=10, color=TINTA2)
 fig.legend(loc='upper left', bbox_to_anchor=(0.005, 0.88), ncol=4, frameon=False, fontsize=10)
-fig.text(0.01, 0.02, f'Los días de riesgo alto son solo {fechas_alto} fechas: 16 de septiembre (Independencia) y 2 de noviembre (Día de Muertos).',
-         fontsize=9, color=TINTA2)
-fig.tight_layout(rect=(0, 0.05, 1, 0.8))
+fig.text(0.01, 0.012, 'Nivel de riesgo según la probabilidad de anomalía crítica que dio el modelo: alto = el 10% de días en alerta con mayor probabilidad, '
+         'medio = el siguiente 15%, bajo = el resto.\n'
+         f'Los días de riesgo alto son solo {fechas_alto} fechas: 16 de septiembre (Independencia) y 2 de noviembre (Día de Muertos).\n' + FUENTE,
+         fontsize=9, color=TINTA2, va='bottom')
+fig.tight_layout(rect=(0, 0.11, 1, 0.8))
 fig.savefig(f'{IMG}/03_osint_por_nivel_de_riesgo.png', dpi=200)
 plt.close(fig)
 
@@ -315,8 +323,10 @@ fig.text(0.01, 0.90, f'Afluencia real (SEMOVI) en {int(g["count"].sum())} estaci
 nota = 'Anormal = anomalía crítica: la afluencia salió del rango esperado y se alejó de su patrón semanal reciente.'
 if alto_16:
     nota += f'\nLos {int(g.loc["A - Alta", "count"])} días de riesgo alto son del 16 de septiembre (Independencia), cuando la afluencia cayó en toda la red.'
-fig.text(0.01, 0.02, nota, fontsize=9, color=TINTA2)
-fig.tight_layout(rect=(0, 0.08, 1, 0.9))
+nota += ('\nRiesgo alto, medio y bajo: probabilidad de anomalía crítica que dio el modelo (10% más alto, siguiente 15%, resto).\n'
+         'Fuente: afluencia diaria de SEMOVI (datos.cdmx.gob.mx).')
+fig.text(0.01, 0.012, nota, fontsize=9, color=TINTA2, va='bottom')
+fig.tight_layout(rect=(0, 0.14, 1, 0.9))
 fig.savefig(f'{IMG}/04_afluencia_real_por_nivel_de_riesgo.png', dpi=200)
 plt.close(fig)
 print(f'Gráficas guardadas en {IMG}/ y tablas en {RES}/')
