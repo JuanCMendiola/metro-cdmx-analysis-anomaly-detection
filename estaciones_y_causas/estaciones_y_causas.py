@@ -10,6 +10,7 @@
 
 # %%
 import os
+import sys
 import textwrap
 import numpy as np
 import pandas as pd
@@ -17,6 +18,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
+sys.path.insert(0, os.getcwd())   # historial.py vive en la raiz del repo
+from historial import registrar_corrida
 
 CARPETA = 'estaciones_y_causas'
 IMG = f'{CARPETA}/img'
@@ -402,3 +405,12 @@ fig.tight_layout(rect=(0, 0.07, 1, 0.87))
 fig.savefig(f'{IMG}/05_causas_ciclicas_y_esporadicas.png', dpi=200)
 plt.close(fig)
 print(f'Gráficas guardadas en {IMG}/ y tablas en {RES}/')
+
+# Historial: tablas a historico/ (git) y graficas a historico_local/
+registrar_corrida(
+    'estaciones_y_causas',
+    archivos=sorted(f'{RES}/{f}' for f in os.listdir(RES) if f.endswith('.csv')),
+    archivos_locales=sorted(f'{IMG}/{f}' for f in os.listdir(IMG) if f.endswith('.png')),
+    metricas={'lineas_mas_afectadas_por_estacion': lineas.index[:3].tolist(),
+              'anomalias_osint': len(osint)},
+)

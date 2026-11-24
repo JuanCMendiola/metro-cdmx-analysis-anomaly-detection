@@ -1,0 +1,28 @@
+{
+  "id": "2026-11-19_145732",
+  "etapa": "modelo_riesgo",
+  "fecha_hora": "2026-11-19T14:57:32-06:00",
+  "commit": "443a96a",
+  "rama": "claude/project-thread-37hjdq",
+  "codigo_sin_commit": [],
+  "python": "3.13.18",
+  "parametros": {},
+  "metricas": {},
+  "nota": "Corrida inicial importada: archivos vigentes en main al 19-nov-2026 (no se volvió a correr el notebook)",
+  "archivos": [
+    {
+      "ruta": "propuesta_anomalias_futuras.csv",
+      "bytes": 2994,
+      "sha256": "ab86a2e0b82c62159a0ff43d2b07b6fc1f6f16f15a800a86a3dce3508a8d6f47",
+      "local": false,
+      "copia": "historico/modelo_riesgo/2026-11-19_145732/propuesta_anomalias_futuras.csv"
+    },
+    {
+      "ruta": "propuesta_anomalias_futuras.xlsx",
+      "bytes": 111957,
+      "sha256": "a2c4926e428483e2719258bb105f23145ddb679dad802875726b9f26ddba29e2",
+      "local": false,
+      "copia": "historico/modelo_riesgo/2026-11-19_145732/propuesta_anomalias_futuras.xlsx"
+    }
+  ]
+}

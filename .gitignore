@@ -227,3 +227,6 @@ feature_engineering/img/*.png
 !feature_engineering/img/.gitkeep
 modeling/img_sarima_backup/*.png
 !modeling/img_sarima_backup/.gitkeep
+# Historial de corridas: las copias pesadas (master, pickles, series, graficas) se quedan
+# en la maquina de quien corre el pipeline; historico/ (manifiestos y tablas) si se sube
+historico_local/
