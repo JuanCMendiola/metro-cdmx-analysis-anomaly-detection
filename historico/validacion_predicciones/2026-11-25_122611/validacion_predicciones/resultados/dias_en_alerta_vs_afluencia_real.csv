@@ -1,0 +1,231 @@
+﻿fecha,linea,estacion,estrato,prob_critica,riesgo_vs_mismo_dia,afluencia_esperada_prophet,yhat_lower,yhat_upper,afluencia_real_semovi,dif_vs_esperada_pct,zscore_robusto,etiqueta
+2026-08-02,linea 4,consulado,C - Control,0.064,2.593,2145.277,1774.928,2613.181,2058,-4.1,0.79,Normal
+2026-08-03,linea 4,consulado,C - Control,0.072,2.652,3385.398,2803.357,4084.312,3288,-2.9,-2.2,Normal
+2026-08-03,linea 4,santa anita,C - Control,0.055,2.007,1868.296,1394.391,2534.736,1777,-4.9,-0.76,Normal
+2026-08-04,linea 4,consulado,C - Control,0.058,2.394,3542.887,2913.514,4355.849,3393,-4.2,0.12,Normal
+2026-08-04,linea 4,santa anita,C - Control,0.058,2.379,1987.938,1497.606,2634.708,1817,-8.6,-0.04,Normal
+2026-08-04,linea 8,garibaldi/lagunilla,C - Control,0.055,2.249,12924.288,10689.515,15680.002,13695,6.0,0.89,Normal
+2026-08-05,linea 4,consulado,C - Control,0.065,2.088,3608.628,2946.452,4399.562,3398,-5.8,-1.28,Normal
+2026-08-06,linea 4,consulado,C - Control,0.081,3.325,3641.582,3009.299,4441.986,3354,-7.9,-48000000.0,MEDIA (Solo MAD)
+2026-08-06,linea 4,santa anita,C - Control,0.066,2.678,2049.687,1565.276,2719.863,1800,-12.2,-1.53,Normal
+2026-08-08,linea 4,consulado,B - Media,0.083,2.621,3166.535,2602.145,3844.604,3100,-2.1,1.34,Normal
+2026-08-08,linea 4,santa anita,C - Control,0.077,2.427,2038.929,1538.334,2700.173,2023,-0.8,0.86,Normal
+2026-08-09,linea 4,consulado,B - Media,0.085,3.454,2277.767,1861.671,2753.199,2058,-9.6,0.0,Normal
+2026-08-09,linea 4,santa anita,C - Control,0.071,2.894,1594.045,1187.722,2136.016,1254,-21.3,-3.6,MEDIA (Solo MAD)
+2026-08-09,linea 9,ciudad deportiva,C - Control,0.059,2.402,5515.387,2822.508,10428.36,4445,-19.4,1.15,Normal
+2026-08-09,linea 9,chabacano,C - Control,0.057,2.33,6040.329,4260.188,8650.392,3823,-36.7,2.94,ALTA (Solo Prophet)
+2026-08-09,linea 8,garibaldi/lagunilla,C - Control,0.054,2.183,9460.421,7909.515,11480.885,10476,10.7,-0.27,Normal
+2026-08-10,linea 4,santa anita,B - Media,0.093,3.393,2013.126,1531.951,2717.482,1846,-8.3,0.86,Normal
+2026-08-10,linea 4,consulado,C - Control,0.081,2.98,3592.441,2965.396,4333.473,3191,-11.2,-2.11,Normal
+2026-08-10,linea 9,chabacano,C - Control,0.059,2.175,12049.717,8342.159,17278.273,8234,-31.7,1.06,ALTA (Solo Prophet)
+2026-08-11,linea 4,santa anita,C - Control,0.078,3.207,2141.939,1604.132,2878.593,1778,-17.0,-1.38,Normal
+2026-08-11,linea 4,consulado,C - Control,0.071,2.933,3754.868,3074.951,4594.659,3348,-10.8,-0.42,Normal
+2026-08-11,linea 9,ciudad deportiva,C - Control,0.064,2.658,7033.113,3598.17,13046.048,6178,-12.2,-2.0,Normal
+2026-08-11,linea 9,chabacano,C - Control,0.059,2.453,12968.515,9030.856,18771.559,8379,-35.4,-0.77,ALTA (Solo Prophet)
+2026-08-11,linea 8,garibaldi/lagunilla,C - Control,0.057,2.348,12824.136,10500.372,15330.302,14717,14.8,0.77,Normal
+2026-08-12,linea 4,santa anita,B - Media,0.089,2.85,2152.978,1628.646,2874.278,1743,-19.0,-1.95,Normal
+2026-08-12,linea 4,consulado,B - Media,0.083,2.658,3817.235,3167.69,4690.032,3237,-15.2,-6.32,MEDIA (Solo MAD)
+2026-08-13,linea 4,consulado,C - Control,0.08,3.259,3842.335,3189.335,4631.374,3467,-9.8,5.19,MEDIA (Solo MAD)
+2026-08-13,linea 4,santa anita,C - Control,0.08,3.255,2202.446,1638.39,2980.916,1909,-13.3,1.78,Normal
+2026-08-13,linea 9,chabacano,C - Control,0.066,2.678,13651.812,9836.164,19385.435,8650,-36.6,-0.4,ALTA (Solo Prophet)
+2026-08-13,linea 9,ciudad deportiva,C - Control,0.065,2.664,8007.4,4312.92,15043.429,6925,-13.5,-1.6,Normal
+2026-08-13,linea 8,garibaldi/lagunilla,C - Control,0.051,2.104,13166.059,10756.018,15876.932,9572,-27.3,-8.9,CRÍTICA (Consenso)
+2026-08-14,linea 4,santa anita,B - Media,0.088,2.117,2206.36,1616.253,2927.269,1789,-18.9,-0.33,Normal
+2026-08-15,linea 4,consulado,B - Media,0.088,2.791,3318.69,2723.827,4042.784,3086,-7.0,0.87,Normal
+2026-08-15,linea 4,santa anita,C - Control,0.079,2.505,2177.394,1618.347,2928.994,2008,-7.8,0.61,Normal
+2026-08-15,linea 9,ciudad deportiva,C - Control,0.071,2.256,9560.472,5036.108,17711.045,13031,36.3,-0.41,Normal
+2026-08-15,linea 9,chabacano,C - Control,0.07,2.207,12965.42,8956.966,18795.013,7901,-39.1,-0.03,ALTA (Solo Prophet)
+2026-08-16,linea 4,santa anita,B - Media,0.09,3.664,1695.018,1280.127,2215.48,1556,-8.2,3.44,Normal
+2026-08-16,linea 4,consulado,B - Media,0.086,3.49,2377.544,1922.923,2872.521,2045,-14.0,-0.24,Normal
+2026-08-16,linea 9,chabacano,C - Control,0.066,2.699,6698.326,4793.107,9641.038,3751,-44.0,1.34,ALTA (Solo Prophet)
+2026-08-16,linea 9,ciudad deportiva,C - Control,0.061,2.475,6371.175,3276.869,12909.71,7351,15.4,7.02,MEDIA (Solo MAD)
+2026-08-16,linea 8,chabacano,C - Control,0.054,2.186,2736.608,2091.091,3560.467,2016,-26.3,2.02,ALTA (Solo Prophet)
+2026-08-17,linea 4,consulado,B - Media,0.098,3.602,3733.199,3068.783,4555.391,3386,-9.3,3.79,MEDIA (Solo MAD)
+2026-08-17,linea 4,santa anita,C - Control,0.08,2.948,2129.915,1547.054,2872.409,1104,-48.2,-14.31,CRÍTICA (Consenso)
+2026-08-17,linea 9,chabacano,C - Control,0.077,2.82,13293.492,9229.575,19001.826,8516,-35.9,2.86,ALTA (Solo Prophet)
+2026-08-17,linea 9,ciudad deportiva,C - Control,0.075,2.759,7506.193,3689.625,13908.75,15217,102.7,3.03,ALTA (Solo Prophet)
+2026-08-17,linea 8,chabacano,C - Control,0.072,2.625,5084.109,3876.583,6589.495,3732,-26.6,0.38,ALTA (Solo Prophet)
+2026-08-17,linea 8,garibaldi/lagunilla,C - Control,0.055,2.028,12443.849,10318.543,14954.721,14182,14.0,0.66,Normal
+2026-08-18,linea 4,santa anita,B - Media,0.09,3.72,2253.396,1690.191,3011.251,695,-69.2,-36.04,CRÍTICA (Consenso)
+2026-08-18,linea 4,consulado,B - Media,0.088,3.643,3883.621,3203.463,4733.292,3480,-10.4,2.51,Normal
+2026-08-18,linea 9,chabacano,C - Control,0.081,3.356,14214.267,10022.675,20517.77,8757,-38.4,3.0,ALTA (Solo Prophet)
+2026-08-18,linea 9,ciudad deportiva,C - Control,0.066,2.705,8062.993,4223.518,16704.87,6222,-22.8,-1.93,Normal
+2026-08-18,linea 8,chabacano,C - Control,0.065,2.691,5387.406,4136.648,6886.213,3707,-31.2,-150000000.0,CRÍTICA (Consenso)
+2026-08-18,linea 8,garibaldi/lagunilla,C - Control,0.054,2.211,12820.411,10524.071,15344.419,14387,12.2,0.28,Normal
+2026-08-19,linea 4,santa anita,B - Media,0.089,2.849,2250.96,1682.397,2984.593,1895,-15.8,0.85,Normal
+2026-08-19,linea 4,consulado,B - Media,0.087,2.788,3928.743,3187.418,4759.376,3352,-14.7,-1.63,Normal
+2026-08-19,linea 9,chabacano,B - Media,0.084,2.708,14561.819,9932.619,20832.758,8782,-39.7,4.6,CRÍTICA (Consenso)
+2026-08-19,linea 9,ciudad deportiva,C - Control,0.08,2.577,8869.011,4823.544,16858.499,5805,-34.5,-0.55,Normal
+2026-08-19,linea 8,chabacano,C - Control,0.067,2.159,5615.031,4290.128,7342.244,3531,-37.1,-6.46,CRÍTICA (Consenso)
+2026-08-20,linea 4,santa anita,B - Media,0.09,3.698,2287.351,1717.839,3029.732,1821,-20.4,-0.65,Normal
+2026-08-20,linea 4,consulado,B - Media,0.083,3.394,3934.696,3185.933,4801.145,3459,-12.1,2.96,Normal
+2026-08-20,linea 9,chabacano,C - Control,0.082,3.371,14717.931,10143.096,21168.726,8643,-41.3,-0.02,ALTA (Solo Prophet)
+2026-08-20,linea 9,ciudad deportiva,C - Control,0.08,3.278,9019.858,4785.349,17316.095,5854,-35.1,-2.89,Normal
+2026-08-20,linea 8,chabacano,C - Control,0.066,2.708,5509.607,4271.844,7104.322,3740,-32.1,-0.38,ALTA (Solo Prophet)
+2026-08-20,linea 8,garibaldi/lagunilla,C - Control,0.051,2.066,13188.658,11004.604,15836.084,15276,15.8,0.63,Normal
+2026-08-21,linea 4,santa anita,B - Media,0.086,2.082,2275.373,1689.542,2975.57,1989,-12.6,1.73,Normal
+2026-08-21,linea 9,ciudad deportiva,B - Media,0.086,2.076,10029.499,5242.363,19095.599,5750,-42.7,-3.75,MEDIA (Solo MAD)
+2026-08-22,linea 9,ciudad deportiva,B - Media,0.093,2.937,10494.425,5360.517,19404.691,5391,-48.6,-2.24,Normal
+2026-08-22,linea 9,chabacano,C - Control,0.082,2.586,13700.974,9760.602,19838.113,8027,-41.4,0.32,ALTA (Solo Prophet)
+2026-08-22,linea 4,santa anita,C - Control,0.078,2.476,2229.265,1676.194,2966.98,1946,-12.7,-0.23,Normal
+2026-08-22,linea 4,consulado,C - Control,0.067,2.132,3364.292,2741.125,4049.727,2999,-10.9,-0.16,Normal
+2026-08-22,linea 8,chabacano,C - Control,0.067,2.118,5894.78,4473.597,7496.45,4290,-27.2,-8.18,CRÍTICA (Consenso)
+2026-08-23,linea 9,ciudad deportiva,B - Media,0.084,3.4,6887.827,3682.197,13149.75,3645,-47.1,-1.07,ALTA (Solo Prophet)
+2026-08-23,linea 4,consulado,C - Control,0.072,2.946,2398.409,1972.456,2928.852,2079,-13.3,1.09,Normal
+2026-08-23,linea 8,chabacano,C - Control,0.067,2.737,2846.689,2220.906,3720.859,2044,-28.2,2.65,ALTA (Solo Prophet)
+2026-08-23,linea 9,chabacano,C - Control,0.067,2.709,7002.351,4944.021,10373.099,3569,-49.0,-0.52,ALTA (Solo Prophet)
+2026-08-23,linea 4,santa anita,C - Control,0.064,2.586,1722.664,1256.325,2288.511,1490,-13.5,0.6,Normal
+2026-08-24,linea 9,ciudad deportiva,B - Media,0.095,3.486,7983.843,4328.101,14806.37,5106,-36.0,-0.52,Normal
+2026-08-24,linea 9,chabacano,C - Control,0.081,2.964,13744.498,9811.416,19622.6,8388,-39.0,1.28,ALTA (Solo Prophet)
+2026-08-24,linea 4,santa anita,C - Control,0.068,2.509,2148.786,1589.421,2844.798,1889,-12.1,1.8,Normal
+2026-08-24,linea 8,chabacano,C - Control,0.066,2.438,5261.976,3974.099,6836.913,3692,-29.8,0.49,ALTA (Solo Prophet)
+2026-08-24,linea 4,consulado,C - Control,0.06,2.216,3748.216,3095.677,4526.786,3546,-5.4,1.29,Normal
+2026-08-25,linea 9,ciudad deportiva,B - Media,0.086,3.529,8432.298,4506.534,16365.576,5182,-38.5,-1.25,Normal
+2026-08-25,linea 9,chabacano,C - Control,0.082,3.376,14535.513,10250.341,20214.755,8630,-40.6,0.67,ALTA (Solo Prophet)
+2026-08-25,linea 8,chabacano,C - Control,0.068,2.802,5546.132,4235.941,7164.867,3753,-32.3,-104000000.0,CRÍTICA (Consenso)
+2026-08-25,linea 4,santa anita,C - Control,0.063,2.62,2257.001,1693.486,3022.999,1801,-20.2,0.4,Normal
+2026-08-25,linea 4,consulado,C - Control,0.054,2.23,3881.848,3203.37,4722.626,3557,-8.4,1.7,Normal
+2026-08-25,linea 8,garibaldi/lagunilla,C - Control,0.052,2.131,12877.997,10709.164,15543.782,14811,15.0,0.28,Normal
+2026-08-26,linea 9,ciudad deportiva,B - Media,0.085,2.717,9117.892,4674.553,18265.414,5771,-36.7,-0.79,Normal
+2026-08-26,linea 9,chabacano,C - Control,0.078,2.507,14731.245,10502.509,21447.385,9142,-37.9,12.92,CRÍTICA (Consenso)
+2026-08-26,linea 8,chabacano,C - Control,0.063,2.035,5748.495,4492.216,7650.448,3870,-32.7,-1.16,ALTA (Solo Prophet)
+2026-08-27,linea 9,ciudad deportiva,B - Media,0.083,3.382,9117.725,4808.217,17968.842,5454,-40.2,-1.34,Normal
+2026-08-27,linea 9,chabacano,C - Control,0.077,3.167,14736.211,10291.036,21228.501,9004,-38.9,361000000.0,CRÍTICA (Consenso)
+2026-08-27,linea 8,chabacano,C - Control,0.068,2.763,5608.918,4285.241,7249.003,3661,-34.7,-1.72,ALTA (Solo Prophet)
+2026-08-27,linea 4,santa anita,C - Control,0.061,2.489,2260.095,1708.668,2978.716,1869,-17.3,0.88,Normal
+2026-08-28,linea 9,ciudad deportiva,B - Media,0.094,2.276,9975.001,5267.91,18475.349,9301,-6.8,-1.68,Normal
+2026-08-29,linea 9,ciudad deportiva,C - Control,0.079,2.487,10279.953,5397.327,20157.759,8067,-21.5,-1.38,Normal
+2026-08-29,linea 9,chabacano,C - Control,0.072,2.294,13466.752,9590.783,19009.922,8300,-38.4,2.26,ALTA (Solo Prophet)
+2026-08-30,linea 9,ciudad deportiva,C - Control,0.078,3.164,6654.619,3475.649,12498.524,11472,72.4,16.01,MEDIA (Solo MAD)
+2026-08-30,linea 9,chabacano,C - Control,0.058,2.37,6829.113,4739.96,9697.716,3981,-41.7,2.84,ALTA (Solo Prophet)
+2026-08-30,linea 8,chabacano,C - Control,0.057,2.305,2851.4,2203.541,3745.678,1958,-31.3,-1.4,ALTA (Solo Prophet)
+2026-08-31,linea 9,ciudad deportiva,C - Control,0.072,2.649,7621.021,4068.405,14531.472,15101,98.1,3.01,ALTA (Solo Prophet)
+2026-08-31,linea 9,chabacano,C - Control,0.062,2.287,13315.535,9426.254,19203.519,8639,-35.1,2.35,ALTA (Solo Prophet)
+2026-08-31,linea 8,chabacano,C - Control,0.057,2.088,5245.376,4007.433,6831.299,3752,-28.5,1.05,ALTA (Solo Prophet)
+2026-09-01,linea 9,chabacano,C - Control,0.054,2.221,14005.992,9744.428,20360.602,9149,-34.7,2.27,ALTA (Solo Prophet)
+2026-09-01,linea 8,chabacano,C - Control,0.051,2.117,5504.627,4193.167,7241.552,4053,-26.4,300000000.0,CRÍTICA (Consenso)
+2026-09-01,linea 9,ciudad deportiva,C - Control,0.051,2.092,7968.503,4291.658,15646.792,5296,-33.5,-0.51,Normal
+2026-09-03,linea 9,ciudad deportiva,C - Control,0.056,2.296,8502.211,4641.11,16033.734,7176,-15.6,1.21,Normal
+2026-09-03,linea 8,chabacano,C - Control,0.053,2.156,5528.137,4341.555,7160.684,3991,-27.8,3.32,ALTA (Solo Prophet)
+2026-09-03,linea 9,chabacano,C - Control,0.052,2.122,14103.473,9606.129,20174.849,9466,-32.9,816000000.0,CRÍTICA (Consenso)
+2026-09-06,linea 9,ciudad deportiva,C - Control,0.054,2.19,6194.817,3208.884,11827.129,4687,-24.3,0.33,Normal
+2026-09-06,linea 9,chabacano,C - Control,0.052,2.108,6535.863,4653.717,9381.537,3751,-42.6,0.0,ALTA (Solo Prophet)
+2026-09-06,linea 8,chabacano,C - Control,0.051,2.059,2795.239,2137.378,3664.791,1976,-29.3,1.1,ALTA (Solo Prophet)
+2026-09-07,linea 9,ciudad deportiva,C - Control,0.061,2.225,7124.11,3570.26,13069.089,5189,-27.2,-3.48,Normal
+2026-09-07,linea 8,chabacano,C - Control,0.057,2.08,5140.444,3965.228,6728.134,4129,-19.7,4.61,MEDIA (Solo MAD)
+2026-09-08,linea 9,ciudad deportiva,C - Control,0.061,2.517,7495.957,3948.323,14136.591,5552,-25.9,-0.35,Normal
+2026-09-08,linea 8,chabacano,C - Control,0.052,2.13,5396.768,4137.317,6956.07,4120,-23.7,263000000.0,CRÍTICA (Consenso)
+2026-09-08,linea 9,chabacano,C - Control,0.052,2.127,13486.557,9028.483,19059.862,9368,-30.5,2.26,Normal
+2026-09-10,linea 9,ciudad deportiva,C - Control,0.061,2.494,8142.891,4248.262,15140.518,5594,-31.3,-0.16,Normal
+2026-09-10,linea 9,chabacano,C - Control,0.055,2.254,13714.773,9532.876,19515.931,9108,-33.6,311000000.0,CRÍTICA (Consenso)
+2026-09-10,linea 8,chabacano,C - Control,0.054,2.226,5435.723,4248.901,7142.281,4065,-25.2,3.62,CRÍTICA (Consenso)
+2026-09-13,linea 9,ciudad deportiva,C - Control,0.063,2.573,6147.549,3265.791,11390.686,11463,86.5,9.31,CRÍTICA (Consenso)
+2026-09-13,linea 9,chabacano,C - Control,0.059,2.388,6476.816,4496.492,9334.007,4107,-36.6,2.33,ALTA (Solo Prophet)
+2026-09-13,linea 8,chabacano,C - Control,0.055,2.236,2772.882,2122.228,3645.295,2078,-25.1,7.64,CRÍTICA (Consenso)
+2026-09-14,linea 8,chabacano,C - Control,0.062,2.265,5118.918,3879.178,6543.306,3859,-24.6,0.79,ALTA (Solo Prophet)
+2026-09-14,linea 9,chabacano,C - Control,0.06,2.186,12744.89,8864.59,17696.169,8472,-33.5,-0.12,ALTA (Solo Prophet)
+2026-09-14,linea 9,ciudad deportiva,C - Control,0.06,2.184,7159.884,3699.737,13721.058,5588,-22.0,-0.74,Normal
+2026-09-14,linea 8,garibaldi/lagunilla,C - Control,0.058,2.131,12411.209,10436.242,15028.712,5417,-56.4,-3.31,ALTA (Solo Prophet)
+2026-09-15,linea 9,velódromo,B - Media,0.11,4.558,4477.141,2290.939,8269.908,5170,15.5,-62.82,MEDIA (Solo MAD)
+2026-09-15,linea 6,lindavista,B - Media,0.101,4.18,11800.295,8716.676,16148.875,9481,-19.7,-2.81,Normal
+2026-09-15,linea 9,ciudad deportiva,B - Media,0.086,3.536,5327.449,2839.775,9944.85,4976,-6.6,-0.37,Normal
+2026-09-15,linea 1,cuauhtémoc,C - Control,0.08,3.298,13622.739,10318.384,17664.867,13228,-2.9,-2.74,Normal
+2026-09-15,linea b,ecatepec,C - Control,0.075,3.102,18661.037,14937.036,22684.906,18236,-2.3,-2.63,Normal
+2026-09-15,linea 3,juárez,C - Control,0.071,2.95,10823.888,7984.722,14815.677,10425,-3.7,-12.25,MEDIA (Solo MAD)
+2026-09-15,linea b,deportivo oceanía,C - Control,0.066,2.706,9847.545,7867.543,12412.211,8389,-14.8,-2.23,Normal
+2026-09-15,linea 8,garibaldi/lagunilla,C - Control,0.063,2.594,12500.855,10398.788,15214.883,13332,6.6,-2.17,Normal
+2026-09-15,linea 7,constituyentes,C - Control,0.062,2.549,11435.38,8235.195,16331.543,10630,-7.0,-3.61,MEDIA (Solo MAD)
+2026-09-15,linea 1,juanacatlán,C - Control,0.059,2.421,5376.702,4155.976,7016.295,6054,12.6,-8.13,MEDIA (Solo MAD)
+2026-09-15,linea 2,zócalo/tenochtitlan,C - Control,0.057,2.37,22548.675,11809.282,46144.904,0,-100.0,,CIERRE (Operativo)
+2026-09-15,linea 9,chabacano,C - Control,0.057,2.36,11868.672,8218.698,16916.955,7469,-37.1,-2.5,ALTA (Solo Prophet)
+2026-09-15,linea 7,aquiles serdán,C - Control,0.054,2.21,12106.795,9799.222,14889.958,11228,-7.3,-2.52,Normal
+2026-09-15,linea 2,hidalgo,C - Control,0.053,2.184,15705.806,11500.394,21748.622,20217,28.7,-3.26,Normal
+2026-09-15,linea 8,chabacano,C - Control,0.053,2.181,4812.72,3649.765,6200.925,3349,-30.4,-2.28,ALTA (Solo Prophet)
+2026-09-15,linea 2,allende,C - Control,0.052,2.154,30836.378,19382.16,49032.205,28373,-8.0,5.27,MEDIA (Solo MAD)
+2026-09-15,linea 7,polanco,C - Control,0.051,2.12,40390.586,33717.848,49826.467,35891,-11.1,-15.79,MEDIA (Solo MAD)
+2026-09-15,linea 1,insurgentes,C - Control,0.051,2.119,40474.673,29567.374,54490.259,37952,-6.2,-4.39,MEDIA (Solo MAD)
+2026-09-16,linea 1,juanacatlán,A - Alta,0.355,11.371,2120.913,1660.101,2752.853,1971,-7.1,-5957000000.0,MEDIA (Solo MAD)
+2026-09-16,linea 6,martín carrera,A - Alta,0.34,10.904,8277.263,6785.117,10040.495,6386,-22.8,-7.05,CRÍTICA (Consenso)
+2026-09-16,linea 6,deportivo 18 de marzo,A - Alta,0.329,10.545,602.54,459.719,779.332,389,-35.4,-9.18,CRÍTICA (Consenso)
+2026-09-16,linea 9,puebla,A - Alta,0.323,10.366,10797.16,8622.905,13498.713,9095,-15.8,-18570000000.0,MEDIA (Solo MAD)
+2026-09-16,linea b,ricardo flores magón,A - Alta,0.323,10.356,2279.81,1946.047,2660.895,2266,-0.6,-6.72,MEDIA (Solo MAD)
+2026-09-16,linea 6,lindavista,A - Alta,0.313,10.027,5076.278,3667.26,6856.677,4017,-20.9,-3.96,MEDIA (Solo MAD)
+2026-09-16,linea b,río de los remedios,A - Alta,0.312,10.015,6879.717,5510.318,8493.082,6034,-12.3,-8.01,MEDIA (Solo MAD)
+2026-09-16,linea 4,santa anita,A - Alta,0.312,10.008,834.095,616.615,1128.218,666,-20.2,-10.63,MEDIA (Solo MAD)
+2026-09-16,linea 9,ciudad deportiva,A - Alta,0.302,9.677,2974.747,1562.219,5632.37,1961,-34.1,-28.24,MEDIA (Solo MAD)
+2026-09-16,linea 9,tacubaya,A - Alta,0.292,9.351,19012.184,16145.748,22723.14,16488,-13.3,-8.51,MEDIA (Solo MAD)
+2026-09-16,linea b,deportivo oceanía,A - Alta,0.287,9.215,4615.93,3651.712,5820.567,3485,-24.5,-4.23,CRÍTICA (Consenso)
+2026-09-16,linea 7,polanco,A - Alta,0.279,8.942,16669.731,13726.961,20198.973,11243,-32.6,-28.87,CRÍTICA (Consenso)
+2026-09-16,linea 9,velódromo,A - Alta,0.275,8.805,3013.686,1616.899,5540.431,1693,-43.8,-9.16,MEDIA (Solo MAD)
+2026-09-16,linea 8,garibaldi/lagunilla,A - Alta,0.272,8.712,6696.432,5611.725,8048.375,7536,12.5,-19.4,MEDIA (Solo MAD)
+2026-09-16,linea b,ecatepec,A - Alta,0.271,8.679,10269.28,8330.623,12653.538,8886,-13.5,-5.28,MEDIA (Solo MAD)
+2026-09-16,linea 7,aquiles serdán,A - Alta,0.256,8.206,6299.333,5105.081,7775.685,4680,-25.7,-10.24,CRÍTICA (Consenso)
+2026-09-16,linea 9,chabacano,A - Alta,0.25,8.01,5144.701,3633.255,7356.093,2838,-44.8,-14.27,CRÍTICA (Consenso)
+2026-09-16,linea 7,constituyentes,A - Alta,0.248,7.954,5985.768,4239.925,8382.969,6149,2.7,-23.64,MEDIA (Solo MAD)
+2026-09-16,linea 8,chabacano,A - Alta,0.237,7.614,2170.337,1686.177,2831.372,1605,-26.0,-10.91,CRÍTICA (Consenso)
+2026-09-16,linea 1,cuauhtémoc,A - Alta,0.234,7.498,8060.459,6300.351,10299.712,6177,-23.4,-16.77,CRÍTICA (Consenso)
+2026-09-16,linea 9,jamaica,A - Alta,0.232,7.436,6480.455,5195.961,8055.536,4700,-27.5,-9.31,CRÍTICA (Consenso)
+2026-09-16,linea 4,consulado,A - Alta,0.231,7.402,1611.56,1325.361,1972.091,1425,-11.6,-8.46,MEDIA (Solo MAD)
+2026-09-16,linea 1,sevilla,A - Alta,0.227,7.266,14299.52,10930.613,18456.108,10798,-24.5,-266.12,CRÍTICA (Consenso)
+2026-09-16,linea 2,allende,A - Alta,0.221,7.102,15012.659,9378.902,24233.76,22627,50.7,-2.24,Normal
+2026-09-16,linea 1,insurgentes,A - Alta,0.215,6.892,28343.173,21250.269,38954.643,23864,-15.8,-25.67,MEDIA (Solo MAD)
+2026-09-16,linea 1,tacubaya,A - Alta,0.199,6.382,13665.862,11266.961,16791.451,11058,-19.1,-12.03,CRÍTICA (Consenso)
+2026-09-16,linea 3,juárez,A - Alta,0.178,5.724,9873.001,7039.788,13777.341,9489,-3.9,-6.59,MEDIA (Solo MAD)
+2026-09-16,linea 3,guerrero,A - Alta,0.171,5.486,4516.423,3920.034,5266.652,4101,-9.2,-12.78,MEDIA (Solo MAD)
+2026-09-16,linea 2,hidalgo,A - Alta,0.14,4.498,14350.54,10584.954,19538.002,16722,16.5,-5.18,MEDIA (Solo MAD)
+2026-09-16,linea 2,zócalo/tenochtitlan,A - Alta,0.134,4.31,22911.158,11264.905,44656.566,0,-100.0,,CIERRE (Operativo)
+2026-09-17,linea 1,tacubaya,B - Media,0.086,3.5,23852.501,19173.453,29466.089,24337,2.0,0.2,Normal
+2026-09-17,linea 8,chabacano,B - Media,0.085,3.467,5483.348,4270.965,7254.78,4144,-24.4,3.01,ALTA (Solo Prophet)
+2026-09-17,linea 9,chabacano,C - Control,0.08,3.266,13938.361,9673.848,20547.952,8961,-35.7,-0.28,ALTA (Solo Prophet)
+2026-09-17,linea 1,insurgentes,C - Control,0.079,3.21,47924.713,34692.131,64456.334,44533,-7.1,-0.78,Normal
+2026-09-17,linea 6,lindavista,C - Control,0.077,3.163,17847.346,13128.046,24408.523,15640,-12.4,-0.68,Normal
+2026-09-17,linea 2,zócalo/tenochtitlan,C - Control,0.076,3.099,22544.874,11648.045,44490.702,36282,60.9,-6.65,MEDIA (Solo MAD)
+2026-09-17,linea 8,garibaldi/lagunilla,C - Control,0.076,3.092,13101.547,10878.561,15795.161,15923,21.5,0.04,ALTA (Solo Prophet)
+2026-09-17,linea 3,juárez,C - Control,0.075,3.078,14954.343,10980.416,20404.584,15290,2.2,0.55,Normal
+2026-09-17,linea 7,polanco,C - Control,0.075,3.058,45002.248,37055.84,55057.471,41359,-8.1,-1.25,Normal
+2026-09-17,linea 1,sevilla,C - Control,0.074,3.033,29155.491,22222.857,37885.271,27129,-7.0,-4.63,MEDIA (Solo MAD)
+2026-09-17,linea 2,hidalgo,C - Control,0.071,2.919,18521.08,13432.899,25250.707,25581,38.1,0.05,ALTA (Solo Prophet)
+2026-09-17,linea 1,juanacatlán,C - Control,0.071,2.898,6445.218,5076.986,8453.584,7504,16.4,-1.37,Normal
+2026-09-17,linea 9,ciudad deportiva,C - Control,0.071,2.89,8477.431,4397.008,16448.363,5815,-31.4,-0.04,Normal
+2026-09-17,linea 7,constituyentes,C - Control,0.07,2.879,14402.485,10454.135,20415.873,14207,-1.4,0.23,Normal
+2026-09-17,linea 6,martín carrera,C - Control,0.07,2.861,24632.702,20395.479,30264.369,25150,2.1,0.38,Normal
+2026-09-17,linea 9,tacubaya,C - Control,0.069,2.831,45948.723,38624.32,55297.629,47629,3.7,-1.14,Normal
+2026-09-17,linea 9,velódromo,C - Control,0.068,2.788,7388.56,3833.186,13881.777,7522,1.8,-0.19,Normal
+2026-09-17,linea 4,consulado,C - Control,0.067,2.719,3645.405,2989.796,4473.49,3600,-1.2,-0.99,Normal
+2026-09-17,linea b,río de los remedios,C - Control,0.066,2.707,17076.29,13595.574,21201.404,18019,5.5,0.55,Normal
+2026-09-17,linea 1,cuauhtémoc,C - Control,0.066,2.696,18384.501,14027.13,23337.828,17313,-5.8,-0.2,Normal
+2026-09-17,linea 3,guerrero,C - Control,0.066,2.681,7919.781,6800.164,9267.928,7583,-4.3,0.12,Normal
+2026-09-17,linea 9,jamaica,C - Control,0.065,2.67,11906.608,9661.491,15070.73,10955,-8.0,-0.06,Normal
+2026-09-17,linea 9,puebla,C - Control,0.065,2.667,25987.273,20868.687,33057.894,27387,5.4,-0.41,Normal
+2026-09-17,linea b,deportivo oceanía,C - Control,0.065,2.651,13037.582,10277.716,16601.869,15831,21.4,0.75,Normal
+2026-09-17,linea 2,allende,C - Control,0.065,2.65,29602.498,18932.021,46944.519,27196,-8.1,1.07,Normal
+2026-09-17,linea b,ricardo flores magón,C - Control,0.064,2.623,5333.619,4549.398,6228.009,5910,10.8,0.95,Normal
+2026-09-17,linea 6,deportivo 18 de marzo,C - Control,0.063,2.593,1526.646,1190.771,2021.441,1569,2.8,2.28,Normal
+2026-09-17,linea 7,aquiles serdán,C - Control,0.062,2.552,14740.464,12057.965,18217.763,14293,-3.0,0.17,Normal
+2026-09-17,linea 4,santa anita,C - Control,0.062,2.548,2067.714,1558.591,2794.247,1943,-6.0,0.39,Normal
+2026-09-17,linea b,ecatepec,C - Control,0.062,2.53,25532.497,21001.856,31372.105,27931,9.4,0.91,Normal
+2026-09-20,linea 8,chabacano,C - Control,0.06,2.458,2834.069,2181.755,3680.678,1811,-36.1,-4.94,CRÍTICA (Consenso)
+2026-09-20,linea 9,ciudad deportiva,C - Control,0.059,2.414,6558.673,3551.715,12863.538,3262,-50.3,-0.86,ALTA (Solo Prophet)
+2026-09-20,linea 9,chabacano,C - Control,0.055,2.239,6672.517,4686.636,9683.857,3727,-44.1,-0.16,ALTA (Solo Prophet)
+2026-09-21,linea 9,ciudad deportiva,C - Control,0.075,2.754,7674.561,3956.096,13967.112,5630,-26.6,0.02,Normal
+2026-09-21,linea 8,chabacano,C - Control,0.061,2.234,5252.849,4076.08,6776.124,4015,-23.6,1.63,ALTA (Solo Prophet)
+2026-09-21,linea 9,chabacano,C - Control,0.055,2.009,13169.047,9235.122,18272.404,9005,-31.6,1.37,ALTA (Solo Prophet)
+2026-09-22,linea 9,ciudad deportiva,C - Control,0.073,3.015,8198.78,4494.866,15249.638,5623,-31.4,0.25,Normal
+2026-09-22,linea 8,chabacano,C - Control,0.059,2.453,5558.16,4267.914,7242.572,4208,-24.3,1.57,ALTA (Solo Prophet)
+2026-09-22,linea 9,chabacano,C - Control,0.054,2.225,14022.534,9835.546,19557.725,9028,-35.6,0.35,ALTA (Solo Prophet)
+2026-09-23,linea 9,ciudad deportiva,C - Control,0.071,2.266,8981.201,4689.498,17152.255,5833,-35.1,0.46,Normal
+2026-09-24,linea 9,ciudad deportiva,C - Control,0.081,3.294,9108.541,4949.328,17081.509,5696,-37.5,-0.2,Normal
+2026-09-24,linea 8,chabacano,C - Control,0.062,2.549,5683.307,4476.758,7287.224,4173,-26.6,0.8,ALTA (Solo Prophet)
+2026-09-24,linea 9,chabacano,C - Control,0.056,2.309,14457.274,10420.926,20603.66,9293,-35.7,1.87,ALTA (Solo Prophet)
+2026-09-26,linea 9,ciudad deportiva,C - Control,0.076,2.412,10579.923,5446.646,20251.914,19378,83.2,1.84,Normal
+2026-09-26,linea 8,chabacano,C - Control,0.063,2.004,6101.596,4748.176,7994.221,4390,-28.1,-0.7,ALTA (Solo Prophet)
+2026-09-27,linea 9,ciudad deportiva,C - Control,0.075,3.057,6950.966,3711.283,13271.198,3482,-49.9,-0.57,ALTA (Solo Prophet)
+2026-09-27,linea 8,chabacano,C - Control,0.062,2.541,2955.47,2277.934,3851.356,2170,-26.6,4.67,CRÍTICA (Consenso)
+2026-09-27,linea 9,chabacano,C - Control,0.054,2.198,6899.5,4813.609,9917.312,4224,-38.8,4.04,CRÍTICA (Consenso)
+2026-09-28,linea 9,ciudad deportiva,B - Media,0.083,3.036,8074.336,4162.307,14876.13,5083,-37.0,-8.11,MEDIA (Solo MAD)
+2026-09-28,linea 8,chabacano,C - Control,0.063,2.326,5483.887,4218.239,7120.895,4081,-25.6,1.37,ALTA (Solo Prophet)
+2026-09-28,linea 9,chabacano,C - Control,0.056,2.062,13587.086,9372.149,19015.664,8900,-34.5,0.73,ALTA (Solo Prophet)
+2026-09-29,linea 9,ciudad deportiva,C - Control,0.081,3.349,8555.177,4522.797,16228.392,5369,-37.2,0.15,Normal
+2026-09-29,linea 8,chabacano,C - Control,0.06,2.462,5806.409,4481.841,7676.855,4309,-25.8,0.88,ALTA (Solo Prophet)
+2026-09-29,linea 9,chabacano,C - Control,0.057,2.353,14430.222,10223.776,20406.225,9198,-36.3,0.22,ALTA (Solo Prophet)
+2026-09-30,linea 9,ciudad deportiva,B - Media,0.084,2.707,9289.26,5035.592,17272.191,6107,-34.3,2.6,Normal

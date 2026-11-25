@@ -54,7 +54,7 @@ This runs `data/recoleccion_y_limpieza.py` -> `eda/analisis_exploratorio.py` -> 
 
    It's a first pass at mapping the network: a "Demanda total" view (bubble map sized by accumulated ridership per station) and an "Anomalias" view (bubble map sized by anomaly count, colored by average impact, with line/priority/date filters). See `dashboard/ANALISIS.md` for where the station coordinates came from and their current limitations (they're from a third-party source, not yet validated against the CDMX government's official station geometry dataset).
 
-6. Validation of the predictions (`validacion_predicciones/`): the prediction OSINT log was researched **manually** on a stratified sample of 79 alert days (Aug-Nov 2026) and is stored in `validacion_predicciones/datos/`, together with the model run it was sampled from and the real SEMOVI ridership published so far. The script only reads it:
+6. Validation of the predictions (`validacion_predicciones/`): the prediction OSINT log was researched **manually** on a stratified sample of 79 alert days (Aug-Nov 2026) and is stored in `validacion_predicciones/datos/bitacora_validacion_predicciones_original.csv` (the team's original log, as captured; an earlier corrected version is kept only as a backup in `datos/respaldo_version_corregida/`), together with the model run it was sampled from and the real SEMOVI ridership published so far. The script only reads it:
 
    ```
    python validacion_predicciones/validacion_predicciones.py

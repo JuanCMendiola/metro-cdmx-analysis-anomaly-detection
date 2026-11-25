@@ -13,13 +13,15 @@ La investigación OSINT se hizo a mano; el código solo la lee para calcular tas
 
 | Archivo | Qué es |
 |---|---|
+| `bitacora_prediccion.py` | Lee la bitácora original y aplica el ajuste del 16-sep; la usan este script y `estaciones_y_causas.py` |
 | `validacion_predicciones.py` | Calcula estratos, tasas de la OSINT, cruce con SEMOVI y las 4 gráficas. Se corre desde la raíz del repo |
-| `datos/bitacora_validacion_predicciones_final.csv` | OSINT consolidada: 79 estación-días investigados (columnas originales de la plantilla + `Afluencia_Real_SEMOVI`) |
-| `datos/bitacora_validacion_registro_de_cambios.csv` | Cada celda que cambió entre la bitácora capturada por el equipo (12-nov-2026) y la consolidada, con el motivo |
+| `datos/bitacora_validacion_predicciones_original.csv` | **Fuente vigente.** OSINT original del equipo: 79 estación-días investigados, tal como se capturó en la hoja de cálculo (fechas m/d/aaaa, afluencia con comas de miles, `Afluencia_Real_SEMOVI` vacía) |
+| `datos/respaldo_version_corregida/` | Versión corregida anterior (`bitacora_validacion_predicciones_final.csv`) y su registro de cambios. **Ya no se usa**: el equipo determinó que esa corrección era incorrecta. Se conserva solo como respaldo |
 | `datos/propuesta_anomalias_futuras_corrida_validacion.xlsx` | Corrida del modelo de la que salió la muestra (950 días en alerta, hojas de muestreo e instrucciones). **No** es la salida actual del notebook: la celda que escribe `propuesta_anomalias_futuras.xlsx` la sobrescribiría, por eso va con otro nombre |
 | `datos/afluenciastc_desglosado_2026-01_a_2026-09.csv` | Afluencia diaria desglosada de SEMOVI (datos.cdmx.gob.mx), 1-ene a 30-sep-2026, tal como se descargó |
 | `resultados/tasas_osint_por_estrato.csv` | Conteos Sí / Parcial / No por estrato, tasas y tasa ponderada |
-| `resultados/causas_osint_prediccion.csv` | Distribución de causas (`Hallazgo_Principal`) |
+| `resultados/causas_osint_prediccion.csv` | Distribución de causas (`Hallazgo_Principal`, con el ajuste del 16-sep) |
+| `resultados/osint_vs_afluencia_real.csv` | Las 49 filas de la bitácora con dato de SEMOVI: respuesta OSINT, afluencia real, etiqueta del detector y si coinciden |
 | `resultados/dias_en_alerta_vs_afluencia_real.csv` | Los 230 días en alerta con dato real: esperado, banda, real, z robusto y etiqueta del detector |
 | `resultados/tasas_afluencia_real_por_estrato.csv` | Tasa de anomalía CRÍTICA real y de cualquier anomalía por estrato |
 | `img/01` a `img/04` | Gráficas (ver abajo) |
@@ -45,31 +47,32 @@ La investigación OSINT se hizo a mano; el código solo la lee para calcular tas
 
 ### Criterio de confirmación
 
-De este criterio dependen las tasas, así que debe declararse tal cual.
+De este criterio dependen las tasas, así que debe declararse tal cual. Son las categorías de la
+plantilla, aplicadas por el equipo al investigar:
 
-- **Sí, evento confirmado.** Una fuente documenta ese día un hecho capaz de alterar la afluencia
-  en la estación, su línea o estaciones cercanas (falla en la línea, marcha de seguridad en la
-  línea por lluvia, evento masivo junto a la estación).
-- **Parcial, evento cercano o indirecto.** El hecho existe pero es de toda la ciudad o su relación
-  con la estación es indirecta (feriado, lluvia general, evento a varias estaciones o en las cercanías).
+- **Sí, evento confirmado.** Se encontró un hecho ese día que el equipo relacionó con la estación
+  (en la bitácora original incluye lluvias intensas, eventos masivos y fallas).
+- **Parcial, evento cercano o indirecto.** El hecho existe pero su relación con la estación es
+  indirecta (por ejemplo feriados, Hoy No Circula o un evento en otra zona). Un feriado cuenta
+  como Parcial aunque no se haya encontrado nada en la estación.
 - **No, sin evento.** Se investigó y no se encontró causa: ruido o falsa alarma.
-- **Sin información suficiente.** No hay fuentes para decidir.
+- **Sin información suficiente.** No hay fuentes para decidir. Es una categoría aparte: no cuenta
+  como Sí ni como Parcial, pero sí en el total de filas del estrato.
 
-El Hoy No Circula habitual no cuenta como causa (aplica todos los días); solo una contingencia
-ambiental declarada. El 16 de septiembre y el Día de Muertos se clasifican como
-`Feriado No Oficial / Cultural`; `Evento Cívico / Jornada Electoral` queda solo para jornadas electorales.
+### Versión de la bitácora que se usa
 
-### Ajustes de consolidación (12-nov-2026)
+Se usa la bitácora **original** del equipo, sin las correcciones de la versión consolidada del
+12-nov-2026 (reclasificación de Hoy No Circula, cambios en VAL-016 y VAL-031, 2-nov). Esa versión quedó en `datos/respaldo_version_corregida/`
+como respaldo.
 
-Se conserva la clasificación del equipo con estos cambios (detalle en el registro de cambios
-y en `Observaciones`):
+**Único ajuste (25-nov-2026):** las 15 filas del 16-sep (Independencia, feriado) calificadas "No"
+pasan a "Parcial" con causa `Feriado No Oficial / Cultural`, porque aunque no se encontró nada en la
+estación el día es feriado (antes eran 13 "Falsa Alarma" y 2 sin causa capturada). Se aplica al leer
+la bitácora (`bitacora_prediccion.py`, que usan este script y `estaciones_y_causas.py`), no en el CSV,
+que se conserva tal como se capturó. La fila del 16-sep con "Sin información suficiente" no cambia.
 
-- **Captura:** campos vacíos, links incompletos y formato de fecha.
-- **Hoy No Circula:** VAL-052, 070, 072, 075, 077 y 079 pasan a "No"; no hubo contingencia y no se encontró otra causa.
-- **Feriados:** las filas del 16-sep y 2-nov en "No" o "Sin información" pasan a "Parcial".
-- **VAL-016:** el link era de Aquiles Serdán, Chihuahua; se reemplazó por el horario festivo del Metro ("Parcial").
-- **VAL-031:** el incendio de la Línea B fue el 4-nov, no el 2; queda "Parcial" por Día de Muertos.
-- **Afluencia real:** `Afluencia_Real_SEMOVI` en las 49 filas con dato publicado.
+La columna `Afluencia_Real_SEMOVI` de la original viene vacía; el cruce con la afluencia real lo
+hace el script directamente con el CSV de SEMOVI.
 
 ## Cómo leer las tasas
 
@@ -78,7 +81,7 @@ y en `Observaciones`):
   diferencia con la de Sí es grande (como en Alta), el modelo acertó sobre todo días de calendario
   atípico y no hechos propios de cada estación.
 - **Tasa ponderada** = Σ N_h · tasa_h / 417. Estima qué se habría encontrado investigando los 417
-  días. No es 34/79 (43%) porque Alta está sobrerrepresentada en la muestra (42 de 79) frente al
+  días. No es 37/79 (47%) porque Alta está sobrerrepresentada en la muestra (42 de 79) frente al
   universo (42 de 417). Como Control pesa 74%, la ponderada se parece a la de Control.
 - **Tasa de anomalía real** (SEMOVI): proporción de días en alerta cuya afluencia real fue CRÍTICA
   (fuera de la banda 95% de Prophet **y** |z robusto MAD| > 3.5), la misma etiqueta que el modelo
@@ -91,13 +94,14 @@ y en `Observaciones`):
 
 | Estrato | Filas | Sí | Parcial | No | Sin info | Tasa Sí | Tasa Sí + Parcial |
 |---|---|---|---|---|---|---|---|
-| A - Alta | 42 | 10 | 32 | 0 | 0 | 24% | 100% |
-| B - Media | 10 | 6 | 2 | 2 | 0 | 60% | 80% |
-| C - Control | 27 | 18 | 3 | 5 | 1 | 67% | 78% |
-| Ponderado (417) | | | | | | 61% | 80% |
+| A - Alta | 42 | 11 | 28 | 2 | 1 | 26% | 93% |
+| B - Media | 10 | 7 | 2 | 1 | 0 | 70% | 90% |
+| C - Control | 27 | 19 | 7 | 0 | 1 | 70% | 96% |
+| Total muestra | 79 | 37 | 37 | 3 | 2 | 47% | 94% |
+| Ponderado (417) | | | | | | 66% | 95% |
 
-Causas: Feriado No Oficial / Cultural 34%, Evento Masivo 23%, Clima Extremo 18%, Falsa Alarma 10%,
-Falla Oculta 6%; el resto 1 a 3% cada una.
+Causas: Feriado No Oficial / Cultural 28% (22), Evento Masivo 24% (19), Clima Extremo 16% (13),
+Contingencia Ambiental 9% (7), Falla Oculta 8% (6), Falsa Alarma 6% (5); el resto 1 a 4% cada una.
 
 ### Afluencia real de SEMOVI (230 días en alerta, 2-ago a 30-sep-2026)
 
@@ -114,26 +118,33 @@ Prophet y solo 61% cayó dentro de su banda.
 
 ### Lectura conjunta
 
-- El modelo anticipa bien los días de calendario atípico: Alta son dos fechas (16-sep, 30 filas;
-  2-nov, 12 filas) y el 16-sep toda la red cayó a cerca del 36% de lo normal.
-- En eventos propios de una estación el acierto es menor: 24% de "Sí" directo en Alta.
+- **El modelo anticipa bien los días de calendario atípico.** Alta son dos fechas (16-sep, 30 filas;
+  2-nov, 12 filas) y en 93% de sus filas pasó algo (Sí o Parcial). El 16-sep toda la red cayó a cerca
+  del 36% de lo normal: 28 de los 30 días de Alta con dato real tuvieron alguna anomalía y 11 fueron
+  CRÍTICA (37%).
+- **En eventos propios de una estación el acierto es menor:** Alta tiene la tasa de Sí más baja (26%);
+  la mayoría de sus filas son Parcial por el feriado. Medio y Control tienen 70% de Sí, así que la OSINT
+  no separa los niveles de riesgo en el orden esperado.
+- **OSINT y afluencia real coinciden en 36 de las 49 filas con ambos datos** (OSINT Sí o Parcial
+  frente a cualquier anomalía real). El desacuerdo principal es fuera del 16-sep: 9 de 16 filas "Sí"
+  tuvieron afluencia normal, sobre todo días con lluvia documentada.
 - Las críticas reales en días en alerta (13%) son unas 4 veces la tasa histórica (~3%); sin el 16-sep, 10%.
-- OSINT y afluencia real coinciden en 38 de las 49 filas que tienen ambos; los desacuerdos son
-  sobre todo días con lluvia documentada y afluencia normal.
 
 ## Gráficas
 
 - `img/01_causas_historico_vs_prediccion.png`: % de cada causa en la OSINT histórica (371 anomalías
   críticas, 2022 a mar-2026) vs la OSINT de las predicciones (79).
 - `img/02_calendario_riesgo_historico_vs_prediccion.png`: causa × mes en ambas bitácoras.
-- `img/03_osint_por_nivel_de_riesgo.png`: Sí / Parcial / No por estrato.
+- `img/03_osint_por_nivel_de_riesgo.png`: Sí / Parcial / No / Sin información por estrato.
 - `img/04_afluencia_real_por_nivel_de_riesgo.png`: % de días con anomalía CRÍTICA real por estrato frente al ~3% histórico.
 
 ## Límites
 
-- **Criterio amplio.** Sí y Parcial aceptan hechos de toda la ciudad; lluvia y feriados ocurren
-  muchos días, así que la OSINT sola no prueba que el modelo distinga días de riesgo. Por eso se
-  reporta junto con la afluencia real.
+- **Criterio amplio.** Sí y Parcial aceptan hechos de toda la ciudad (la lluvia intensa se registró
+  como "Sí"); lluvia, feriados y Hoy No Circula ocurren muchos días, así que la OSINT sola no prueba
+  que el modelo distinga días de riesgo. Por eso se reporta junto con la afluencia real.
+- **Contingencia Ambiental.** Las 7 filas con esta causa (19, 26 y 27-oct, 3-nov) describen el
+  "Hoy No Circula"; si no hubo contingencia declarada, es el programa habitual que aplica todos los días.
 - **Sin grupo de comparación.** Las 79 filas son días en alerta; no se investigaron días sin alerta.
 - **Muestras chicas.** Media 10 filas, Control 27: margen de error amplio.
 - **Datos reales parciales.** SEMOVI llegaba al 30-sep-2026; faltan octubre y noviembre (incluido el 2-nov).

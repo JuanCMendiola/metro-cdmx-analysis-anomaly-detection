@@ -1,0 +1,13 @@
+﻿tipo_causa,causa,registros,meses_mas_frecuentes,pct_en_3_meses,pct_de_registros
+Cíclica,Clima Extremo,33,"9, 8, 7",63.6,8.9
+Cíclica,Contingencia Ambiental,10,"12, 4, 1",80.0,2.7
+Cíclica,Feriado No Oficial / Cultural,58,"5, 4, 3",58.6,15.6
+Esporádica,Efecto Sustitución,10,"3, 1, 11",60.0,2.7
+Esporádica,Falla Mecánica,29,"11, 12, 1",55.2,7.8
+Esporádica,Falla Oculta,56,"1, 12, 2",51.8,15.1
+Esporádica,Falla Técnica / Eléctrica,18,"3, 2, 4",50.0,4.9
+Esporádica,Incidente Externo,17,"7, 10, 5",52.9,4.6
+Falsa alarma,Falsa Alarma,75,"11, 1, 5",40.0,20.2
+Programada,Cierre Programado,18,"3, 6, 1",44.4,4.9
+Programada,Evento Cívico / Jornada Electoral,3,4,100.0,0.8
+Programada,Evento Masivo,44,"10, 4, 12",47.7,11.9

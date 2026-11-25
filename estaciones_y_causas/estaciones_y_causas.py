@@ -20,6 +20,8 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 sys.path.insert(0, os.getcwd())   # historial.py vive en la raiz del repo
 from historial import registrar_corrida
+sys.path.insert(0, os.path.join(os.getcwd(), 'validacion_predicciones'))
+from bitacora_prediccion import leer_bitacora_pred   # OSINT de los dias en alerta 2026 (original + ajuste del 16-sep)
 
 CARPETA = 'estaciones_y_causas'
 IMG = f'{CARPETA}/img'
@@ -29,7 +31,6 @@ os.makedirs(RES, exist_ok=True)
 
 MASTER = 'master_auditoria_consenso_MAD.csv'
 BITACORA = 'bitacora_investigacion_anomalias_criticas.csv'
-BITACORA_PRED = 'validacion_predicciones/datos/bitacora_validacion_predicciones_final.csv'   # OSINT de los dias en alerta 2026
 TOP_ESTACIONES = 15
 RUIDO = 'Falsa Alarma'   # causa que sirve de referencia: desviaciones sin evento identificado
 
@@ -174,7 +175,7 @@ tipo_causa['pct_de_registros'] = tipo_causa['registros'] / len(osint) * 100
 tipo_causa.round(1).to_csv(f'{RES}/causas_ciclicas_programadas_esporadicas.csv', index=False, encoding='utf-8-sig')
 tipo_linea = pd.crosstab(osint['linea'], osint['tipo_causa']).reindex(columns=TIPOS, fill_value=0)
 tipo_linea.loc['Toda la red'] = tipo_linea.sum()
-pred = pd.read_csv(BITACORA_PRED)
+pred = leer_bitacora_pred()
 pred_tipo = pred['Hallazgo_Principal'].str.strip().str.split(' (', regex=False).str[0].map(TIPO_CAUSA)
 tipo_linea.loc['Alertas de la predicción 2026'] = pred_tipo.value_counts().reindex(TIPOS, fill_value=0)
 tipo_linea_pct = tipo_linea.div(tipo_linea.sum(axis=1), axis=0) * 100
@@ -399,7 +400,9 @@ fig.suptitle('¿Qué parte de las anomalías se puede prevenir?', fontsize=15, f
 fig.text(0.01, 0.905, 'Causas encontradas por la OSINT, agrupadas por si se repiten con el calendario, se anuncian antes o son imprevistas. '
          'Líneas ordenadas por pasajeros afectados.', fontsize=10, color=TINTA2)
 fig.legend(loc='upper left', bbox_to_anchor=(0.005, 0.89), ncol=4, frameon=False, fontsize=9.5)
-notas(fig, 'Histórico: 371 anomalías críticas 2022 a mar-2026. Predicción: 79 días que el modelo XGBoost marcó en alerta, ago a nov 2026.',
+sin_causa_pred = int(pred_tipo.isna().sum())
+notas(fig, f'Histórico: {len(osint)} anomalías críticas 2022 a mar-2026. Predicción: {len(pred)} días que el modelo XGBoost marcó en alerta, ago a nov 2026'
+      + (f' ({sin_causa_pred} sin causa registrada en la bitácora no se clasifican).' if sin_causa_pred else '.'),
       'Cíclica: se repite con el calendario. Programada: se anuncia con anticipación. Esporádica: no se puede anticipar.', FUENTE)
 fig.tight_layout(rect=(0, 0.07, 1, 0.87))
 fig.savefig(f'{IMG}/05_causas_ciclicas_y_esporadicas.png', dpi=200)

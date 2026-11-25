@@ -1,0 +1,92 @@
+{
+  "id": "2026-11-25_122611",
+  "etapa": "validacion_predicciones",
+  "fecha_hora": "2026-11-25T12:26:11-06:00",
+  "commit": "f1046a2",
+  "rama": "claude/project-thread-8wweoz",
+  "codigo_sin_commit": [],
+  "python": "3.13.18",
+  "parametros": {
+    "fecha_corte_osint": "2026-11-05",
+    "archivo_semovi": "validacion_predicciones/datos/afluenciastc_desglosado_2026-01_a_2026-09.csv",
+    "corrida_modelo": "validacion_predicciones/datos/propuesta_anomalias_futuras_corrida_validacion.xlsx"
+  },
+  "metricas": {
+    "osint_tasa_si_ponderada_pct": 65.9,
+    "osint_tasa_si_parcial_ponderada_pct": 95.0,
+    "dias_en_alerta_con_dato_real": 230,
+    "osint_vs_real_coinciden": "36/49",
+    "real_dias_en_alerta": 230.0,
+    "real_criticas": 31.0,
+    "real_tasa_critica_pct": 13.5,
+    "real_cualquier_anomalia_pct": 53.5,
+    "real_dentro_de_banda_pct": 61.3,
+    "real_dif_mediana_vs_esperada_pct": -19.9
+  },
+  "nota": "",
+  "archivos": [
+    {
+      "ruta": "validacion_predicciones/resultados/causas_osint_prediccion.csv",
+      "bytes": 588,
+      "sha256": "2b784135579c13b8fdd357e36b7853c9635a595c89c1fd03bb65e36aeb293ac8",
+      "local": false,
+      "copia": "historico/validacion_predicciones/2026-11-25_122611/validacion_predicciones/resultados/causas_osint_prediccion.csv"
+    },
+    {
+      "ruta": "validacion_predicciones/resultados/dias_en_alerta_vs_afluencia_real.csv",
+      "bytes": 26112,
+      "sha256": "c08abc2585d4ce0001b218febf039cb11565888a4d8c7b5868c09d38719dbe75",
+      "local": false,
+      "copia": "historico/validacion_predicciones/2026-11-25_122611/validacion_predicciones/resultados/dias_en_alerta_vs_afluencia_real.csv"
+    },
+    {
+      "ruta": "validacion_predicciones/resultados/osint_vs_afluencia_real.csv",
+      "bytes": 7216,
+      "sha256": "c4a70e8296120a72a85f0e1e0cd8b698259e5e30276ca9ec975a4a6ecad47094",
+      "local": false,
+      "copia": "historico/validacion_predicciones/2026-11-25_122611/validacion_predicciones/resultados/osint_vs_afluencia_real.csv"
+    },
+    {
+      "ruta": "validacion_predicciones/resultados/tasas_afluencia_real_por_estrato.csv",
+      "bytes": 355,
+      "sha256": "7e96739c15b9451267a2c08566d82923637468f3c69a4f28d2b1206cfa00e2b9",
+      "local": false,
+      "copia": "historico/validacion_predicciones/2026-11-25_122611/validacion_predicciones/resultados/tasas_afluencia_real_por_estrato.csv"
+    },
+    {
+      "ruta": "validacion_predicciones/resultados/tasas_osint_por_estrato.csv",
+      "bytes": 296,
+      "sha256": "dd5517e828793d2d062d5c9049095570b8dc78e7e18184016ccce5117da93bde",
+      "local": false,
+      "copia": "historico/validacion_predicciones/2026-11-25_122611/validacion_predicciones/resultados/tasas_osint_por_estrato.csv"
+    },
+    {
+      "ruta": "validacion_predicciones/img/01_causas_historico_vs_prediccion.png",
+      "bytes": 445403,
+      "sha256": "94a4574b715cc046554a0fe82656862bde1346fe5c801676d208433128749c9d",
+      "local": true,
+      "copia": "historico_local/validacion_predicciones/2026-11-25_122611/validacion_predicciones/img/01_causas_historico_vs_prediccion.png"
+    },
+    {
+      "ruta": "validacion_predicciones/img/02_calendario_riesgo_historico_vs_prediccion.png",
+      "bytes": 510956,
+      "sha256": "a0c428a67220c51db7d33b94399926e23bdfd93c54d2dde7f176867c21ea17b1",
+      "local": true,
+      "copia": "historico_local/validacion_predicciones/2026-11-25_122611/validacion_predicciones/img/02_calendario_riesgo_historico_vs_prediccion.png"
+    },
+    {
+      "ruta": "validacion_predicciones/img/03_osint_por_nivel_de_riesgo.png",
+      "bytes": 286243,
+      "sha256": "8364d6c0e0cf19449fa9aa6cd2d11b7a49711d2e760eb25c4660c43f52237518",
+      "local": true,
+      "copia": "historico_local/validacion_predicciones/2026-11-25_122611/validacion_predicciones/img/03_osint_por_nivel_de_riesgo.png"
+    },
+    {
+      "ruta": "validacion_predicciones/img/04_afluencia_real_por_nivel_de_riesgo.png",
+      "bytes": 233473,
+      "sha256": "f05f2dca2818ded3e857b163957194f35ffdb892ee5ce08c4acf74c4c1159424",
+      "local": true,
+      "copia": "historico_local/validacion_predicciones/2026-11-25_122611/validacion_predicciones/img/04_afluencia_real_por_nivel_de_riesgo.png"
+    }
+  ]
+}
