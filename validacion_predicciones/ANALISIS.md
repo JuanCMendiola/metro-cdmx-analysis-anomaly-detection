@@ -61,14 +61,16 @@ plantilla, aplicadas por el equipo al investigar:
 ### Versión de la bitácora que se usa
 
 Se usa la bitácora **original** del equipo, sin las correcciones de la versión consolidada del
-12-nov-2026 (reclasificación de Hoy No Circula, cambios en VAL-016 y VAL-031, 2-nov).
+12-nov-2026 (reclasificación de Hoy No Circula, cambios en VAL-016 y VAL-031, 2-nov). Esa versión quedó en `datos/respaldo_version_corregida/`
+como respaldo.
 
 **Único ajuste (25-nov-2026):** las 15 filas del 16-sep (Independencia, feriado) calificadas "No"
 pasan a "Parcial", porque aunque no se encontró nada en la estación el día es feriado. Se aplica en
 el script (`FERIADO_AJUSTE`), no en el CSV, que se conserva tal como se capturó. Solo cambia la
 calificación: la causa (`Hallazgo_Principal`) queda como la registró el equipo, así que esas filas
 siguen contando como "Falsa Alarma" (13) o sin causa (2) en las gráficas de causas. La fila del
-16-sep con "Sin información suficiente" no cambia. Esa versión quedó en `datos/respaldo_version_corregida/` como respaldo.
+16-sep con "Sin información suficiente" no cambia.
+
 La columna `Afluencia_Real_SEMOVI` de la original viene vacía; el cruce con la afluencia real lo
 hace el script directamente con el CSV de SEMOVI.
 
