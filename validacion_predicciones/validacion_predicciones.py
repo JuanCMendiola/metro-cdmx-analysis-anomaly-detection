@@ -18,6 +18,8 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 sys.path.insert(0, os.getcwd())   # historial.py vive en la raiz del repo
 from historial import registrar_corrida
+sys.path.insert(0, os.path.join(os.getcwd(), 'validacion_predicciones'))
+from bitacora_prediccion import BITACORA_PRED, leer_bitacora_pred   # OSINT original + ajuste del 16-sep
 
 CARPETA = 'validacion_predicciones'
 DATOS = f'{CARPETA}/datos'
@@ -26,12 +28,10 @@ RES = f'{CARPETA}/resultados'
 os.makedirs(IMG, exist_ok=True)
 os.makedirs(RES, exist_ok=True)
 
-BITACORA_PRED = f'{DATOS}/bitacora_validacion_predicciones_original.csv'   # OSINT manual original del equipo (79 filas, sin correcciones)
 BITACORA_HIST = 'bitacora_investigacion_anomalias_criticas.csv'             # OSINT manual del historico (raiz del repo)
 CORRIDA = f'{DATOS}/propuesta_anomalias_futuras_corrida_validacion.xlsx'    # corrida del modelo de la que salio la muestra
 SEMOVI = f'{DATOS}/afluenciastc_desglosado_2026-01_a_2026-09.csv'          # afluencia real 2026 (datos.cdmx.gob.mx)
 
-FERIADO_AJUSTE = '2026-09-16'   # filas "No" de este dia pasan a "Parcial" (ver leer_bitacora_pred)
 FECHA_CORTE = '2026-11-05'       # ultimo dia ya ocurrido cuando se sorteo la muestra
 INICIO_REAL = '2026-08-02'       # primer dia en alerta de la corrida
 TASA_HISTORICA = 3.0             # % de estacion-dias CRITICOS en el historico (modeling/ANALISIS.md: 2.6% a 3.3%)
@@ -65,18 +65,6 @@ print(N_h.to_string())
 # en la muestra porque se investigo completo).
 
 # %%
-def leer_bitacora_pred(ruta):
-    # La bitacora original viene de la hoja de calculo del equipo: fechas m/d/aaaa y afluencia con comas de miles
-    df = pd.read_csv(ruta, thousands=',')
-    df['Fecha'] = pd.to_datetime(df['Fecha'], format='%m/%d/%Y')
-    # Unico ajuste a la bitacora original (decision del equipo, 25-nov-2026): el 16-sep es feriado
-    # (Independencia), asi que las filas de ese dia calificadas "No" cuentan como evento indirecto.
-    # Solo cambia la calificacion; la causa (Hallazgo_Principal) se deja como la capturo el equipo.
-    feriado_no = (df['Fecha'] == FERIADO_AJUSTE) & df['Ocurrio_Evento'].str.startswith('No')
-    df.loc[feriado_no, 'Ocurrio_Evento'] = 'Parcial - Evento cercano/indirecto'
-    print(f'Ajuste feriado {FERIADO_AJUSTE}: {int(feriado_no.sum())} filas de "No" a "Parcial"')
-    return df
-
 pred = leer_bitacora_pred(BITACORA_PRED)
 pred['respuesta'] = pred['Ocurrio_Evento'].str.split(' - ').str[0].str.strip()
 conteo = pd.crosstab(pred['Estrato'], pred['respuesta']).reindex(ESTRATOS, fill_value=0)

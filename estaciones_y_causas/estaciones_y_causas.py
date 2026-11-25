@@ -20,6 +20,8 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 sys.path.insert(0, os.getcwd())   # historial.py vive en la raiz del repo
 from historial import registrar_corrida
+sys.path.insert(0, os.path.join(os.getcwd(), 'validacion_predicciones'))
+from bitacora_prediccion import leer_bitacora_pred   # OSINT de los dias en alerta 2026 (original + ajuste del 16-sep)
 
 CARPETA = 'estaciones_y_causas'
 IMG = f'{CARPETA}/img'
@@ -29,7 +31,6 @@ os.makedirs(RES, exist_ok=True)
 
 MASTER = 'master_auditoria_consenso_MAD.csv'
 BITACORA = 'bitacora_investigacion_anomalias_criticas.csv'
-BITACORA_PRED = 'validacion_predicciones/datos/bitacora_validacion_predicciones_original.csv'   # OSINT original de los dias en alerta 2026
 TOP_ESTACIONES = 15
 RUIDO = 'Falsa Alarma'   # causa que sirve de referencia: desviaciones sin evento identificado
 
@@ -174,7 +175,7 @@ tipo_causa['pct_de_registros'] = tipo_causa['registros'] / len(osint) * 100
 tipo_causa.round(1).to_csv(f'{RES}/causas_ciclicas_programadas_esporadicas.csv', index=False, encoding='utf-8-sig')
 tipo_linea = pd.crosstab(osint['linea'], osint['tipo_causa']).reindex(columns=TIPOS, fill_value=0)
 tipo_linea.loc['Toda la red'] = tipo_linea.sum()
-pred = pd.read_csv(BITACORA_PRED)
+pred = leer_bitacora_pred()
 pred_tipo = pred['Hallazgo_Principal'].str.strip().str.split(' (', regex=False).str[0].map(TIPO_CAUSA)
 tipo_linea.loc['Alertas de la predicción 2026'] = pred_tipo.value_counts().reindex(TIPOS, fill_value=0)
 tipo_linea_pct = tipo_linea.div(tipo_linea.sum(axis=1), axis=0) * 100

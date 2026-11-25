@@ -13,13 +13,14 @@ La investigación OSINT se hizo a mano; el código solo la lee para calcular tas
 
 | Archivo | Qué es |
 |---|---|
+| `bitacora_prediccion.py` | Lee la bitácora original y aplica el ajuste del 16-sep; la usan este script y `estaciones_y_causas.py` |
 | `validacion_predicciones.py` | Calcula estratos, tasas de la OSINT, cruce con SEMOVI y las 4 gráficas. Se corre desde la raíz del repo |
 | `datos/bitacora_validacion_predicciones_original.csv` | **Fuente vigente.** OSINT original del equipo: 79 estación-días investigados, tal como se capturó en la hoja de cálculo (fechas m/d/aaaa, afluencia con comas de miles, `Afluencia_Real_SEMOVI` vacía) |
 | `datos/respaldo_version_corregida/` | Versión corregida anterior (`bitacora_validacion_predicciones_final.csv`) y su registro de cambios. **Ya no se usa**: el equipo determinó que esa corrección era incorrecta. Se conserva solo como respaldo |
 | `datos/propuesta_anomalias_futuras_corrida_validacion.xlsx` | Corrida del modelo de la que salió la muestra (950 días en alerta, hojas de muestreo e instrucciones). **No** es la salida actual del notebook: la celda que escribe `propuesta_anomalias_futuras.xlsx` la sobrescribiría, por eso va con otro nombre |
 | `datos/afluenciastc_desglosado_2026-01_a_2026-09.csv` | Afluencia diaria desglosada de SEMOVI (datos.cdmx.gob.mx), 1-ene a 30-sep-2026, tal como se descargó |
 | `resultados/tasas_osint_por_estrato.csv` | Conteos Sí / Parcial / No por estrato, tasas y tasa ponderada |
-| `resultados/causas_osint_prediccion.csv` | Distribución de causas (`Hallazgo_Principal`; las 2 filas sin causa capturada salen como "Sin causa registrada") |
+| `resultados/causas_osint_prediccion.csv` | Distribución de causas (`Hallazgo_Principal`, con el ajuste del 16-sep) |
 | `resultados/osint_vs_afluencia_real.csv` | Las 49 filas de la bitácora con dato de SEMOVI: respuesta OSINT, afluencia real, etiqueta del detector y si coinciden |
 | `resultados/dias_en_alerta_vs_afluencia_real.csv` | Los 230 días en alerta con dato real: esperado, banda, real, z robusto y etiqueta del detector |
 | `resultados/tasas_afluencia_real_por_estrato.csv` | Tasa de anomalía CRÍTICA real y de cualquier anomalía por estrato |
@@ -65,11 +66,10 @@ Se usa la bitácora **original** del equipo, sin las correcciones de la versión
 como respaldo.
 
 **Único ajuste (25-nov-2026):** las 15 filas del 16-sep (Independencia, feriado) calificadas "No"
-pasan a "Parcial", porque aunque no se encontró nada en la estación el día es feriado. Se aplica en
-el script (`FERIADO_AJUSTE`), no en el CSV, que se conserva tal como se capturó. Solo cambia la
-calificación: la causa (`Hallazgo_Principal`) queda como la registró el equipo, así que esas filas
-siguen contando como "Falsa Alarma" (13) o sin causa (2) en las gráficas de causas. La fila del
-16-sep con "Sin información suficiente" no cambia.
+pasan a "Parcial" con causa `Feriado No Oficial / Cultural`, porque aunque no se encontró nada en la
+estación el día es feriado (antes eran 13 "Falsa Alarma" y 2 sin causa capturada). Se aplica al leer
+la bitácora (`bitacora_prediccion.py`, que usan este script y `estaciones_y_causas.py`), no en el CSV,
+que se conserva tal como se capturó. La fila del 16-sep con "Sin información suficiente" no cambia.
 
 La columna `Afluencia_Real_SEMOVI` de la original viene vacía; el cruce con la afluencia real lo
 hace el script directamente con el CSV de SEMOVI.
@@ -100,8 +100,8 @@ hace el script directamente con el CSV de SEMOVI.
 | Total muestra | 79 | 37 | 37 | 3 | 2 | 47% | 94% |
 | Ponderado (417) | | | | | | 66% | 95% |
 
-Causas: Evento Masivo 24%, Falsa Alarma 23%, Clima Extremo 16%, Feriado No Oficial / Cultural 9%,
-Contingencia Ambiental 9%, Falla Oculta 8%; el resto 1 a 4% cada una (2 filas sin causa capturada).
+Causas: Feriado No Oficial / Cultural 28% (22), Evento Masivo 24% (19), Clima Extremo 16% (13),
+Contingencia Ambiental 9% (7), Falla Oculta 8% (6), Falsa Alarma 6% (5); el resto 1 a 4% cada una.
 
 ### Afluencia real de SEMOVI (230 días en alerta, 2-ago a 30-sep-2026)
 
