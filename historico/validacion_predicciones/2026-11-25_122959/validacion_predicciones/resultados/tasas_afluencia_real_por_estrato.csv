@@ -1,0 +1,6 @@
+﻿estrato,dias_en_alerta,criticas,tasa_critica_pct,cualquier_anomalia_pct,dentro_de_banda_pct,dif_mediana_vs_esperada_pct
+A - Alta,30.0,11.0,36.7,93.3,60.0,-19.6
+B - Media,33.0,2.0,6.1,27.3,87.9,-15.8
+C - Control,167.0,18.0,10.8,51.5,56.3,-22.0
+Todos los dias en alerta,230.0,31.0,13.5,53.5,61.3,-19.9
+Todos sin el 16-sep,200.0,20.0,10.0,47.5,61.5,-19.9
