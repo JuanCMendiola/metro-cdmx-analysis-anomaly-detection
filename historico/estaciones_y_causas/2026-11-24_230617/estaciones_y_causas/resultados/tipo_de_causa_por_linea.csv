@@ -1,0 +1,15 @@
+﻿linea,Cíclica,Programada,Esporádica,Falsa alarma,total
+linea 1,13,9,15,1,38
+linea 12,9,7,15,20,51
+linea 2,15,12,16,6,49
+linea 3,10,6,15,5,36
+linea 4,4,2,3,9,18
+linea 5,7,2,4,8,21
+linea 6,3,4,5,6,18
+linea 7,8,8,8,3,27
+linea 8,13,7,11,4,35
+linea 9,1,5,12,2,20
+linea a,6,1,8,5,20
+linea b,12,2,18,6,38
+Toda la red,101,65,130,75,371
+Alertas de la predicción 2026,27,19,13,18,77
