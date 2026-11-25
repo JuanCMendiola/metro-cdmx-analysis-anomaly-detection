@@ -52,7 +52,8 @@ plantilla, aplicadas por el equipo al investigar:
 - **Sí, evento confirmado.** Se encontró un hecho ese día que el equipo relacionó con la estación
   (en la bitácora original incluye lluvias intensas, eventos masivos y fallas).
 - **Parcial, evento cercano o indirecto.** El hecho existe pero su relación con la estación es
-  indirecta (por ejemplo feriados, Hoy No Circula o un evento en otra zona).
+  indirecta (por ejemplo feriados, Hoy No Circula o un evento en otra zona). Un feriado cuenta
+  como Parcial aunque no se haya encontrado nada en la estación.
 - **No, sin evento.** Se investigó y no se encontró causa: ruido o falsa alarma.
 - **Sin información suficiente.** No hay fuentes para decidir. Es una categoría aparte: no cuenta
   como Sí ni como Parcial, pero sí en el total de filas del estrato.
@@ -60,8 +61,14 @@ plantilla, aplicadas por el equipo al investigar:
 ### Versión de la bitácora que se usa
 
 Se usa la bitácora **original** del equipo, sin las correcciones de la versión consolidada del
-12-nov-2026 (reclasificación de Hoy No Circula, paso de las filas del 16-sep y 2-nov a "Parcial",
-cambios en VAL-016 y VAL-031). Esa versión quedó en `datos/respaldo_version_corregida/` como respaldo.
+12-nov-2026 (reclasificación de Hoy No Circula, cambios en VAL-016 y VAL-031, 2-nov).
+
+**Único ajuste (25-nov-2026):** las 15 filas del 16-sep (Independencia, feriado) calificadas "No"
+pasan a "Parcial", porque aunque no se encontró nada en la estación el día es feriado. Se aplica en
+el script (`FERIADO_AJUSTE`), no en el CSV, que se conserva tal como se capturó. Solo cambia la
+calificación: la causa (`Hallazgo_Principal`) queda como la registró el equipo, así que esas filas
+siguen contando como "Falsa Alarma" (13) o sin causa (2) en las gráficas de causas. La fila del
+16-sep con "Sin información suficiente" no cambia. Esa versión quedó en `datos/respaldo_version_corregida/` como respaldo.
 La columna `Afluencia_Real_SEMOVI` de la original viene vacía; el cruce con la afluencia real lo
 hace el script directamente con el CSV de SEMOVI.
 
@@ -85,11 +92,11 @@ hace el script directamente con el CSV de SEMOVI.
 
 | Estrato | Filas | Sí | Parcial | No | Sin info | Tasa Sí | Tasa Sí + Parcial |
 |---|---|---|---|---|---|---|---|
-| A - Alta | 42 | 11 | 13 | 17 | 1 | 26% | 57% |
+| A - Alta | 42 | 11 | 28 | 2 | 1 | 26% | 93% |
 | B - Media | 10 | 7 | 2 | 1 | 0 | 70% | 90% |
 | C - Control | 27 | 19 | 7 | 0 | 1 | 70% | 96% |
-| Total muestra | 79 | 37 | 22 | 18 | 2 | 47% | 75% |
-| Ponderado (417) | | | | | | 66% | 91% |
+| Total muestra | 79 | 37 | 37 | 3 | 2 | 47% | 94% |
+| Ponderado (417) | | | | | | 66% | 95% |
 
 Causas: Evento Masivo 24%, Falsa Alarma 23%, Clima Extremo 16%, Feriado No Oficial / Cultural 9%,
 Contingencia Ambiental 9%, Falla Oculta 8%; el resto 1 a 4% cada una (2 filas sin causa capturada).
@@ -109,18 +116,17 @@ Prophet y solo 61% cayó dentro de su banda.
 
 ### Lectura conjunta
 
-- **La OSINT original no respalda el estrato de riesgo alto.** Alta tiene la tasa de Sí más baja
-  (26%) y 17 de sus 42 filas son "No". Alta son dos fechas (16-sep, 30 filas; 2-nov, 12 filas) y
-  en el 16-sep el equipo registró 15 filas como "No" (falsa alarma).
-- **La afluencia real sí respalda Alta.** El 16-sep toda la red cayó a cerca del 36% de lo normal:
-  28 de los 30 días de Alta con dato real tuvieron alguna anomalía y 11 fueron CRÍTICA (37%).
-- **OSINT y afluencia real coinciden en 21 de las 49 filas con ambos datos** (OSINT Sí o Parcial
-  frente a cualquier anomalía real). El desacuerdo principal es el 16-sep: 15 filas "No" con
-  afluencia real anómala. Fuera del 16-sep, 9 de 16 filas "Sí" tuvieron afluencia normal.
+- **El modelo anticipa bien los días de calendario atípico.** Alta son dos fechas (16-sep, 30 filas;
+  2-nov, 12 filas) y en 93% de sus filas pasó algo (Sí o Parcial). El 16-sep toda la red cayó a cerca
+  del 36% de lo normal: 28 de los 30 días de Alta con dato real tuvieron alguna anomalía y 11 fueron
+  CRÍTICA (37%).
+- **En eventos propios de una estación el acierto es menor:** Alta tiene la tasa de Sí más baja (26%);
+  la mayoría de sus filas son Parcial por el feriado. Medio y Control tienen 70% de Sí, así que la OSINT
+  no separa los niveles de riesgo en el orden esperado.
+- **OSINT y afluencia real coinciden en 36 de las 49 filas con ambos datos** (OSINT Sí o Parcial
+  frente a cualquier anomalía real). El desacuerdo principal es fuera del 16-sep: 9 de 16 filas "Sí"
+  tuvieron afluencia normal, sobre todo días con lluvia documentada.
 - Las críticas reales en días en alerta (13%) son unas 4 veces la tasa histórica (~3%); sin el 16-sep, 10%.
-- Medio y Control tienen tasas de Sí altas (70%) y casi ninguna fila "No", así que la OSINT no
-  separa los niveles de riesgo en el orden esperado. La afluencia real tampoco lo hace entre Medio
-  (6%) y Control (11%).
 
 ## Gráficas
 

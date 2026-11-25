@@ -31,6 +31,7 @@ BITACORA_HIST = 'bitacora_investigacion_anomalias_criticas.csv'             # OS
 CORRIDA = f'{DATOS}/propuesta_anomalias_futuras_corrida_validacion.xlsx'    # corrida del modelo de la que salio la muestra
 SEMOVI = f'{DATOS}/afluenciastc_desglosado_2026-01_a_2026-09.csv'          # afluencia real 2026 (datos.cdmx.gob.mx)
 
+FERIADO_AJUSTE = '2026-09-16'   # filas "No" de este dia pasan a "Parcial" (ver leer_bitacora_pred)
 FECHA_CORTE = '2026-11-05'       # ultimo dia ya ocurrido cuando se sorteo la muestra
 INICIO_REAL = '2026-08-02'       # primer dia en alerta de la corrida
 TASA_HISTORICA = 3.0             # % de estacion-dias CRITICOS en el historico (modeling/ANALISIS.md: 2.6% a 3.3%)
@@ -68,6 +69,12 @@ def leer_bitacora_pred(ruta):
     # La bitacora original viene de la hoja de calculo del equipo: fechas m/d/aaaa y afluencia con comas de miles
     df = pd.read_csv(ruta, thousands=',')
     df['Fecha'] = pd.to_datetime(df['Fecha'], format='%m/%d/%Y')
+    # Unico ajuste a la bitacora original (decision del equipo, 25-nov-2026): el 16-sep es feriado
+    # (Independencia), asi que las filas de ese dia calificadas "No" cuentan como evento indirecto.
+    # Solo cambia la calificacion; la causa (Hallazgo_Principal) se deja como la capturo el equipo.
+    feriado_no = (df['Fecha'] == FERIADO_AJUSTE) & df['Ocurrio_Evento'].str.startswith('No')
+    df.loc[feriado_no, 'Ocurrio_Evento'] = 'Parcial - Evento cercano/indirecto'
+    print(f'Ajuste feriado {FERIADO_AJUSTE}: {int(feriado_no.sum())} filas de "No" a "Parcial"')
     return df
 
 pred = leer_bitacora_pred(BITACORA_PRED)
@@ -204,7 +211,7 @@ plt.rcParams.update({'font.family': 'DejaVu Sans', 'figure.facecolor': FONDO, 'a
                      'axes.edgecolor': REJILLA})
 
 def cargar_bitacora(ruta):
-    df = leer_bitacora_pred(ruta) if ruta == BITACORA_PRED else pd.read_csv(ruta)
+    df = pred.copy() if ruta == BITACORA_PRED else pd.read_csv(ruta)
     df.columns = df.columns.str.lower()
     df['fecha'] = pd.to_datetime(df['fecha'])
     df['causa'] = df['hallazgo_principal'].fillna(SIN_CAUSA).str.strip()
