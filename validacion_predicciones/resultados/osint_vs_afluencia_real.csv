@@ -1,0 +1,50 @@
+﻿ID_Validacion,Estrato,Fecha,Linea,Estacion,osint,Hallazgo_Principal,afluencia_real_semovi,dif_vs_esperada_pct,etiqueta_real_detector,osint_paso_algo,cualquier_anomalia,coinciden
+VAL-067,C - Control,2026-08-02,linea 4,consulado,Sí,Clima Extremo (Inundaciones severas),2058,-4.1,Normal,True,False,False
+VAL-073,C - Control,2026-08-04,linea 4,santa anita,Sí,Clima Extremo (Inundaciones severas),1817,-8.6,Normal,True,False,False
+VAL-049,B - Media,2026-08-08,linea 4,consulado,Parcial,Falla Oculta (No hay reporte oficial del incidente),3100,-2.1,Normal,True,False,False
+VAL-063,C - Control,2026-08-09,linea 4,santa anita,Sí,Clima Extremo (Inundaciones severas),1254,-21.3,MEDIA (Solo MAD),True,True,True
+VAL-047,B - Media,2026-08-16,linea 4,consulado,Sí,Clima Extremo (Inundaciones severas),2045,-14.0,Normal,True,False,False
+VAL-060,C - Control,2026-08-17,linea 8,chabacano,Sí,Falla Oculta (No hay reporte oficial del incidente),3732,-26.6,ALTA (Solo Prophet),True,True,True
+VAL-048,B - Media,2026-08-20,linea 4,consulado,Sí,Clima Extremo (Inundaciones severas),3459,-12.1,Normal,True,False,False
+VAL-065,C - Control,2026-08-20,linea 8,chabacano,Sí,Clima Extremo (Inundaciones severas),3740,-32.1,ALTA (Solo Prophet),True,True,True
+VAL-054,C - Control,2026-08-22,linea 9,chabacano,Sí,Clima Extremo (Inundaciones severas),8027,-41.4,ALTA (Solo Prophet),True,True,True
+VAL-050,B - Media,2026-08-27,linea 9,ciudad deportiva,No,Falsa Alarma (Se investigó y fue ruido normal),5454,-40.2,Normal,False,False,True
+VAL-076,C - Control,2026-09-01,linea 9,chabacano,Sí,Falla Oculta (No hay reporte oficial del incidente),9149,-34.7,ALTA (Solo Prophet),True,True,True
+VAL-071,C - Control,2026-09-14,linea 9,ciudad deportiva,Sí,Clima Extremo (Inundaciones severas),5588,-22.0,Normal,True,False,False
+VAL-043,B - Media,2026-09-15,linea 9,velódromo,Sí,"Evento Masivo (Concierto, partido, manifestación)",5170,15.5,MEDIA (Solo MAD),True,True,True
+VAL-062,C - Control,2026-09-15,linea 3,juárez,Parcial,"Evento Masivo (Concierto, partido, manifestación)",10425,-3.7,MEDIA (Solo MAD),True,True,True
+VAL-001,A - Alta,2026-09-16,linea 1,juanacatlán,Sí,"Falla Técnica / Eléctrica (Cortocircuito, energía)",1971,-7.1,MEDIA (Solo MAD),True,True,True
+VAL-002,A - Alta,2026-09-16,linea 6,martín carrera,No,,6386,-22.8,CRÍTICA (Consenso),False,True,False
+VAL-003,A - Alta,2026-09-16,linea 6,deportivo 18 de marzo,Parcial,Efecto Sustitución (Falla en Metrobús u otra línea o estación),389,-35.4,CRÍTICA (Consenso),True,True,True
+VAL-004,A - Alta,2026-09-16,linea 9,puebla,No,Falsa Alarma (Se investigó y fue ruido normal),9095,-15.8,MEDIA (Solo MAD),False,True,False
+VAL-005,A - Alta,2026-09-16,linea b,ricardo flores magón,No,Falsa Alarma (Se investigó y fue ruido normal),2266,-0.6,MEDIA (Solo MAD),False,True,False
+VAL-006,A - Alta,2026-09-16,linea 6,lindavista,No,Falsa Alarma (Se investigó y fue ruido normal),4017,-20.9,MEDIA (Solo MAD),False,True,False
+VAL-007,A - Alta,2026-09-16,linea b,río de los remedios,No,Falsa Alarma (Se investigó y fue ruido normal),6034,-12.3,MEDIA (Solo MAD),False,True,False
+VAL-008,A - Alta,2026-09-16,linea 4,santa anita,No,Falsa Alarma (Se investigó y fue ruido normal),666,-20.2,MEDIA (Solo MAD),False,True,False
+VAL-009,A - Alta,2026-09-16,linea 9,ciudad deportiva,No,Falsa Alarma (Se investigó y fue ruido normal),1961,-34.1,MEDIA (Solo MAD),False,True,False
+VAL-010,A - Alta,2026-09-16,linea 9,tacubaya,No,Falsa Alarma (Se investigó y fue ruido normal),16488,-13.3,MEDIA (Solo MAD),False,True,False
+VAL-011,A - Alta,2026-09-16,linea b,deportivo oceanía,No,Falsa Alarma (Se investigó y fue ruido normal),3485,-24.5,CRÍTICA (Consenso),False,True,False
+VAL-012,A - Alta,2026-09-16,linea 7,polanco,Parcial,Feriado No Oficial / Cultural,11243,-32.6,CRÍTICA (Consenso),True,True,True
+VAL-013,A - Alta,2026-09-16,linea 9,velódromo,No,Falsa Alarma (Se investigó y fue ruido normal),1693,-43.8,MEDIA (Solo MAD),False,True,False
+VAL-014,A - Alta,2026-09-16,linea 8,garibaldi/lagunilla,No,Falsa Alarma (Se investigó y fue ruido normal),7536,12.5,MEDIA (Solo MAD),False,True,False
+VAL-015,A - Alta,2026-09-16,linea b,ecatepec,Parcial,"Evento Masivo (Concierto, partido, manifestación)",8886,-13.5,MEDIA (Solo MAD),True,True,True
+VAL-016,A - Alta,2026-09-16,linea 7,aquiles serdán,Parcial,"Evento Masivo (Concierto, partido, manifestación)",4680,-25.7,CRÍTICA (Consenso),True,True,True
+VAL-017,A - Alta,2026-09-16,linea 9,chabacano,Parcial,"Evento Masivo (Concierto, partido, manifestación)",2838,-44.8,CRÍTICA (Consenso),True,True,True
+VAL-018,A - Alta,2026-09-16,linea 7,constituyentes,No,Falsa Alarma (Se investigó y fue ruido normal),6149,2.7,MEDIA (Solo MAD),False,True,False
+VAL-019,A - Alta,2026-09-16,linea 8,chabacano,Parcial,"Evento Masivo (Concierto, partido, manifestación)",1605,-26.0,CRÍTICA (Consenso),True,True,True
+VAL-020,A - Alta,2026-09-16,linea 1,cuauhtémoc,Sí,"Evento Masivo (Concierto, partido, manifestación)",6177,-23.4,CRÍTICA (Consenso),True,True,True
+VAL-021,A - Alta,2026-09-16,linea 9,jamaica,Sin información suficiente,Falsa Alarma (Se investigó y fue ruido normal),4700,-27.5,CRÍTICA (Consenso),False,True,False
+VAL-022,A - Alta,2026-09-16,linea 4,consulado,No,Falsa Alarma (Se investigó y fue ruido normal),1425,-11.6,MEDIA (Solo MAD),False,True,False
+VAL-023,A - Alta,2026-09-16,linea 1,sevilla,No,Falsa Alarma (Se investigó y fue ruido normal),10798,-24.5,CRÍTICA (Consenso),False,True,False
+VAL-024,A - Alta,2026-09-16,linea 2,allende,Sí,"Evento Masivo (Concierto, partido, manifestación)",22627,50.7,Normal,True,False,False
+VAL-025,A - Alta,2026-09-16,linea 1,insurgentes,Sí,"Evento Masivo (Concierto, partido, manifestación)",23864,-15.8,MEDIA (Solo MAD),True,True,True
+VAL-026,A - Alta,2026-09-16,linea 1,tacubaya,No,,11058,-19.1,CRÍTICA (Consenso),False,True,False
+VAL-027,A - Alta,2026-09-16,linea 3,juárez,Sí,Falla Oculta (No hay reporte oficial del incidente),9489,-3.9,MEDIA (Solo MAD),True,True,True
+VAL-028,A - Alta,2026-09-16,linea 3,guerrero,Sí,Falla Oculta (No hay reporte oficial del incidente),4101,-9.2,MEDIA (Solo MAD),True,True,True
+VAL-035,A - Alta,2026-09-16,linea 2,hidalgo,Parcial,"Evento Masivo (Concierto, partido, manifestación)",16722,16.5,MEDIA (Solo MAD),True,True,True
+VAL-036,A - Alta,2026-09-16,linea 2,zócalo/tenochtitlan,Sí,"Evento Masivo (Concierto, partido, manifestación)",0,-100.0,CIERRE (Operativo),True,False,False
+VAL-056,C - Control,2026-09-17,linea 9,chabacano,Sí,"Falla Mecánica (Tren averiado, puertas, desalojo)",8961,-35.7,ALTA (Solo Prophet),True,True,True
+VAL-057,C - Control,2026-09-17,linea 1,insurgentes,Sí,"Evento Masivo (Concierto, partido, manifestación)",44533,-7.1,Normal,True,False,False
+VAL-064,C - Control,2026-09-17,linea b,río de los remedios,Sí,Clima Extremo (Inundaciones severas),18019,5.5,Normal,True,False,False
+VAL-069,C - Control,2026-09-17,linea 4,santa anita,Sí,Clima Extremo (Inundaciones severas),1943,-6.0,Normal,True,False,False
+VAL-058,C - Control,2026-09-21,linea 9,ciudad deportiva,Sí,Falla Oculta (No hay reporte oficial del incidente),5630,-26.6,Normal,True,False,False

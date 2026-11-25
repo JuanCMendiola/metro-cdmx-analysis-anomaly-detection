@@ -1,5 +1,5 @@
 ﻿estrato,N_h_universo,n_h_muestra,si,parcial,no,sin_informacion,tasa_si_pct,tasa_si_parcial_pct,peso_N_h_N
-A - Alta,42,42,10,32,0,0,23.81,100.0,0.101
-B - Media,66,10,6,2,2,0,60.0,80.0,0.158
-C - Control,309,27,18,3,5,1,66.667,77.778,0.741
-Ponderada (universo),417,79,34,37,7,1,61.295,80.368,1.0
+A - Alta,42,42,11,13,17,1,26.19,57.143,0.101
+B - Media,66,10,7,2,1,0,70.0,90.0,0.158
+C - Control,309,27,19,7,0,1,70.37,96.296,0.741
+Ponderada (universo),417,79,37,22,18,2,65.862,91.356,1.0

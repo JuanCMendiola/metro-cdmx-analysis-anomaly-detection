@@ -29,7 +29,7 @@ os.makedirs(RES, exist_ok=True)
 
 MASTER = 'master_auditoria_consenso_MAD.csv'
 BITACORA = 'bitacora_investigacion_anomalias_criticas.csv'
-BITACORA_PRED = 'validacion_predicciones/datos/bitacora_validacion_predicciones_final.csv'   # OSINT de los dias en alerta 2026
+BITACORA_PRED = 'validacion_predicciones/datos/bitacora_validacion_predicciones_original.csv'   # OSINT original de los dias en alerta 2026
 TOP_ESTACIONES = 15
 RUIDO = 'Falsa Alarma'   # causa que sirve de referencia: desviaciones sin evento identificado
 
@@ -399,7 +399,9 @@ fig.suptitle('¿Qué parte de las anomalías se puede prevenir?', fontsize=15, f
 fig.text(0.01, 0.905, 'Causas encontradas por la OSINT, agrupadas por si se repiten con el calendario, se anuncian antes o son imprevistas. '
          'Líneas ordenadas por pasajeros afectados.', fontsize=10, color=TINTA2)
 fig.legend(loc='upper left', bbox_to_anchor=(0.005, 0.89), ncol=4, frameon=False, fontsize=9.5)
-notas(fig, 'Histórico: 371 anomalías críticas 2022 a mar-2026. Predicción: 79 días que el modelo XGBoost marcó en alerta, ago a nov 2026.',
+sin_causa_pred = int(pred_tipo.isna().sum())
+notas(fig, f'Histórico: {len(osint)} anomalías críticas 2022 a mar-2026. Predicción: {len(pred)} días que el modelo XGBoost marcó en alerta, ago a nov 2026'
+      + (f' ({sin_causa_pred} sin causa registrada en la bitácora no se clasifican).' if sin_causa_pred else '.'),
       'Cíclica: se repite con el calendario. Programada: se anuncia con anticipación. Esporádica: no se puede anticipar.', FUENTE)
 fig.tight_layout(rect=(0, 0.07, 1, 0.87))
 fig.savefig(f'{IMG}/05_causas_ciclicas_y_esporadicas.png', dpi=200)

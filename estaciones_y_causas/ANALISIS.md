@@ -158,9 +158,10 @@ La ciclicidad se ve en los datos:
   - Una fecha única como el 11-jun-2026 (inauguración del Mundial, 153 estaciones) no cuenta como recurrente.
 - **Histórico vs predicción.** La clasificación se hace con la OSINT histórica, porque cubre cuatro
   años y es una muestra proporcional de todas las anomalías críticas. La OSINT de 2026 solo cubre tres
-  meses y viene de días que el modelo eligió. Como contraste, en esos días 76% de las causas fueron
-  cíclicas o programadas (53% y 23%) y solo 14% esporádicas. Eso es lo esperado: el modelo usa el
-  calendario, así que anticipa bien lo cíclico y casi no ve lo esporádico.
+  meses y viene de días que el modelo eligió. Como contraste, en esos días (bitácora original del
+  equipo, 77 filas con causa capturada) 60% de las causas fueron cíclicas o programadas (35% y 25%),
+  17% esporádicas y 23% falsas alarmas. Eso es lo esperado: el modelo usa el calendario, así que
+  anticipa mejor lo cíclico y lo programado que lo esporádico.
 - **Por línea.** Casi la mitad de las anomalías de la red (45%) tienen causa cíclica o programada,
   es decir, prevenible. La Línea 9 es la excepción, con 60% esporádicas, sobre todo fallas sin reporte.
 

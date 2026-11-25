@@ -26,7 +26,7 @@ RES = f'{CARPETA}/resultados'
 os.makedirs(IMG, exist_ok=True)
 os.makedirs(RES, exist_ok=True)
 
-BITACORA_PRED = f'{DATOS}/bitacora_validacion_predicciones_final.csv'      # OSINT manual consolidada (79 filas)
+BITACORA_PRED = f'{DATOS}/bitacora_validacion_predicciones_original.csv'   # OSINT manual original del equipo (79 filas, sin correcciones)
 BITACORA_HIST = 'bitacora_investigacion_anomalias_criticas.csv'             # OSINT manual del historico (raiz del repo)
 CORRIDA = f'{DATOS}/propuesta_anomalias_futuras_corrida_validacion.xlsx'    # corrida del modelo de la que salio la muestra
 SEMOVI = f'{DATOS}/afluenciastc_desglosado_2026-01_a_2026-09.csv'          # afluencia real 2026 (datos.cdmx.gob.mx)
@@ -64,7 +64,13 @@ print(N_h.to_string())
 # en la muestra porque se investigo completo).
 
 # %%
-pred = pd.read_csv(BITACORA_PRED)
+def leer_bitacora_pred(ruta):
+    # La bitacora original viene de la hoja de calculo del equipo: fechas m/d/aaaa y afluencia con comas de miles
+    df = pd.read_csv(ruta, thousands=',')
+    df['Fecha'] = pd.to_datetime(df['Fecha'], format='%m/%d/%Y')
+    return df
+
+pred = leer_bitacora_pred(BITACORA_PRED)
 pred['respuesta'] = pred['Ocurrio_Evento'].str.split(' - ').str[0].str.strip()
 conteo = pd.crosstab(pred['Estrato'], pred['respuesta']).reindex(ESTRATOS, fill_value=0)
 for col in ['Sí', 'Parcial', 'No', 'Sin información suficiente']:
@@ -94,7 +100,8 @@ tasas.index.name = 'estrato'
 tasas.to_csv(f'{RES}/tasas_osint_por_estrato.csv', encoding='utf-8-sig')
 print(tasas[['n_h_muestra', 'si', 'parcial', 'no', 'tasa_si_pct', 'tasa_si_parcial_pct']].round(1).to_string())
 
-causas = pred['Hallazgo_Principal'].str.strip().value_counts().rename('registros').to_frame()
+SIN_CAUSA = 'Sin causa registrada'   # filas de la bitacora original con Hallazgo_Principal vacio
+causas = pred['Hallazgo_Principal'].fillna(SIN_CAUSA).str.strip().value_counts().rename('registros').to_frame()
 causas['pct'] = (causas['registros'] / len(pred) * 100).round(1)
 causas.index.name = 'causa'
 causas.to_csv(f'{RES}/causas_osint_prediccion.csv', encoding='utf-8-sig')
@@ -159,6 +166,19 @@ cruce['dif_vs_esperada_pct'] = (cruce['afluencia'] / cruce['afluencia_esperada_p
     .to_csv(f'{RES}/dias_en_alerta_vs_afluencia_real.csv', index=False, encoding='utf-8-sig'))
 print(f'Dias en alerta con dato real ({INICIO_REAL} a {ULTIMO_REAL.date()}): {len(cruce)}; sin dato: {sin_dato}')
 
+# OSINT vs afluencia real en las filas de la bitacora que ya tienen dato de SEMOVI.
+# "Paso algo" en la OSINT = Si o Parcial; en la afluencia real = cualquier anomalia del detector.
+osint_real = pred.merge(cruce[['fecha', 'linea', 'estacion', 'afluencia', 'dif_vs_esperada_pct', 'etiqueta', 'cualquier_anomalia']],
+                        left_on=['Fecha', 'Linea', 'Estacion'], right_on=['fecha', 'linea', 'estacion'], how='inner')
+osint_real['osint_paso_algo'] = osint_real['respuesta'].isin(['Sí', 'Parcial'])
+osint_real['coinciden'] = osint_real['osint_paso_algo'] == osint_real['cualquier_anomalia']
+(osint_real[['ID_Validacion', 'Estrato', 'Fecha', 'Linea', 'Estacion', 'respuesta', 'Hallazgo_Principal', 'afluencia',
+             'dif_vs_esperada_pct', 'etiqueta', 'osint_paso_algo', 'cualquier_anomalia', 'coinciden']]
+    .rename(columns={'respuesta': 'osint', 'afluencia': 'afluencia_real_semovi', 'etiqueta': 'etiqueta_real_detector'})
+    .round({'dif_vs_esperada_pct': 1}).to_csv(f'{RES}/osint_vs_afluencia_real.csv', index=False, encoding='utf-8-sig'))
+print(f"OSINT vs afluencia real: coinciden {int(osint_real['coinciden'].sum())} de {len(osint_real)} filas con dato real")
+print(pd.crosstab(osint_real['respuesta'], osint_real['cualquier_anomalia'].map({True: 'anomalia real', False: 'normal'})).to_string())
+
 def resumen_real(df):
     return pd.Series({'dias_en_alerta': len(df), 'criticas': int(df['critica'].sum()),
                       'tasa_critica_pct': df['critica'].mean() * 100,
@@ -184,10 +204,10 @@ plt.rcParams.update({'font.family': 'DejaVu Sans', 'figure.facecolor': FONDO, 'a
                      'axes.edgecolor': REJILLA})
 
 def cargar_bitacora(ruta):
-    df = pd.read_csv(ruta)
+    df = leer_bitacora_pred(ruta) if ruta == BITACORA_PRED else pd.read_csv(ruta)
     df.columns = df.columns.str.lower()
     df['fecha'] = pd.to_datetime(df['fecha'])
-    df['causa'] = df['hallazgo_principal'].str.strip()
+    df['causa'] = df['hallazgo_principal'].fillna(SIN_CAUSA).str.strip()
     return df
 
 hist, pr = cargar_bitacora(BITACORA_HIST), cargar_bitacora(BITACORA_PRED)
@@ -264,8 +284,8 @@ fig.savefig(f'{IMG}/02_calendario_riesgo_historico_vs_prediccion.png', dpi=200)
 plt.close(fig)
 
 # ---------- 03. OSINT: que se encontro en los dias que el modelo marco ----------
-RESP = [('Sí', 'Evento en la estación o en su línea', AZUL, 'white'),
-        ('Parcial', 'Evento cercano o de toda la ciudad (feriado, lluvia)', AZUL_CLARO, TINTA),
+RESP = [('Sí', 'Evento confirmado', AZUL, 'white'),
+        ('Parcial', 'Evento cercano o indirecto', AZUL_CLARO, TINTA),
         ('No', 'No se encontró nada', GRIS, TINTA),
         ('Sin información suficiente', 'Sin información suficiente', GRIS_CLARO, TINTA)]
 t = conteo[[r[0] for r in RESP]]
@@ -343,6 +363,7 @@ registrar_corrida(
     metricas={'osint_tasa_si_ponderada_pct': round(float(pond['tasa_si_pct']), 1),
               'osint_tasa_si_parcial_ponderada_pct': round(float(pond['tasa_si_parcial_pct']), 1),
               'dias_en_alerta_con_dato_real': len(cruce),
+              'osint_vs_real_coinciden': f"{int(osint_real['coinciden'].sum())}/{len(osint_real)}",
               **{f'real_{k}': (round(float(v), 1) if isinstance(v, float) else v) for k, v in todos.items()}},
     parametros={'fecha_corte_osint': FECHA_CORTE, 'archivo_semovi': SEMOVI, 'corrida_modelo': CORRIDA},
 )
