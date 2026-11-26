@@ -62,11 +62,31 @@ arcgis_url = "https://www.arcgis.com/apps/mapviewer/index.html?webmap=..."
 
 ## Pestañas
 
+Arriba, los filtros de **Línea** y **Estación** valen para toda la página. Los
+cuatro indicadores se recalculan para la selección (toda la red, una línea o una
+estación): pasajeros al día (promedio de todo el histórico, sin días de cierre),
+anomalías graves por año, afluencia esperada el próximo mes y riesgo en los
+próximos meses (nivel de la estación, o número de estaciones en alerta). El mapa
+resalta y acerca la línea o estación elegida, y el ranking se limita a esa línea.
+
 Pensado para usuarios, con dos pestañas:
 
-- **Mapa:** el mapa web de ArcGIS Online del equipo (constante `ARCGIS_URL`) y, a
-  la derecha, el ranking de estaciones con más afluencia o más anomalías en el
-  periodo elegido (las anomalías leves se pueden incluir con un interruptor).
+- **Mapa:** mapa propio de la red hecho con Plotly (`go.Scattermap`, fondo Carto
+  sin token): cada línea con su color y las estaciones como burbujas cuyo tamaño y
+  color crecen con la afluencia o con los días de anomalía. Se probó una capa de
+  calor (`go.Densitymap`), pero tapaba las líneas y se quitó. A la derecha, el ranking de estaciones
+  con más afluencia o más anomalías en el periodo elegido (las anomalías leves se
+  pueden incluir con un interruptor); mapa y ranking usan los mismos filtros. El
+  mapa de ArcGIS Online del equipo (constante `ARCGIS_URL`) queda en un panel
+  desplegable debajo.
+  - El dataset no trae la geometría de las líneas: el trazo une las estaciones de
+    `estaciones_coordenadas.csv` en el orden del camino más corto entre los dos
+    extremos de cada línea (`ordenar_estaciones()`); se revisó que reproduce el
+    recorrido real de las 12 líneas.
+  - El mapa de ArcGIS dejó de cargar en nov-2026: la API responde `403 Subscription
+    is disabled` porque la suscripción de la organización `ipn-upiita` está
+    desactivada, aunque el mapa siga compartido como público. Por eso el mapa
+    principal ya no depende de ArcGIS.
 - **Series de tiempo:** se elige línea y estación en listas desplegables; muestra
   afluencia real, rango normal de Prophet, pronóstico y anomalías marcadas. Abajo,
   la tabla de las últimas anomalías auditadas (días pronosticados de ago-nov 2026

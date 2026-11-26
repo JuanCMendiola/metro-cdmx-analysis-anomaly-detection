@@ -3,5 +3,5 @@
 # pipeline completo).
 streamlit>=1.67
 pandas>=2.2
-plotly>=5.22
+plotly>=5.24  # go.Scattermap (mapa sin token)
 pyarrow>=15
